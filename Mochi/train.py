@@ -482,7 +482,7 @@ def main(args):
 
                 # validation_prompts = args.validation_prompt.split(args.validation_prompt_separator)
                 validation_prompts = [
-                    "A boy in a white shirt and shorts is seen bouncing a ball, isolated background",
+                    "A camouflaged scorpionfish is subtly blended into its environment, its texture, color, and shape nearly indistinguishable from the surrounding rocks and corals. The fish barely moves, with only the gentle motion of its fins or a slow shift in position revealing its presence. The animal is hard to spot as it expertly mimics its surroundings.",
                 ]
                 for validation_prompt in validation_prompts:
                     pipeline_args = {

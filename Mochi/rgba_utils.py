@@ -184,7 +184,7 @@ class RGBALoRAMochiAttnProcessor:
         # linear proj
         original_hidden_states = attn.to_out[0](hidden_states)
         hidden_states_delta = self.to_out_lora(hidden_states).to(hidden_states.device)
-        original_hidden_states[:, -sequence_length // 2:, :] += hidden_states_delta[:, -sequence_length // 2:, :] * scaling
+        original_hidden_states += hidden_states_delta * scaling
         # dropout
         hidden_states = attn.to_out[1](original_hidden_states)
 
