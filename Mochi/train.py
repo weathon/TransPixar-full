@@ -290,6 +290,7 @@ def main(args):
         device=torch.device("cuda"),
         dtype=torch.bfloat16,
         # seq_length=seq_length,
+        lora_rank=args.rank
     )    
     processor_params = get_all_processor_params(transformer)
 
