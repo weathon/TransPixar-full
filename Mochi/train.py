@@ -489,8 +489,8 @@ def main(args):
                 for validation_prompt in validation_prompts:
                     pipeline_args = {
                         "prompt": validation_prompt,
-                        "guidance_scale": 6.0,
-                        "num_frames": 37,
+                        "guidance_scale": 9.0,
+                        "num_frames": 48,
                         "num_inference_steps": 10,
                         "height": args.height,
                         "width": args.width,
