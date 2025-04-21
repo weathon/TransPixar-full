@@ -20,6 +20,7 @@ cmd="CUDA_VISIBLE_DEVICES=$GPU_IDS python train.py \
   --checkpointing_steps 100 \
   --caption_dropout 0.1 \
   --report_to wandb \
+  --rank 16 \
   --max_train_steps 2000 \
   --resume_from_checkpoint mochi-rgba-lora-f37/checkpoint-500.pt \
   --gradient_checkpointing \
