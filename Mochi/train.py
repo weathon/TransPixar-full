@@ -329,6 +329,7 @@ def main(args):
         batch_size=args.train_batch_size,
         num_workers=args.dataloader_num_workers,
         pin_memory=args.pin_memory,
+        shuffle=True
     )
 
     # LR scheduler and math around the number of training steps.
