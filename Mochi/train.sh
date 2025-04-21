@@ -20,10 +20,10 @@ cmd="CUDA_VISIBLE_DEVICES=$GPU_IDS python train.py \
   --checkpointing_steps 100 \
   --caption_dropout 0.1 \
   --report_to wandb \
-  --max_train_steps 2000 \
+  --max_train_steps 1000 \
   --gradient_checkpointing \
   --push_to_hub \
-  --validation_steps 50 \
+  --validation_steps 20 \
   --enable_slicing \
   --enable_tiling \
   --optimizer adamw \
