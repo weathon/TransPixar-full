@@ -460,7 +460,7 @@ def main(args):
                     checkpoint_path,
                 )
             
-            if args.validation_prompt is not None and global_step % args.validation_steps == 0:
+            if global_step % args.validation_steps == 0:
                 print("===== Memory before validation =====")
                 print_memory("cuda")
 
@@ -489,7 +489,7 @@ def main(args):
                         "prompt": validation_prompt,
                         "guidance_scale": 6.0,
                         "num_frames": 37,
-                        "num_inference_steps": 64,
+                        "num_inference_steps": 10,
                         "height": args.height,
                         "width": args.width,
                         "max_sequence_length": 256,
