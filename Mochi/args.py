@@ -99,7 +99,7 @@ def _get_validation_args(parser: argparse.ArgumentParser) -> None:
         help="Number of videos that should be generated during validation per `validation_prompt`.",
     )
     parser.add_argument(
-        "--validation_epochs",
+        "--validation_steps",
         type=int,
         default=50,
         help="Run validation every X training steps. Validation consists of running the validation prompt `args.num_validation_videos` times.",

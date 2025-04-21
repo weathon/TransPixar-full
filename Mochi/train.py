@@ -460,7 +460,7 @@ def main(args):
                     checkpoint_path,
                 )
             
-            # if args.validation_prompt is not None and (epoch + 1) % args.validation_epochs == 0:
+            if args.validation_prompt is not None and global_step % args.validation_steps == 0:
                 print("===== Memory before validation =====")
                 print_memory("cuda")
 
