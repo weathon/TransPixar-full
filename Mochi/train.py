@@ -168,6 +168,7 @@ def log_validation(
     with torch.autocast("cuda", torch.bfloat16, cache_enabled=False):
         for _ in range(args.num_validation_videos):
             video = pipe(**pipeline_args, generator=generator, output_type="np").frames[0]
+            print(video.shape)
             videos.append(video)
 
     video_filenames = []
@@ -443,7 +444,7 @@ def main(args):
             lr_scheduler.step()
 
             progress_bar.update(1)
-            global_step += 1
+            
 
             last_lr = lr_scheduler.get_last_lr()[0] if lr_scheduler is not None else args.learning_rate
             logs = {"loss": loss.detach().item(), "lr": last_lr}
@@ -515,7 +516,7 @@ def main(args):
                 torch.cuda.empty_cache()
 
                 transformer.train()
-
+            global_step += 1
             if global_step >= args.max_train_steps:
                 break
 

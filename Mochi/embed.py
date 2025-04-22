@@ -35,6 +35,7 @@ def encode_videos(model: torch.nn.Module, vid_path: Path, shape: str):
     with torch.inference_mode():
         with torch.autocast("cuda", dtype=torch.bfloat16):
             ldist = model._encode(video)
+            decoded = model._decode(ldist)
 
         torch.save(dict(ldist=ldist), vid_path.with_suffix(".latent.pt"))
 
@@ -47,7 +48,7 @@ def encode_videos(model: torch.nn.Module, vid_path: Path, shape: str):
     help="Repo id. Should be genmo/mochi-1-preview",
     default="genmo/mochi-1-preview",
 )
-@click.option("--shape", default="163x480x848", help="Shape of the video to encode")
+@click.option("--shape", default="49x480x848", help="Shape of the video to encode")
 @click.option("--overwrite", "-ow", is_flag=True, help="Overwrite existing latents and caption embeddings.")
 def batch_process(output_dir: Path, model_id: Path, shape: str, overwrite: bool) -> None:
     """Process all videos and captions in a directory using a single GPU."""
@@ -61,10 +62,10 @@ def batch_process(output_dir: Path, model_id: Path, shape: str, overwrite: bool)
         print(f"No MP4 files found in {output_dir}")
         return
 
-    text_paths = list(output_dir.glob("**/*.txt"))
-    if not text_paths:
-        print(f"No text files found in {output_dir}")
-        return
+    # text_paths = list(output_dir.glob("**/*.txt"))
+    # if not text_paths:
+    #     print(f"No text files found in {output_dir}")
+    #     return
 
     # load the models
     vae = AutoencoderKLMochi.from_pretrained(model_id, subfolder="vae", torch_dtype=torch.float32).to("cuda")
@@ -77,7 +78,7 @@ def batch_process(output_dir: Path, model_id: Path, shape: str, overwrite: bool)
     for idx, video_path in tqdm(enumerate(sorted(video_paths))):
         print(f"Processing {video_path}")
         try:
-            if video_path.with_suffix(".latent.pt").exists() and not overwrite:
+            if video_path.with_suffix(".latent.pt").exists() and video_path.with_suffix(".embed.pt").exists() and not overwrite:
                 print(f"Skipping {video_path}")
                 continue
 
@@ -85,10 +86,12 @@ def batch_process(output_dir: Path, model_id: Path, shape: str, overwrite: bool)
             encode_videos(vae, vid_path=video_path, shape=shape)
 
             # embed captions.
-            prompt_path = Path("/".join(str(video_path).split(".")[:-1]) + ".txt")
+            print(video_path)
+            prompt_path = Path(".".join(str(video_path).split(".")[:-1]) + ".txt")
+            print(prompt_path)
             embed_path = prompt_path.with_suffix(".embed.pt")
 
-            if embed_path.exists() and not overwrite:
+            if embed_path.exists() and prompt_path.exists() and not overwrite:
                 print(f"Skipping {prompt_path} - embeddings already exist")
                 continue
 
