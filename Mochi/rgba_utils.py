@@ -31,7 +31,7 @@ def decode_latents(pipe, latents):
 
 class RGBALoRAMochiAttnProcessor:
     """Attention processor used in Mochi."""
-    def __init__(self, device, dtype, lora_rank=128, lora_alpha=1.0, latent_dim=3072):
+    def __init__(self, device, dtype, lora_rank=16, lora_alpha=1.0, latent_dim=3072):
         if not hasattr(F, "scaled_dot_product_attention"):
             raise ImportError("MochiAttnProcessor2_0 requires PyTorch 2.0. To use it, please upgrade PyTorch to 2.0.")
 
@@ -199,7 +199,7 @@ class RGBALoRAMochiAttnProcessor:
 
 def prepare_for_rgba_inference(
     model, device: torch.device, dtype: torch.dtype,
-    lora_rank: int = 128, lora_alpha: float = 1.0
+    lora_rank: int = 16, lora_alpha: float = 1.0
 ):
 
     def custom_forward(self):

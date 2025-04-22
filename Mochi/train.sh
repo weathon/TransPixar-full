@@ -4,7 +4,7 @@ export TORCH_NCCL_ENABLE_MONITORING=0
 
 GPU_IDS="0"
 
-DATA_ROOT="dataset"
+DATA_ROOT="final_dataset"
 MODEL="genmo/mochi-1-preview"
 OUTPUT_PATH="mochi-rgba-lora-f37"
 
@@ -22,7 +22,6 @@ cmd="CUDA_VISIBLE_DEVICES=$GPU_IDS python train.py \
   --report_to wandb \
   --rank 16 \
   --max_train_steps 2000 \
-  --resume_from_checkpoint mochi-rgba-lora-f37/checkpoint-500.pt \
   --gradient_checkpointing \
   --push_to_hub \
   --validation_steps 20 \
