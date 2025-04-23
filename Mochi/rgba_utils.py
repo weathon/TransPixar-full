@@ -70,7 +70,8 @@ class RGBALoRAMochiAttnProcessor:
         
         # self.domain_embeding = nn.parameter.Parameter(torch.randn(latent_dim) * 0.1).cuda()
         self.domain_embeding = nn.Embedding(1, latent_dim, max_norm=0.5).cuda()
-
+        self.domain_embedding.weight.requires_grad_(True)
+        
     def _apply_lora(self, hidden_states, seq_len, query, key, value, scaling):
         """Applies LoRA updates to query, key, and value tensors."""
         query_delta = self.to_q_lora(hidden_states).to(query.device)
