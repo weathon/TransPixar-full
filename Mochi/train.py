@@ -436,8 +436,12 @@ def main(args):
                     return_dict=False,
                 )[0]
             assert model_pred.shape == z.shape
-            loss = F.mse_loss(model_pred.float(), ut.float())
-            loss.backward()
+            print(model_pred.shape)
+            seq_len_ = model_pred.shape[1]
+            loss_rgb = F.mse_loss(model_pred[:,:seq_len_//2].float(), ut[:,:seq_len_//2].float())
+            loss_alpha = F.mse_loss(model_pred[:,seq_len_//2:].float(), ut[:,seq_len_//2:].float())
+            loss = loss_rgb + loss_alpha
+            loss.backward() 
 
             optimizer.step()
             optimizer.zero_grad()
@@ -447,7 +451,7 @@ def main(args):
             
 
             last_lr = lr_scheduler.get_last_lr()[0] if lr_scheduler is not None else args.learning_rate
-            logs = {"loss": loss.detach().item(), "lr": last_lr}
+            logs = {"loss": loss.detach().item(), "lr": last_lr, "loss_alpha": loss_alpha, "loss_rgb": loss_rgb}
             progress_bar.set_postfix(**logs)
             if wandb_run:
                 wandb_run.log(logs, step=global_step)
@@ -491,7 +495,7 @@ def main(args):
                     pipeline_args = {
                         "prompt": validation_prompt,
                         "guidance_scale": 9.0,
-                        "num_frames": 48,
+                        "num_frames": 37,
                         "num_inference_steps": 10,
                         "height": args.height,
                         "width": args.width,

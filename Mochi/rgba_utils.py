@@ -86,7 +86,8 @@ class RGBALoRAMochiAttnProcessor:
         encoder_hidden_states: torch.Tensor,
         attention_mask: Optional[torch.Tensor] = None,
         image_rotary_emb: Optional[torch.Tensor] = None,
-    ) -> torch.Tensor:
+    ) -> torch.Tensor: 
+        # print(hidden_states.shape, self.domain_embeding[None, None, :].shape)
         query = attn.to_q(hidden_states)
         key = attn.to_k(hidden_states)
         value = attn.to_v(hidden_states)
@@ -187,8 +188,8 @@ class RGBALoRAMochiAttnProcessor:
         # linear proj
         original_hidden_states = attn.to_out[0](hidden_states)
         hidden_states_delta = self.to_out_lora(hidden_states).to(hidden_states.device)
-        original_hidden_states += hidden_states_delta * scaling
-        # original_hidden_states[:, -sequence_length // 2:, :] += hidden_states_delta[:, -sequence_length // 2:, :] * scaling
+        # original_hidden_states += hidden_states_delta * scaling
+        original_hidden_states[:, -sequence_length // 2:, :] += hidden_states_delta[:, -sequence_length // 2:, :] * scaling
         # dropout
         hidden_states = attn.to_out[1](original_hidden_states)
 
