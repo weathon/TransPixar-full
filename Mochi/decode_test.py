@@ -19,7 +19,7 @@ print(latten.shape)
 vae.enable_slicing()
 vae.enable_tiling()
 data = latten[:,:12] * std / vae.config.scaling_factor + mean
-data += torch.randn_like(data)
+data += torch.randn_like(data) * 0.1
 with torch.no_grad():
     video = vae.decode(data)["sample"].float().cpu().permute(0, 2, 3, 4, 1).numpy()
 print(video.shape)
