@@ -66,16 +66,16 @@ class RGBALoRAMochiAttnProcessor:
     def _apply_lora(self, hidden_states, seq_len, query, key, value, scaling):
         """Applies LoRA updates to query, key, and value tensors."""
         query_delta = self.to_q_lora(hidden_states).to(query.device)
-        # query[:, -seq_len // 2:, :] += query_delta[:, -seq_len // 2:, :] * scaling
-        query += query_delta * scaling
+        query[:, -seq_len // 2:, :] += query_delta[:, -seq_len // 2:, :] * scaling
+        # query += query_delta * scaling
 
         key_delta = self.to_k_lora(hidden_states).to(key.device)
-        # key[:, -seq_len // 2:, :] += key_delta[:, -seq_len // 2:, :] * scaling
-        key += key_delta * scaling
+        key[:, -seq_len // 2:, :] += key_delta[:, -seq_len // 2:, :] * scaling
+        # key += key_delta * scaling
 
         value_delta = self.to_v_lora(hidden_states).to(value.device)
-        # value[:, -seq_len // 2:, :] += value_delta[:, -seq_len // 2:, :] * scaling
-        value += value_delta * scaling
+        value[:, -seq_len // 2:, :] += value_delta[:, -seq_len // 2:, :] * scaling
+        # value += value_delta * scaling
 
         return query, key, value
 
