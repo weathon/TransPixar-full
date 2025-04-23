@@ -285,7 +285,7 @@ def main(args):
         transformer = cast_dit(transformer, torch.bfloat16)
     if args.compile_dit:
         transformer.compile()
-
+ 
     prepare_for_rgba_inference(
         model=transformer,
         device=torch.device("cuda"),
@@ -294,7 +294,7 @@ def main(args):
         lora_rank=args.rank
     )    
     processor_params = get_all_processor_params(transformer)
-
+    print(processor_params)
     # Enable TF32 for faster training on Ampere GPUs,
     # cf https://pytorch.org/docs/stable/notes/cuda.html#tensorfloat-32-tf32-on-ampere-devices
     if args.allow_tf32 and torch.cuda.is_available():
