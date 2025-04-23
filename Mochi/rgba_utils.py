@@ -68,7 +68,8 @@ class RGBALoRAMochiAttnProcessor:
         self.to_rgb_v_lora = create_lora_layer(latent_dim, lora_rank, latent_dim)
         self.to_rgb_out_lora = create_lora_layer(latent_dim, lora_rank, latent_dim)
         
-        self.domain_embeding = nn.parameter.Parameter(torch.randn(latent_dim) * 0.1).cuda()
+        # self.domain_embeding = nn.parameter.Parameter(torch.randn(latent_dim) * 0.1).cuda()
+        self.domain_embeding = nn.Embedding(1, latent_dim)
 
     def _apply_lora(self, hidden_states, seq_len, query, key, value, scaling):
         """Applies LoRA updates to query, key, and value tensors."""
@@ -104,7 +105,7 @@ class RGBALoRAMochiAttnProcessor:
         image_rotary_emb: Optional[torch.Tensor] = None,
     ) -> torch.Tensor: 
         # print(hidden_states.shape, self.domain_embeding[None, None, :].shape)
-        hidden_states[:,-hidden_states.shape[1]//2:] = hidden_states[:,-hidden_states.shape[1]//2:] + self.domain_embeding[None, None, :]
+        hidden_states[:,-hidden_states.shape[1]//2:] = hidden_states[:,-hidden_states.shape[1]//2:] + self.domain_embeding(torch.tensor(0))[None, None, :]
         query = attn.to_q(hidden_states)
         key = attn.to_k(hidden_states)
         value = attn.to_v(hidden_states)
