@@ -361,7 +361,7 @@ def main(args):
 
     # Resume from checkpoint if specified
     if args.resume_from_checkpoint:
-        checkpoint = torch.load(args.resume_from_checkpoint, map_location="cpu")
+        checkpoint = torch.load(args.resume_from_checkpoint, map_location="cpu", weights_only=False)
         if "global_step" in checkpoint:
             global_step = checkpoint["global_step"]
         if "optimizer" in checkpoint:
