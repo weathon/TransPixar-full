@@ -225,6 +225,21 @@ def save_checkpoint(model, optimizer, lr_scheduler, global_step, checkpoint_path
         checkpoint_path,
     )
 
+import ignite
+def latent_mask_loss(
+    pred: torch.Tensor,
+    target: torch.Tensor,
+    eps: float = 1e-6,
+):
+    pred = pred.float().mean(1)
+    target = target.float().mean(1)
+    pred = F.softmax(pred, dim=(-1, -2))
+    target = F.softmax(target, dim=(-1, -2))
+
+    intersection = (pred * target).sum()
+    union = pred.sum() + target.sum() - intersection
+    dice_loss = 1 - (2 * intersection + eps) / (union + eps)
+    return dice_loss
 
 class CollateFunction:
     def __init__(self, caption_dropout: float = None) -> None:
@@ -439,7 +454,12 @@ def main(args):
             seq_len_ = model_pred.shape[1]
             loss_rgb = F.mse_loss(model_pred[:,:seq_len_//2].float(), ut[:,:seq_len_//2].float())
             loss_alpha = F.mse_loss(model_pred[:,seq_len_//2:].float(), ut[:,seq_len_//2:].float())
-            loss = loss_rgb + loss_alpha
+            alpha_dice_loss = latent_mask_loss(
+                model_pred[:,seq_len_//2:].float(),
+                ut[:,seq_len_//2:].float()
+            )
+            # could also try coundry loss
+            loss = ((loss_rgb + loss_alpha)/2 + alpha_dice_loss)/2
             loss.backward() 
 
             optimizer.step()
@@ -450,7 +470,7 @@ def main(args):
             
 
             last_lr = lr_scheduler.get_last_lr()[0] if lr_scheduler is not None else args.learning_rate
-            logs = {"loss": loss.detach().item(), "lr": last_lr, "loss_alpha": loss_alpha, "loss_rgb": loss_rgb}
+            logs = {"loss": loss.detach().item(), "lr": last_lr, "loss_alpha": loss_alpha, "loss_rgb": loss_rgb, "alpha_dice_loss":alpha_dice_loss}
             progress_bar.set_postfix(**logs)
             if wandb_run:
                 wandb_run.log(logs, step=global_step)
