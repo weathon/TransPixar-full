@@ -409,7 +409,7 @@ def main(args):
     print(f"  Total optimization steps = {args.max_train_steps}")
 
     first_epoch = 0
-    progress_bar = tqdm(
+    g = tqdm(
         range(0, args.max_train_steps),
         initial=global_step,
         desc="Steps",
