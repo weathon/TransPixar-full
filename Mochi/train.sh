@@ -30,7 +30,7 @@ cmd="CUDA_VISIBLE_DEVICES=$GPU_IDS python train.py \
   --enable_tiling \
   --optimizer adamw \
   --allow_tf32 \
-  --learning_rate 2e-4" 
+  --learning_rate 5e-4" 
 
 echo "Running command: $cmd"
 eval $cmd

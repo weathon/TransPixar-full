@@ -71,6 +71,7 @@ class RGBALoRAMochiAttnProcessor:
         self.encoder_lora = create_lora_layer(1536, lora_rank, 1536)
         
         # self.domain_embeding = nn.parameter.Parameter(torch.randn(latent_dim) * 0.5).cuda()
+        self.domain_embeding = nn.Embedding(2, 3072).cuda()
 
         
     def _apply_lora(self, hidden_states, seq_len, query, key, value, scaling):
@@ -107,7 +108,7 @@ class RGBALoRAMochiAttnProcessor:
         image_rotary_emb: Optional[torch.Tensor] = None,
     ) -> torch.Tensor: 
         # print(hidden_states.shape, self.domain_embeding[None, None, :].shape)
-        # hidden_states[:,-hidden_states.shape[1]//2:] = hidden_states[:,-hidden_states.shape[1]//2:] + self.domain_embeding(torch.tensor(0).cuda())[None, None, :]
+        hidden_states[:,-hidden_states.shape[1]//2:] = hidden_states[:,-hidden_states.shape[1]//2:] + self.domain_embeding(torch.tensor(0).cuda())[None, None, :]
         # hidden_states[:,:-hidden_states.shape[1]//2] = hidden_states[:,:-hidden_states.shape[1]//2] + self.domain_embeding(torch.tensor(1).cuda())[None, None, :]
         encoder_hidden_states_delta = self.encoder_lora(encoder_hidden_states).to(hidden_states.device)
         encoder_hidden_states = encoder_hidden_states + encoder_hidden_states_delta * self.lora_alpha / self.lora_rank * 0.5
@@ -279,8 +280,8 @@ def prepare_for_rgba_inference(
                 dtype=torch.float32,
             )
             # print(hidden_states.shape)
-            split_index = hidden_states.shape[1]//2
-            hidden_states[:,split_index:] = hidden_states[:,split_index:] + self.domain_embeding(torch.tensor(0).cuda())[None, None, :] 
+            # split_index = hidden_states.shape[1]//2
+            # hidden_states[:,split_index:] = hidden_states[:,split_index:] + self.domain_embeding(torch.tensor(0).cuda())[None, None, :] 
         
             
             for i, block in enumerate(self.transformer_blocks):
@@ -330,13 +331,13 @@ def prepare_for_rgba_inference(
         attn_processor = RGBALoRAMochiAttnProcessor(
             device=device, 
             dtype=dtype,
-            lora_rank=lora_rank, 
+            lora_rank=lora_rank,
             lora_alpha=lora_alpha
         ) 
         # block.attn1.set_processor(attn_processor)
         block.attn1.processor = attn_processor
-    model.domain_embeding = nn.Embedding(2, 3072).cuda()
-    model.domain_embeding.weight.requires_grad_(True)
+    # model.domain_embeding = nn.Embedding(2, 3072).cuda()
+    # model.domain_embeding.weight.requires_grad_(True)
     model.forward = custom_forward(model)
 
 def get_processor_state_dict(model):
