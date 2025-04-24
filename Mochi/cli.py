@@ -34,7 +34,7 @@ def main(args):
     
 
     if args.lora_path is not None:
-        checkpoint = torch.load(args.lora_path, map_location="CPU", weights_only=False)
+        checkpoint = torch.load(args.lora_path, map_location="cpu", weights_only=False)
         processor_state_dict = checkpoint["state_dict"]
         load_processor_state_dict(pipe.transformer, processor_state_dict)
 
