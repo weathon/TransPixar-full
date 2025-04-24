@@ -454,12 +454,12 @@ def main(args):
             seq_len_ = model_pred.shape[1]
             loss_rgb = F.mse_loss(model_pred[:,:seq_len_//2].float(), ut[:,:seq_len_//2].float())
             loss_alpha = F.mse_loss(model_pred[:,seq_len_//2:].float(), ut[:,seq_len_//2:].float())
-            alpha_dice_loss = latent_mask_loss(
-                model_pred[:,seq_len_//2:].float(),
-                ut[:,seq_len_//2:].float()
-            )
+            # alpha_dice_loss = latent_mask_loss(
+            #     model_pred[:,seq_len_//2:].float(),
+            #     ut[:,seq_len_//2:].float()
+            # )
             # could also try coundry loss
-            loss = ((loss_rgb + loss_alpha)/2 + alpha_dice_loss)/2
+            loss = ((loss_rgb + loss_alpha)/2)# + alpha_dice_loss)/2
             loss.backward() 
 
             optimizer.step()
