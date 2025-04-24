@@ -25,12 +25,12 @@ cmd="CUDA_VISIBLE_DEVICES=$GPU_IDS python train.py \
   --max_train_steps 2000 \
   --gradient_checkpointing \
   --push_to_hub \
-  --validation_steps 50 \
+  --validation_steps 20 \
   --enable_slicing \
   --enable_tiling \
   --optimizer adamw \
   --allow_tf32 \
-  --learning_rate 7e-4" 
+  --learning_rate 2e-4" 
 
 echo "Running command: $cmd"
 eval $cmd

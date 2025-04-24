@@ -68,32 +68,31 @@ class RGBALoRAMochiAttnProcessor:
         self.to_rgb_v_lora = create_lora_layer(latent_dim, lora_rank, latent_dim)
         self.to_rgb_out_lora = create_lora_layer(latent_dim, lora_rank, latent_dim)
         
-        self.encoder_lora = create_lora_layer(latent_dim, lora_rank, latent_dim)
+        self.encoder_lora = create_lora_layer(1536, lora_rank, 1536)
         
-        # self.domain_embeding = nn.parameter.Parameter(torch.randn(latent_dim) * 0.1).cuda()
-        self.domain_embeding = nn.Embedding(2, latent_dim).cuda()
-        self.domain_embeding.weight.requires_grad_(True)
+        # self.domain_embeding = nn.parameter.Parameter(torch.randn(latent_dim) * 0.5).cuda()
+
         
     def _apply_lora(self, hidden_states, seq_len, query, key, value, scaling):
         """Applies LoRA updates to query, key, and value tensors."""
         query_delta = self.to_q_lora(hidden_states).to(query.device)
         query_rgb_delta = self.to_rgb_q_lora(hidden_states).to(query.device)
         query[:, -seq_len // 2:, :] += query_delta[:, -seq_len // 2:, :] * scaling
-        query[:, :-seq_len // 2, :] += query_rgb_delta[:, :-seq_len // 2, :] * scaling * 0.1
+        query[:, :-seq_len // 2, :] += query_rgb_delta[:, :-seq_len // 2, :] * scaling * 0.5
         
         # query += query_delta * scaling
 
         key_delta = self.to_k_lora(hidden_states).to(key.device)
         key_rgb_delta = self.to_rgb_k_lora(hidden_states).to(query.device)
         key[:, -seq_len // 2:, :] += key_delta[:, -seq_len // 2:, :] * scaling
-        key[:, :-seq_len // 2, :] += key_rgb_delta[:, :-seq_len // 2, :] * scaling * 0.1
+        key[:, :-seq_len // 2, :] += key_rgb_delta[:, :-seq_len // 2, :] * scaling * 0.5
         
         # key += key_delta * scaling
 
         value_delta = self.to_v_lora(hidden_states).to(value.device)
         value_rgb_delta = self.to_rgb_v_lora(hidden_states).to(value.device)
         value[:, -seq_len // 2:, :] += value_delta[:, -seq_len // 2:, :] * scaling
-        value[:, :-seq_len // 2, :] += value_rgb_delta[:, :-seq_len // 2, :] * scaling * 0.1
+        value[:, :-seq_len // 2, :] += value_rgb_delta[:, :-seq_len // 2, :] * scaling * 0.5
         
         # value += value_delta * scaling
 
@@ -108,11 +107,10 @@ class RGBALoRAMochiAttnProcessor:
         image_rotary_emb: Optional[torch.Tensor] = None,
     ) -> torch.Tensor: 
         # print(hidden_states.shape, self.domain_embeding[None, None, :].shape)
-        hidden_states[:,-hidden_states.shape[1]//2:] = hidden_states[:,-hidden_states.shape[1]//2:] + self.domain_embeding(torch.tensor(0).cuda())[None, None, :]
-        hidden_states[:,:-hidden_states.shape[1]//2] = hidden_states[:,:-hidden_states.shape[1]//2] + self.domain_embeding(torch.tensor(1).cuda())[None, None, :]
-        
+        # hidden_states[:,-hidden_states.shape[1]//2:] = hidden_states[:,-hidden_states.shape[1]//2:] + self.domain_embeding(torch.tensor(0).cuda())[None, None, :]
+        # hidden_states[:,:-hidden_states.shape[1]//2] = hidden_states[:,:-hidden_states.shape[1]//2] + self.domain_embeding(torch.tensor(1).cuda())[None, None, :]
         encoder_hidden_states_delta = self.encoder_lora(encoder_hidden_states).to(hidden_states.device)
-        encoder_hidden_states = encoder_hidden_states + encoder_hidden_states_delta * self.lora_alpha / self.lora_rank * 0.1
+        encoder_hidden_states = encoder_hidden_states + encoder_hidden_states_delta * self.lora_alpha / self.lora_rank * 0.5
         
         
         query = attn.to_q(hidden_states)
@@ -217,7 +215,7 @@ class RGBALoRAMochiAttnProcessor:
         hidden_states_delta = self.to_out_lora(hidden_states).to(hidden_states.device)
         hidden_states_rgb_delta = self.to_rgb_out_lora(hidden_states).to(hidden_states.device)
         original_hidden_states[:, -sequence_length // 2:, :] += hidden_states_delta[:, -sequence_length // 2:, :] * scaling
-        original_hidden_states[:, :-sequence_length // 2, :] += hidden_states_rgb_delta[:, :-sequence_length // 2, :] * scaling * 0.1
+        original_hidden_states[:, :-sequence_length // 2, :] += hidden_states_rgb_delta[:, :-sequence_length // 2, :] * scaling * 0.5
         # dropout 
         hidden_states = attn.to_out[1](original_hidden_states)
 
@@ -280,7 +278,11 @@ def prepare_for_rgba_inference(
                 device=hidden_states.device,
                 dtype=torch.float32,
             )
-
+            # print(hidden_states.shape)
+            split_index = hidden_states.shape[1]//2
+            hidden_states[:,split_index:] = hidden_states[:,split_index:] + self.domain_embeding(torch.tensor(0).cuda())[None, None, :] 
+        
+            
             for i, block in enumerate(self.transformer_blocks):
                 if torch.is_grad_enabled() and self.gradient_checkpointing:
 
@@ -333,7 +335,8 @@ def prepare_for_rgba_inference(
         ) 
         # block.attn1.set_processor(attn_processor)
         block.attn1.processor = attn_processor
-
+    model.domain_embeding = nn.Embedding(2, 3072).cuda()
+    model.domain_embeding.weight.requires_grad_(True)
     model.forward = custom_forward(model)
 
 def get_processor_state_dict(model):
