@@ -233,8 +233,8 @@ def latent_mask_loss(
 ):
     pred = pred.float().mean(1)
     target = target.float().mean(1)
-    pred = F.softmax(pred, dim=(-1, -2))
-    target = F.softmax(target, dim=(-1, -2))
+    pred = F.softmax(pred.flatten(-2, -1), dim=(-1))
+    target = F.softmax(target.flatten(-2, -1), dim=(-1))
 
     intersection = (pred * target).sum()
     union = pred.sum() + target.sum() - intersection
