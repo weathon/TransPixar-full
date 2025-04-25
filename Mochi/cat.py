@@ -18,16 +18,14 @@ import os
 files = os.listdir("dataset/video_alpha/video_alpha")
 os.makedirs("final_dataset", exist_ok=True)
 for file in files:
-    if not file.endswith("latent.pt"):
+    if not file.endswith("latent.pt"): 
         continue
-    tensor1 = torch.load("dataset/video_alpha/video_alpha/"+file)["ldist"]
-    tensor1 = torch.nn.functional.avg_pool3d(tensor1, (1, 2, 2))
+    tensor1 = torch.load("dataset/video_rgb_/"+file)["ldist"]
     try:
-        tensor2 = torch.load("dataset/video_rgb_/"+file)["ldist"]
-        tensor2 = torch.nn.functional.avg_pool3d(tensor2, (1, 2, 2))
+        tensor2 = torch.load("dataset/video_alpha/video_alpha/"+file)["ldist"]
         assert (torch.abs(tensor1 - tensor2) > 0.01).any()
         res = torch.cat([tensor1[:], tensor2[:]], dim=2)
-        print(res.shape)
+        print(res.shape) 
         torch.save({"ldist": res}, "final_dataset/"+file)
     except FileNotFoundError as e:
         continue

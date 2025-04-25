@@ -69,6 +69,13 @@ class RGBALoRAMochiAttnProcessor:
         self.to_rgb_out_lora = create_lora_layer(latent_dim, lora_rank//4, latent_dim)
         
         self.encoder_lora = create_lora_layer(1536, lora_rank//2, 1536)
+        self.adapter = nn.Sequential(
+            nn.Linear(latent_dim, lora_rank, device=device, dtype=dtype),
+            nn.GELU(),
+            nn.Linear(lora_rank, latent_dim, device=device, dtype=dtype),
+        )
+        nn.init.zeros_(self.adapter[2])
+        
         
         # self.domain_embeding = nn.parameter.Parameter(torch.randn(latent_dim) * 0.1).cuda()
         self.domain_embeding = nn.Embedding(2, 3072).cuda()
@@ -219,6 +226,7 @@ class RGBALoRAMochiAttnProcessor:
         original_hidden_states[:, :-sequence_length // 2, :] += hidden_states_rgb_delta * scaling * 0.1
         # dropout 
         hidden_states = attn.to_out[1](original_hidden_states)
+        hidden_states[:,:-sequence_length // 2] = hidden_states[:,:-sequence_length // 2] + self.adapter(hidden_states[:,:-sequence_length // 2])
 
         if hasattr(attn, "to_add_out"):
             encoder_hidden_states = attn.to_add_out(encoder_hidden_states)
