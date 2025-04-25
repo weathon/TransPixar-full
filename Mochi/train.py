@@ -231,15 +231,15 @@ def latent_mask_loss(
     target: torch.Tensor,
     eps: float = 1e-6,
 ):
-    pred = pred.float().mean(1)
-    target = target.float().mean(1)
-    pred = F.softmax(pred.flatten(-2, -1), dim=(-1))
-    target = F.softmax(target.flatten(-2, -1), dim=(-1))
+    pred = pred.float().abs().mean(1)
+    target = target.float().abs().mean(1)
+    pred = (pred - pred.min())/(pred.max() - pred.min())
+    target = (target - target.min())/(target.max() - target.min())
 
     intersection = (pred * target).sum()
     union = pred.sum() + target.sum() - intersection
     dice_loss = 1 - (2 * intersection + eps) / (union + eps)
-    return dice_loss
+    return dice_loss, pred, target
 
 class CollateFunction:
     def __init__(self, caption_dropout: float = None) -> None:
@@ -291,7 +291,8 @@ def main(args):
     scheduler = FlowMatchEulerDiscreteScheduler.from_pretrained(
         args.pretrained_model_name_or_path, subfolder="scheduler"
     )
-
+    scheduler.set_timesteps(num_inference_steps=40)
+    
     transformer.requires_grad_(False)
     transformer.to("cuda")
     if args.gradient_checkpointing:
@@ -450,30 +451,34 @@ def main(args):
                     return_dict=False,
                 )[0]
             assert model_pred.shape == z.shape
-            print(model_pred.shape)
-            seq_len_ = model_pred.shape[1]
-            loss_rgb = F.mse_loss(model_pred[:,:seq_len_//2].float(), ut[:,:seq_len_//2].float())
-            loss_alpha = F.mse_loss(model_pred[:,seq_len_//2:].float(), ut[:,seq_len_//2:].float())
-            # alpha_dice_loss = latent_mask_loss(
-            #     model_pred[:,seq_len_//2:].float(),
-            #     ut[:,seq_len_//2:].float()
-            # )
+            print(model_pred.shape) 
+            seq_len_ = model_pred.shape[2]
+            loss_rgb = F.mse_loss(model_pred[:,:,:seq_len_//2].float(), ut[:,:,:seq_len_//2].float())
+            loss_alpha = F.mse_loss(model_pred[:,:,seq_len_//2:].float(), ut[:,:,seq_len_//2:].float())
+            print(model_pred[:,:,seq_len_//2:].shape)
+            alpha_dice_loss, pred_img, target_img = latent_mask_loss(
+                model_pred[:,:,seq_len_//2:].float(),
+                ut[:,:,seq_len_//2:].float()
+            )
             # could also try coundry loss
-            loss = ((loss_rgb + loss_alpha)/2)# + alpha_dice_loss)/2
+            loss = (loss_rgb + loss_alpha + alpha_dice_loss)/3
             loss.backward() 
-
-            optimizer.step()
-            optimizer.zero_grad()
+            if global_step % 16 == 15:
+                optimizer.step()
+                optimizer.zero_grad()
             lr_scheduler.step()
+            
+            global_step += 1
 
             progress_bar.update(1)
             
 
             last_lr = lr_scheduler.get_last_lr()[0] if lr_scheduler is not None else args.learning_rate
-            logs = {"loss": loss.detach().item(), "lr": last_lr, "loss_alpha": loss_alpha, "loss_rgb": loss_rgb}
+            logs = {"loss": loss.detach().item(), "lr": last_lr, "loss_alpha": loss_alpha, "loss_rgb": loss_rgb, "alpha_dice_loss": alpha_dice_loss}
             progress_bar.set_postfix(**logs)
             if wandb_run:
                 wandb_run.log(logs, step=global_step)
+                wandb_run.log({"pred_img": wandb.Image(pred_img[0,-1]), "target_img": wandb.Image(target_img[0,-1]), "sigma": sigma[0]}, step=global_step)
 
             if args.checkpointing_steps is not None and global_step % args.checkpointing_steps == 0:
                 print(f"Saving checkpoint at step {global_step}")
@@ -539,7 +544,6 @@ def main(args):
                 torch.cuda.empty_cache()
 
                 transformer.train()
-            global_step += 1
             if global_step >= args.max_train_steps:
                 break
 
