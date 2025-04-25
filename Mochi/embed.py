@@ -22,10 +22,10 @@ def encode_videos(model: torch.nn.Module, vid_path: Path, shape: str):
     og_shape = video.shape
     assert video.shape[2] == H, f"Expected {vid_path} to have height {H}, got {video.shape}"
     assert video.shape[3] == W, f"Expected {vid_path} to have width {W}, got {video.shape}"
-    assert video.shape[1] >= T, f"Expected {vid_path} to have at least {T} frames, got {video.shape}"
-    if video.shape[1] > T:
-        video = video[:, :T]
-        print(f"Trimmed video from {og_shape[1]} to first {T} frames")
+    # assert video.shape[1] >= T, f"Expected {vid_path} to have at least {T} frames, got {video.shape}"
+    # if video.shape[1] > T:
+    #     video = video[:, :T]
+    #     print(f"Trimmed video from {og_shape[1]} to first {T} frames")
     video = video.unsqueeze(0)
     video = video.float() / 127.5 - 1.0
     video = video.to(model.device)
