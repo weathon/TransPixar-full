@@ -74,7 +74,7 @@ class RGBALoRAMochiAttnProcessor:
             nn.GELU(),
             nn.Linear(lora_rank, latent_dim, device=device, dtype=dtype),
         )
-        nn.init.zeros_(self.adapter[2])
+        nn.init.zeros_(self.adapter[2].weight)
         
         
         # self.domain_embeding = nn.parameter.Parameter(torch.randn(latent_dim) * 0.1).cuda()
