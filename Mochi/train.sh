@@ -30,6 +30,7 @@ cmd="CUDA_VISIBLE_DEVICES=$GPU_IDS python train.py \
   --enable_tiling \
   --optimizer adamw \
   --allow_tf32 \
+  --weight_decay 0.05 \
   --learning_rate 7e-4 \
   --resume_from_checkpoint ~/wash/TransPixar-full/Mochi/mochi-rgba-lora-f37/checkpoint-300.pt"
 

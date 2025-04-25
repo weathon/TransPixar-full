@@ -231,8 +231,8 @@ def latent_mask_loss(
     target: torch.Tensor,
     eps: float = 1e-6,
 ):
-    pred = pred.float().mean(1)
-    target = target.float().mean(1)
+    pred = pred.float().abs().mean(1)
+    target = target.float().abs().mean(1)
     pred = (pred - pred.min())/(pred.max() - pred.min())
     target = (target - target.min())/(target.max() - target.min())
 
@@ -450,17 +450,19 @@ def main(args):
                     return_dict=False,
                 )[0]
             assert model_pred.shape == z.shape
-            print(model_pred.shape)
-            seq_len_ = model_pred.shape[1]
-            loss_rgb = F.mse_loss(model_pred[:,:seq_len_//2].float(), ut[:,:seq_len_//2].float())
-            loss_alpha = F.mse_loss(model_pred[:,seq_len_//2:].float(), ut[:,seq_len_//2:].float())
+            print(model_pred.shape) 
+            seq_len_ = model_pred.shape[2]
+            loss_rgb = F.mse_loss(model_pred[:,:,:seq_len_//2].float(), ut[:,:,:seq_len_//2].float())
+            loss_alpha = F.mse_loss(model_pred[:,:,seq_len_//2:].float(), ut[:,:,seq_len_//2:].float())
+            print(model_pred[:,:,seq_len_//2:].shape)
             alpha_dice_loss, pred_img, target_img = latent_mask_loss(
-                model_pred[:,seq_len_//2:].float(),
-                ut[:,seq_len_//2:].float()
+                model_pred[:,:,seq_len_//2:].float(),
+                ut[:,:,seq_len_//2:].float()
             )
             # could also try coundry loss
             loss = (loss_rgb + loss_alpha + alpha_dice_loss)/3
             loss.backward() 
+            global_step += 1
 
             optimizer.step()
             optimizer.zero_grad()
@@ -474,7 +476,7 @@ def main(args):
             progress_bar.set_postfix(**logs)
             if wandb_run:
                 wandb_run.log(logs, step=global_step)
-                wandb_run.log({"pred_img": wandb.Image(pred_img[0,0]), "target_img": wandb.Image(target_img[0,0])}, step=global_step)
+                wandb_run.log({"pred_img": wandb.Image(pred_img[0,-1]), "target_img": wandb.Image(target_img[0,-1])}, step=global_step)
 
             if args.checkpointing_steps is not None and global_step % args.checkpointing_steps == 0:
                 print(f"Saving checkpoint at step {global_step}")
@@ -540,7 +542,6 @@ def main(args):
                 torch.cuda.empty_cache()
 
                 transformer.train()
-            global_step += 1
             if global_step >= args.max_train_steps:
                 break
 

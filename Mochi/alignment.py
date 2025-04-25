@@ -13,7 +13,7 @@ import os
 vae = AutoencoderKLMochi.from_pretrained("genmo/mochi-1-preview", subfolder="vae", torch_dtype=torch.float32).to("cuda")
 files = os.listdir("./video_alpha/")
 files = [i for i in files if i.endswith("latent.pt")]
-file = files[100]
+file = files[86]
 latent_alpha = torch.load("./video_alpha/" + file, weights_only=False)["ldist"].float()
 # latent_rgb = torch.load("./video_rgb_/cuttlefish_4_002.latent.pt")["ldist"].float()
 
