@@ -8,7 +8,7 @@ from transformers import T5EncoderModel, T5Tokenizer
 from tqdm.auto import tqdm
 from diffusers.utils import export_to_video
 vae = AutoencoderKLMochi.from_pretrained("genmo/mochi-1-preview", subfolder="vae", torch_dtype=torch.float32).to("cuda")
-latten = torch.load("final_dataset/pygmy_seahorse_4_001.latent.pt")["ldist"].float()
+latten = torch.load("single_frame/grasshopper_1_011.latent.pt")["ldist"].float()
 
 mean = (
     torch.tensor(vae.config.latents_mean).view(1, 12, 1, 1, 1).to(latten.device, latten.dtype)

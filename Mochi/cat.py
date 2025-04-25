@@ -22,9 +22,12 @@ for file in files:
         continue
     tensor1 = torch.load("video_alpha/"+file)["ldist"]
     tensor1 = torch.nn.functional.avg_pool3d(tensor1, (1, 2, 2))
-    tensor2 = torch.load("video_rgb_/"+file)["ldist"]
-    tensor2 = torch.nn.functional.avg_pool3d(tensor2, (1, 2, 2))
-    assert (torch.abs(tensor1 - tensor2) > 0.01).any()
-    res = torch.cat([tensor1[:], tensor2[:]], dim=2)
-    print(res.shape)
-    torch.save({"ldist": res}, "single_frame/"+file)
+    try:
+        tensor2 = torch.load("video_rgb_/"+file)["ldist"]
+        tensor2 = torch.nn.functional.avg_pool3d(tensor2, (1, 2, 2))
+        assert (torch.abs(tensor1 - tensor2) > 0.01).any()
+        res = torch.cat([tensor1[:], tensor2[:]], dim=2)
+        print(res.shape)
+        torch.save({"ldist": res}, "single_frame/"+file)
+    except FileNotFoundError as e:
+        continue
