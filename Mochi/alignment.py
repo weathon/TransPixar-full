@@ -23,7 +23,7 @@ latent_alpha = torch.load("./video_alpha/" + file, weights_only=False)["ldist"].
 # cv2.imwrite("rgb.png", rgb_gray)
 
 alpha_gray = latent_alpha[0].mean(0)[0]
-alpha_gray = (alpha_gray - alpha_gray.min())/(alpha_gray.max() - alpha_gray.min()) * 255 - 125
+alpha_gray = (alpha_gray - alpha_gray.min())/(alpha_gray.max() - alpha_gray.min()) * 5 - 2.5
 alpha_gray = torch.sigmoid(alpha_gray).cpu().numpy() * 255
 alpha_gray = cv2.resize(alpha_gray, (512, 512))
 cv2.imwrite("alpha.png", alpha_gray)
