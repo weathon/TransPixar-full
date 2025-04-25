@@ -513,9 +513,9 @@ def main(args):
                 for validation_prompt in validation_prompts:
                     pipeline_args = {
                         "prompt": validation_prompt,
-                        "guidance_scale": 9.0,
+                        "guidance_scale": 3.0, 
                         "num_frames": 37,
-                        "num_inference_steps": 10,
+                        "num_inference_steps": 20,
                         "height": args.height,
                         "width": args.width,
                         "max_sequence_length": 256,
