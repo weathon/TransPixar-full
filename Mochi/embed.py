@@ -15,6 +15,7 @@ from tqdm.auto import tqdm
 
 def encode_videos(model: torch.nn.Module, vid_path: Path, shape: str):
     T, H, W = [int(s) for s in shape.split("x")]
+    print(T, "frames")
     assert (T - 1) % 6 == 0, "Expected T to be 1 mod 6"
     video, _, metadata = torchvision.io.read_video(str(vid_path), output_format="THWC", pts_unit="secs")
     fps = metadata["video_fps"]
@@ -35,7 +36,7 @@ def encode_videos(model: torch.nn.Module, vid_path: Path, shape: str):
     with torch.inference_mode():
         with torch.autocast("cuda", dtype=torch.bfloat16):
             ldist = model._encode(video)
-
+            print(ldist.shape)
         torch.save(dict(ldist=ldist), vid_path.with_suffix(".latent.pt"))
 
 
