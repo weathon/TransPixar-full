@@ -48,7 +48,7 @@ def main(args):
     frames_rgb = decode_latents(pipe, frames_latents_rgb)
     frames_alpha = decode_latents(pipe, frames_latents_alpha)
 
-    frames_alpha_pooled = np.abs(frames_alpha - frames_rgb)
+    frames_alpha_pooled = np.clip(frames_alpha - frames_rgb, 0, 1)
     frames_alpha_pooled = (frames_alpha_pooled - frames_alpha_pooled.min()) / (frames_alpha_pooled.max() - frames_alpha_pooled.min())
 
     if os.path.exists(args.output_path) == False:

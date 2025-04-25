@@ -111,6 +111,12 @@ def _get_validation_args(parser: argparse.ArgumentParser) -> None:
         help="Whether or not to use VAE slicing for saving memory.",
     )
     parser.add_argument(
+        "--single_frame",
+        action="store_true",
+        default=False,
+        help="If we only train on a single frame of the video.",
+    )
+    parser.add_argument(
         "--enable_tiling",
         action="store_true",
         default=False,

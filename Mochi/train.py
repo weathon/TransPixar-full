@@ -514,8 +514,8 @@ def main(args):
                     pipeline_args = {
                         "prompt": validation_prompt,
                         "guidance_scale": 3.0, 
-                        "num_frames": 37,
-                        "num_inference_steps": 20,
+                        "num_frames": 1 if args.single_frame else 37,
+                        "num_inference_steps": 10,
                         "height": args.height,
                         "width": args.width,
                         "max_sequence_length": 256,
