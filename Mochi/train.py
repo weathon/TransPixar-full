@@ -463,11 +463,12 @@ def main(args):
             # could also try coundry loss
             loss = (loss_rgb + loss_alpha + alpha_dice_loss)/3
             loss.backward() 
-            global_step += 1
-
-            optimizer.step()
-            optimizer.zero_grad()
+            if global_step % 16 == 15:
+                optimizer.step()
+                optimizer.zero_grad()
             lr_scheduler.step()
+            
+            global_step += 1
 
             progress_bar.update(1)
             
