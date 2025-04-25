@@ -14,13 +14,13 @@ cmd="CUDA_VISIBLE_DEVICES=$GPU_IDS python train.py \
   --data_root $DATA_ROOT \
   --seed 42 \
   --output_dir $OUTPUT_PATH \
-  --train_batch_size 2 \
+  --train_batch_size 1 \
   --dataloader_num_workers 100 \
   --pin_memory \
   --checkpointing_steps 100 \
   --caption_dropout 0.1 \
   --report_to wandb \
-  --rank 16 \
+  --rank 32 \
   --lr_warmup_steps 20 \
   --max_train_steps 2000 \
   --gradient_checkpointing \
@@ -33,7 +33,7 @@ cmd="CUDA_VISIBLE_DEVICES=$GPU_IDS python train.py \
   --weight_decay 0.05 \
   --learning_rate 7e-4 \
   --resume_from_checkpoint ~/wash/TransPixar-full/Mochi/mochi-rgba-lora-f37/checkpoint-300.pt"
-
+# batchsize one so that it can do different video length
 echo "Running command: $cmd"
 eval $cmd
 echo -ne "-------------------- Finished executing script --------------------\n\n"

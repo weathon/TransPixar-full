@@ -461,7 +461,8 @@ def main(args):
                 ut[:,:,seq_len_//2:].float()
             )
             # could also try coundry loss
-            loss = (loss_rgb + loss_alpha + alpha_dice_loss)/3
+            alpha_dice_loss = 0
+            loss = (loss_rgb + loss_alpha)/2
             loss.backward() 
             if global_step % 16 == 15:
                 optimizer.step()
