@@ -291,7 +291,8 @@ def main(args):
     scheduler = FlowMatchEulerDiscreteScheduler.from_pretrained(
         args.pretrained_model_name_or_path, subfolder="scheduler"
     )
-
+    scheduler.set_timesteps(num_inference_steps=40)
+    
     transformer.requires_grad_(False)
     transformer.to("cuda")
     if args.gradient_checkpointing:
@@ -476,7 +477,7 @@ def main(args):
             progress_bar.set_postfix(**logs)
             if wandb_run:
                 wandb_run.log(logs, step=global_step)
-                wandb_run.log({"pred_img": wandb.Image(pred_img[0,-1]), "target_img": wandb.Image(target_img[0,-1])}, step=global_step)
+                wandb_run.log({"pred_img": wandb.Image(pred_img[0,-1]), "target_img": wandb.Image(target_img[0,-1]), "sigma": sigma[0]}, step=global_step)
 
             if args.checkpointing_steps is not None and global_step % args.checkpointing_steps == 0:
                 print(f"Saving checkpoint at step {global_step}")
