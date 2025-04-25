@@ -63,12 +63,12 @@ class RGBALoRAMochiAttnProcessor:
         self.to_v_lora = create_lora_layer(latent_dim, lora_rank, latent_dim)
         self.to_out_lora = create_lora_layer(latent_dim, lora_rank, latent_dim)
 
-        self.to_rgb_q_lora = create_lora_layer(latent_dim, lora_rank, latent_dim)
-        self.to_rgb_k_lora = create_lora_layer(latent_dim, lora_rank, latent_dim)
-        self.to_rgb_v_lora = create_lora_layer(latent_dim, lora_rank, latent_dim)
-        self.to_rgb_out_lora = create_lora_layer(latent_dim, lora_rank, latent_dim)
+        self.to_rgb_q_lora = create_lora_layer(latent_dim, lora_rank//2, latent_dim)
+        self.to_rgb_k_lora = create_lora_layer(latent_dim, lora_rank//2, latent_dim)
+        self.to_rgb_v_lora = create_lora_layer(latent_dim, lora_rank//2, latent_dim)
+        self.to_rgb_out_lora = create_lora_layer(latent_dim, lora_rank//2, latent_dim)
         
-        self.encoder_lora = create_lora_layer(1536, lora_rank, 1536)
+        self.encoder_lora = create_lora_layer(1536, lora_rank//2, 1536)
         
         # self.domain_embeding = nn.parameter.Parameter(torch.randn(latent_dim) * 0.1).cuda()
         self.domain_embeding = nn.Embedding(2, 3072).cuda()
