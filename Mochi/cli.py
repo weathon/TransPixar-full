@@ -48,14 +48,13 @@ def main(args):
     frames_rgb = decode_latents(pipe, frames_latents_rgb)
     frames_alpha = decode_latents(pipe, frames_latents_alpha)
 
-    pooled_alpha = np.max(frames_alpha, axis=-1, keepdims=True)
-    frames_alpha_pooled = np.repeat(pooled_alpha, 3, axis=-1)
-    premultiplied_rgb = frames_rgb * frames_alpha_pooled
+    frames_alpha_pooled = np.abs(frames_alpha - frames_rgb)
+    frames_alpha_pooled = (frames_alpha_pooled - frames_alpha_pooled.min()) / (frames_alpha_pooled.max() - frames_alpha_pooled.min())
 
     if os.path.exists(args.output_path) == False:
         os.makedirs(args.output_path)
 
-    export_to_video(premultiplied_rgb[0], os.path.join(args.output_path, "rgb.mp4"), fps=args.fps)
+    export_to_video(frames_alpha[0], os.path.join(args.output_path, "alpha_raw.mp4"), fps=args.fps)
     export_to_video(frames_alpha_pooled[0], os.path.join(args.output_path, "alpha.mp4"), fps=args.fps)
     export_to_video(frames_rgb[0], os.path.join(args.output_path, "original_rgb.mp4"), fps=args.fps)
 
