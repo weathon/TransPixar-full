@@ -63,12 +63,12 @@ class RGBALoRAMochiAttnProcessor:
         self.to_v_lora = create_lora_layer(latent_dim, lora_rank, latent_dim)
         self.to_out_lora = create_lora_layer(latent_dim, lora_rank, latent_dim)
 
-        self.to_rgb_q_lora = create_lora_layer(latent_dim, lora_rank//4, latent_dim)
-        self.to_rgb_k_lora = create_lora_layer(latent_dim, lora_rank//4, latent_dim)
-        self.to_rgb_v_lora = create_lora_layer(latent_dim, lora_rank//4, latent_dim)
-        self.to_rgb_out_lora = create_lora_layer(latent_dim, lora_rank//4, latent_dim)
+        self.to_rgb_q_lora = create_lora_layer(latent_dim, lora_rank//8, latent_dim)
+        self.to_rgb_k_lora = create_lora_layer(latent_dim, lora_rank//8, latent_dim)
+        self.to_rgb_v_lora = create_lora_layer(latent_dim, lora_rank//8, latent_dim)
+        self.to_rgb_out_lora = create_lora_layer(latent_dim, lora_rank//8, latent_dim)
         
-        self.encoder_lora = create_lora_layer(1536, lora_rank//2, 1536)
+        self.encoder_lora = create_lora_layer(1536, lora_rank//8, 1536)
         self.adapter = nn.Sequential(
             nn.Linear(latent_dim, lora_rank, device=device, dtype=dtype),
             nn.GELU(),
