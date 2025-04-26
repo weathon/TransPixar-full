@@ -30,6 +30,7 @@ def main(args):
         pipe.transformer,
         device="cuda",
         dtype=torch.bfloat16,
+        lora_rank=32,
     )
     
 
@@ -39,23 +40,21 @@ def main(args):
         load_processor_state_dict(pipe.transformer, processor_state_dict)
 
 
-    # 4. inference
+    # 4. inference 
     generator = torch.manual_seed(args.seed) if args.seed else None
     frames_latents = pipe(**pipeline_args, generator=generator).frames
+    # decode twice 
+    # frames_latents = pipe(**pipeline_args, latents = frames_latents, first_half=False).frames
 
     frames_latents_rgb, frames_latents_alpha = frames_latents.chunk(2, dim=2)
     
     frames_rgb = decode_latents(pipe, frames_latents_rgb)
     frames_alpha = decode_latents(pipe, frames_latents_alpha)
-
-    frames_alpha_pooled = np.clip(frames_alpha - frames_rgb, 0, 1)
-    frames_alpha_pooled = (frames_alpha_pooled - frames_alpha_pooled.min()) / (frames_alpha_pooled.max() - frames_alpha_pooled.min())
-
+    
     if os.path.exists(args.output_path) == False:
         os.makedirs(args.output_path)
 
     export_to_video(frames_alpha[0], os.path.join(args.output_path, "alpha_raw.mp4"), fps=args.fps)
-    export_to_video(frames_alpha_pooled[0], os.path.join(args.output_path, "alpha.mp4"), fps=args.fps)
     export_to_video(frames_rgb[0], os.path.join(args.output_path, "original_rgb.mp4"), fps=args.fps)
 
 if __name__ == "__main__":
@@ -70,10 +69,11 @@ if __name__ == "__main__":
     parser.add_argument("--guidance_scale", type=float, default=6, help="The scale for classifier-free guidance")
     parser.add_argument("--num_inference_steps", type=int, default=64, help="Inference steps")
     parser.add_argument("--num_frames", type=int, default=79, help="Number of steps for the inference process")
-    parser.add_argument("--width", type=int, default=848, help="Number of steps for the inference process")
-    parser.add_argument("--height", type=int, default=480, help="Number of steps for the inference process")
+    parser.add_argument("--width", type=int, default=576, help="Number of steps for the inference process")
+    parser.add_argument("--height", type=int, default=320, help="Number of steps for the inference process")
     parser.add_argument("--fps", type=int, default=30, help="Number of steps for the inference process")
     parser.add_argument("--seed", type=int, default=None, help="The seed for reproducibility")
+    
     args = parser.parse_args()
 
     main(args)

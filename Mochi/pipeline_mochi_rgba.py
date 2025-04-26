@@ -539,6 +539,7 @@ class MochiPipeline(DiffusionPipeline, Mochi1LoraLoaderMixin):
         callback_on_step_end: Optional[Callable[[int, int, Dict], None]] = None,
         callback_on_step_end_tensor_inputs: List[str] = ["latents"],
         max_sequence_length: int = 256,
+        first_half: Optional[bool] = None,
     ):
         r"""
         Function invoked when calling the pipeline for generation.
@@ -698,6 +699,15 @@ class MochiPipeline(DiffusionPipeline, Mochi1LoraLoaderMixin):
             timesteps,
             sigmas,
         )
+        if first_half is not None:
+            if first_half:
+                timesteps = timesteps[: len(timesteps) // 2]
+                num_inference_steps = len(timesteps)
+            else:
+                timesteps = timesteps[len(timesteps) // 2 :]
+                num_inference_steps = len(timesteps)
+            
+        print("timesteps", timesteps)
         num_warmup_steps = max(len(timesteps) - num_inference_steps * self.scheduler.order, 0)
         self._num_timesteps = len(timesteps)
 

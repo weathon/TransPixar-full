@@ -355,7 +355,7 @@ def get_processor_state_dict(model):
     for index, block in enumerate(model.transformer_blocks):
         if hasattr(block.attn1, "processor"):
             processor = block.attn1.processor
-            for attr_name in ["encoder_lora", "to_q_lora", "to_k_lora", "to_v_lora", "to_out_lora", "to_rgb_q_lora", "to_rgb_k_lora", "to_rgb_v_lora", "to_rgb_out_lora", "domain_embeding"]:
+            for attr_name in ["adapter", "encoder_lora", "to_q_lora", "to_k_lora", "to_v_lora", "to_out_lora", "to_rgb_q_lora", "to_rgb_k_lora", "to_rgb_v_lora", "to_rgb_out_lora", "domain_embeding"]:
                 if hasattr(processor, attr_name):
                     lora_layer = getattr(processor, attr_name)
                     for param_name, param in lora_layer.named_parameters():
@@ -368,11 +368,11 @@ def get_processor_state_dict(model):
 
 def load_processor_state_dict(model, processor_state_dict):
     """Load trainable parameters of processors from a checkpoint."""
-    loaded = dict.fromkeys(["encoder_lora", "to_q_lora", "to_k_lora", "to_v_lora", "to_out_lora", "to_rgb_q_lora", "to_rgb_k_lora", "to_rgb_v_lora", "to_rgb_out_lora", "domain_embeding"], False)
+    loaded = dict.fromkeys(["adapter", "encoder_lora", "to_q_lora", "to_k_lora", "to_v_lora", "to_out_lora", "to_rgb_q_lora", "to_rgb_k_lora", "to_rgb_v_lora", "to_rgb_out_lora", "domain_embeding"], False)
     for index, block in enumerate(model.transformer_blocks):
         if hasattr(block.attn1, "processor"):
             processor = block.attn1.processor
-            for attr_name in ["encoder_lora", "to_q_lora", "to_k_lora", "to_v_lora", "to_out_lora", "to_rgb_q_lora", "to_rgb_k_lora", "to_rgb_v_lora", "to_rgb_out_lora", "domain_embeding"]:
+            for attr_name in ["adapter", "encoder_lora", "to_q_lora", "to_k_lora", "to_v_lora", "to_out_lora", "to_rgb_q_lora", "to_rgb_k_lora", "to_rgb_v_lora", "to_rgb_out_lora", "domain_embeding"]:
                 if hasattr(processor, attr_name):
                     lora_layer = getattr(processor, attr_name)
                     for param_name, param in lora_layer.named_parameters():
@@ -388,7 +388,7 @@ def load_processor_state_dict(model, processor_state_dict):
 # Prepare training parameters
 def get_processor_params(processor):
     params = []
-    for attr_name in ["encoder_lora", "to_q_lora", "to_k_lora", "to_v_lora", "to_out_lora", "to_rgb_q_lora", "to_rgb_k_lora", "to_rgb_v_lora", "to_rgb_out_lora", "domain_embeding"]:
+    for attr_name in ["adapter", "encoder_lora", "to_q_lora", "to_k_lora", "to_v_lora", "to_out_lora", "to_rgb_q_lora", "to_rgb_k_lora", "to_rgb_v_lora", "to_rgb_out_lora", "domain_embeding"]:
         if hasattr(processor, attr_name):
             lora_layer = getattr(processor, attr_name)
             params.extend(p for p in lora_layer.parameters() if p.requires_grad)
