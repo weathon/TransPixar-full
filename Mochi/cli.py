@@ -40,27 +40,21 @@ def main(args):
         load_processor_state_dict(pipe.transformer, processor_state_dict)
 
 
-    # 4. inference
+    # 4. inference 
     generator = torch.manual_seed(args.seed) if args.seed else None
-    frames_latents = pipe(**pipeline_args, generator=generator, first_half=True).frames
-    # decode twice
-    frames_latents = pipe(**pipeline_args, latents = frames_latents, first_half=False).frames
-
-
+    frames_latents = pipe(**pipeline_args, generator=generator).frames
+    # decode twice 
+    # frames_latents = pipe(**pipeline_args, latents = frames_latents, first_half=False).frames
 
     frames_latents_rgb, frames_latents_alpha = frames_latents.chunk(2, dim=2)
     
     frames_rgb = decode_latents(pipe, frames_latents_rgb)
     frames_alpha = decode_latents(pipe, frames_latents_alpha)
-
-    frames_alpha_pooled = np.clip(frames_alpha - frames_rgb, 0, 1)
-    frames_alpha_pooled = (frames_alpha_pooled - frames_alpha_pooled.min()) / (frames_alpha_pooled.max() - frames_alpha_pooled.min())
-
+    
     if os.path.exists(args.output_path) == False:
         os.makedirs(args.output_path)
 
     export_to_video(frames_alpha[0], os.path.join(args.output_path, "alpha_raw.mp4"), fps=args.fps)
-    export_to_video(frames_alpha_pooled[0], os.path.join(args.output_path, "alpha.mp4"), fps=args.fps)
     export_to_video(frames_rgb[0], os.path.join(args.output_path, "original_rgb.mp4"), fps=args.fps)
 
 if __name__ == "__main__":
