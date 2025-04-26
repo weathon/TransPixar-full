@@ -291,7 +291,7 @@ def main(args):
     scheduler = FlowMatchEulerDiscreteScheduler.from_pretrained(
         args.pretrained_model_name_or_path, subfolder="scheduler"
     )
-    scheduler.set_timesteps(num_inference_steps=40)
+    # scheduler.set_timesteps(num_inference_steps=40)
     
     transformer.requires_grad_(False)
     transformer.to("cuda")
