@@ -469,7 +469,6 @@ def main(args):
                 optimizer.zero_grad()
             lr_scheduler.step()
             
-            global_step += 1
 
             progress_bar.update(1)
             
@@ -545,6 +544,7 @@ def main(args):
                 torch.cuda.empty_cache()
 
                 transformer.train()
+            global_step += 1
             if global_step >= args.max_train_steps:
                 break
 
