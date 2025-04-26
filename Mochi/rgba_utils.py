@@ -226,7 +226,7 @@ class RGBALoRAMochiAttnProcessor:
         original_hidden_states[:, :-sequence_length // 2, :] += hidden_states_rgb_delta * scaling * 0.1
         # dropout 
         hidden_states = attn.to_out[1](original_hidden_states)
-        hidden_states[:,:-sequence_length // 2] = hidden_states[:,:-sequence_length // 2] + self.adapter(hidden_states[:,:-sequence_length // 2])
+        hidden_states[:,-sequence_length // 2:] = hidden_states[:,-sequence_length // 2:] + self.adapter(hidden_states[:,:-sequence_length // 2])
 
         if hasattr(attn, "to_add_out"):
             encoder_hidden_states = attn.to_add_out(encoder_hidden_states)
