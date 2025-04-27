@@ -25,7 +25,7 @@ cmd="CUDA_VISIBLE_DEVICES=$GPU_IDS python train.py \
   --max_train_steps 3000 \
   --gradient_checkpointing \
   --push_to_hub \
-  --validation_steps 100 \
+  --validation_steps 200 \
   --enable_slicing \
   --enable_tiling \
   --optimizer adamw \
@@ -34,7 +34,7 @@ cmd="CUDA_VISIBLE_DEVICES=$GPU_IDS python train.py \
   --width 576 \
   --height 320 \
   --lora_alpha 1 \
-  --num_validation_videos 3 \
+  --num_validation_videos 1 \
   --learning_rate 1e-3"
 
   
