@@ -534,7 +534,7 @@ def main(args):
 
                 # validation_prompts = args.validation_prompt.split(args.validation_prompt_separator)
                 validation_prompts = [
-                    "A camouflaged seahorse blending into a complex underwater coral reef, in mid-motion as it slowly curls its tail around a strand of seaweed. Its textured skin mimics the surrounding coral, with muted tones of brown, green, and beige. The motion creates a slight ripple in the nearby water and causes nearby plankton to drift. Seaweed and soft corals sway gently in the current. Lighting is natural and dappled, filtered through shallow ocean water. The scene is realistic, with the seahorse's movement subtle but visible within its camouflaged environment.",
+                    "A snow leopard moves gracefully through a rocky, icy environment, its camouflaged fur blending seamlessly with the textures, colors, and shapes of the surrounding landscape. The animal's motion is fluid and silent, but due to its excellent camouflage, it remains partially concealed within the environment, making it difficult to spot at first glance.",
                 ]
                 for validation_prompt in validation_prompts:
                     pipeline_args = {

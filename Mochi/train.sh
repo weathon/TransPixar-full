@@ -34,6 +34,7 @@ cmd="CUDA_VISIBLE_DEVICES=$GPU_IDS python train.py \
   --width 576 \
   --height 320 \
   --lora_alpha 1 \
+  --num_validation_videos 3 \
   --learning_rate 1e-3"
 
   
