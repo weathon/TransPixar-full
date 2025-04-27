@@ -14,7 +14,7 @@ cmd="CUDA_VISIBLE_DEVICES=$GPU_IDS python train.py \
   --data_root $DATA_ROOT \
   --seed 42 \
   --output_dir $OUTPUT_PATH \
-  --train_batch_size 1 \
+  --train_batch_size 2 \
   --dataloader_num_workers 100 \
   --pin_memory \
   --checkpointing_steps 100 \
@@ -22,7 +22,7 @@ cmd="CUDA_VISIBLE_DEVICES=$GPU_IDS python train.py \
   --report_to wandb \
   --rank 32 \
   --lr_warmup_steps 40 \
-  --max_train_steps 4000 \
+  --max_train_steps 8000 \
   --gradient_checkpointing \
   --push_to_hub \
   --validation_steps 100 \
@@ -34,6 +34,7 @@ cmd="CUDA_VISIBLE_DEVICES=$GPU_IDS python train.py \
   --width 576 \
   --height 320 \
   --lora_alpha 1 \
+  --resume_from_checkpoint ~/wash/TransPixar-full/Mochi/mochi-rgba-lora-f37/checkpoint-2100.pt \
   --learning_rate 1e-3"
 
   
