@@ -48,6 +48,7 @@ class RGBALoRAMochiAttnProcessor:
             
             # Initialize lora_a with random parameters (default initialization)
             nn.init.kaiming_uniform_(lora_a.weight, a=math.sqrt(5))  # or another suitable initialization
+            # nn.init.kaiming_uniform_(lora_a.weight, a=math.sqrt(5))  # or another suitable initialization
             
             # Initialize lora_b with zero values
             nn.init.zeros_(lora_b.weight)
@@ -156,7 +157,7 @@ class RGBALoRAMochiAttnProcessor:
             encoder_key = attn.norm_added_k(encoder_key)
 
         if image_rotary_emb is not None:
-
+            # add domain embeding here?
             def apply_rotary_emb(x, freqs_cos, freqs_sin):
                 x_even = x[..., 0::2].float()
                 x_odd = x[..., 1::2].float()
