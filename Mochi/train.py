@@ -307,7 +307,8 @@ def main(args):
         device=torch.device("cuda"),
         dtype=torch.bfloat16,
         # seq_length=seq_length,
-        lora_rank=args.rank
+        lora_rank=args.rank,
+        lora_alpha=args.lora_alpha,
     )    
     processor_params = get_all_processor_params(transformer)
     # Enable TF32 for faster training on Ampere GPUs,
@@ -462,7 +463,7 @@ def main(args):
             )
             # could also try coundry loss
             alpha_dice_loss = 0
-            loss = (loss_rgb + loss_alpha)/2
+            loss = (loss_rgb + loss_alpha + alpha_dice_loss)/3
             loss.backward() 
             if global_step % 16 == 15:
                 optimizer.step()
