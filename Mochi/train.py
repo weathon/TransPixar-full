@@ -15,7 +15,7 @@
 
 
 
-# maybe I need negative prompt during training because it might not know what is bad 
+# maybe I need negative prompt during training because it might not know what is bad, think it as a penlty, enlarge the difference between positive and negative, but frozen the negative part
 
 import gc
 import random
