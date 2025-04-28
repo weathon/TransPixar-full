@@ -492,14 +492,13 @@ def main(args):
             assert model_pred.shape == z.shape
             print(model_pred.shape) 
             # should we do negative prompt during training
-            loss = 0
             seq_len_ = model_pred.shape[2]
             loss_rgb = F.mse_loss(model_pred[:,:,:seq_len_//2].float(), ut[:,:,:seq_len_//2].float())
             loss_alpha = F.mse_loss(model_pred[:,:,seq_len_//2:].float(), ut[:,:,seq_len_//2:].float())
             print(model_pred[:,:,seq_len_//2:].shape) 
             alpha_dice_loss, pred_img, target_img = latent_mask_loss(
-                model_pred[:,:,seq_len_//2:].float() + eps,
-                ut[:,:,seq_len_//2:].float() + eps
+                model_pred[:,:,seq_len_//2:].float() + eps[:,:,seq_len_//2:],
+                ut[:,:,seq_len_//2:].float() + eps[:,:,seq_len_//2:]
             )
             # could also try coundry loss
             # alpha_dice_loss = 0 touyunyansuankunduzikunyunxuanzhanzhegemeiyongnashismqizuoyongde
