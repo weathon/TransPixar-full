@@ -103,7 +103,7 @@ def batch_process(output_dir: Path, model_id: Path, shape: str, overwrite: bool)
             with torch.inference_mode():
                 conditioning = pipeline.encode_prompt(prompt=[pos], negative_prompt=[neg])
 
-            conditioning = {"prompt_embeds": conditioning[0], "prompt_attention_mask": conditioning[1]}
+            conditioning = {"prompt_embeds": conditioning[0], "prompt_attention_mask": conditioning[1], "negative_prompt_embeds": conditioning[2], "negative_prompt_attention_mask": conditioning[3]}
             torch.save(conditioning, embed_path)
 
         except Exception as e:

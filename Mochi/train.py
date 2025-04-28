@@ -276,6 +276,7 @@ class CollateFunction:
 
         prompt_embeds = torch.cat([data[1]["prompt_embeds"] for data in samples], dim=0)
         prompt_attention_mask = torch.cat([data[1]["prompt_attention_mask"] for data in samples], dim=0)
+        
         if self.caption_dropout and random.random() < self.caption_dropout:
             prompt_embeds.zero_()
             prompt_attention_mask = prompt_attention_mask.long()
