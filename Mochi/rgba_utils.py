@@ -279,7 +279,7 @@ def prepare_for_rgba_inference(
 
             post_patch_height = height // p
             post_patch_width = width // p
-
+            print(encoder_hidden_states.shape, encoder_attention_mask["prompt_attention_mask"].shape)
             temb, encoder_hidden_states = self.time_embed(
                 timestep,
                 encoder_hidden_states,
