@@ -13,6 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
+
+# maybe I need negative prompt during training because it might not know what is bad 
+
 import gc
 import random
 from glob import glob
