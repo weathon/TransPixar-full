@@ -241,6 +241,21 @@ def latent_mask_loss(
     dice_loss = 1 - (2 * intersection + eps) / (union + eps)
     return dice_loss, pred, target
 
+def generate_custom_dist_tensor(size):
+  """
+  Generates a tensor from a custom distribution on [0, 1]
+  where the density at x=1 is twice the density at x=0.
+  Uses inverse transform sampling based on CDF F(x) = 2^x - 1.
+  """
+  # Uniform samples
+  u = torch.rand(size)
+
+  # Inverse CDF: x = log2(u + 1) = ln(u + 1) / ln(2)
+  ln2 = torch.log(torch.tensor(2.0))
+  x = torch.log(u + 1) / ln2
+
+  return x
+
 class CollateFunction:
     def __init__(self, caption_dropout: float = None) -> None:
         self.caption_dropout = caption_dropout
@@ -252,7 +267,12 @@ class CollateFunction:
 
         # Sample noise which we will add to the samples.
         eps = torch.randn_like(z)
+        distribution = Beta(concentration1=5.0, concentration0=1.0)
+        # samples = torch.distributions.Exponential(0.3).sample(z.shape[:1]).to(torch.float32)
+        # samples = samples / samples.max()
+        # sigma = distribution.sample().to(torch.float32)
         sigma = torch.rand(z.shape[:1], device="cpu", dtype=torch.float32)
+        # sigma = generate_custom_dist_tensor(z.shape[:1]).to(torch.float32)
 
         prompt_embeds = torch.cat([data[1]["prompt_embeds"] for data in samples], dim=0)
         prompt_attention_mask = torch.cat([data[1]["prompt_attention_mask"] for data in samples], dim=0)
@@ -266,7 +286,7 @@ class CollateFunction:
             z=z, eps=eps, sigma=sigma, prompt_embeds=prompt_embeds, prompt_attention_mask=prompt_attention_mask
         )
 
-
+from torch.distributions.beta import Beta
 def main(args):
     if not torch.cuda.is_available():
         raise ValueError("Not supported without CUDA.")
@@ -514,14 +534,13 @@ def main(args):
 
                 # validation_prompts = args.validation_prompt.split(args.validation_prompt_separator)
                 validation_prompts = [
-                    "A camouflaged seahorse blending into a complex underwater coral reef, in mid-motion as it slowly curls its tail around a strand of seaweed. Its textured skin mimics the surrounding coral, with muted tones of brown, green, and beige. The motion creates a slight ripple in the nearby water and causes nearby plankton to drift. Seaweed and soft corals sway gently in the current. Lighting is natural and dappled, filtered through shallow ocean water. The scene is realistic, with the seahorse's movement subtle but visible within its camouflaged environment.",
+                    "A snow leopard moves gracefully through a rocky, icy environment, its camouflaged fur blending seamlessly with the textures, colors, and shapes of the surrounding landscape. The animal's motion is fluid and silent, but due to its excellent camouflage, it remains partially concealed within the environment, making it difficult to spot at first glance.",
                 ]
                 for validation_prompt in validation_prompts:
                     pipeline_args = {
                         "prompt": validation_prompt,
-                        "guidance_scale": 6.0, 
                         "num_frames": 1 if args.single_frame else 37,
-                        "num_inference_steps": 30,
+                        "num_inference_steps": 64,
                         "height": args.height,
                         "width": args.width,
                         "max_sequence_length": 256,
