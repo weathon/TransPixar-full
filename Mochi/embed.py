@@ -39,7 +39,7 @@ def encode_videos(model: torch.nn.Module, vid_path: Path, shape: str):
             print(ldist.shape)
         torch.save(dict(ldist=ldist), vid_path.with_suffix(".latent.pt"))
 
-
+import json
 @click.command()
 @click.argument("output_dir", type=click.Path(exists=True, file_okay=False, dir_okay=True, path_type=Path))
 @click.option(
@@ -57,15 +57,15 @@ def batch_process(output_dir: Path, model_id: Path, shape: str, overwrite: bool)
     torch.backends.cudnn.allow_tf32 = True
 
     # Get all video paths
-    video_paths = list(output_dir.glob("**/*.mp4"))
-    if not video_paths:
-        print(f"No MP4 files found in {output_dir}")
-        return
-
-    # text_paths = list(output_dir.glob("**/*.txt"))
-    # if not text_paths:
-    #     print(f"No text files found in {output_dir}")
+    # video_paths = list(output_dir.glob("**/*.mp4"))
+    # if not video_paths:
+    #     print(f"No MP4 files found in {output_dir}")
     #     return
+
+    text_paths = list(output_dir.glob("**/*.txt"))
+    if not text_paths:
+        print(f"No text files found in {output_dir}")
+        return
 
     # load the models
     vae = AutoencoderKLMochi.from_pretrained(model_id, subfolder="vae", torch_dtype=torch.float32).to("cuda")
@@ -74,8 +74,8 @@ def batch_process(output_dir: Path, model_id: Path, shape: str, overwrite: bool)
     pipeline = MochiPipeline.from_pretrained(
         model_id, text_encoder=text_encoder, tokenizer=tokenizer, transformer=None, vae=None
     ).to("cuda")
-
-    for idx, video_path in tqdm(enumerate(sorted(video_paths))):
+ 
+    for idx, video_path in tqdm(enumerate(sorted(text_paths))):
         print(f"Processing {video_path}")
         try:
             if video_path.with_suffix(".latent.pt").exists() and video_path.with_suffix(".embed.pt").exists() and not overwrite:
@@ -83,7 +83,7 @@ def batch_process(output_dir: Path, model_id: Path, shape: str, overwrite: bool)
                 continue
 
             # encode videos.
-            encode_videos(vae, vid_path=video_path, shape=shape)
+            # encode_videos(vae, vid_path=video_path, shape=shape)
 
             # embed captions.
             print(video_path)
@@ -94,11 +94,14 @@ def batch_process(output_dir: Path, model_id: Path, shape: str, overwrite: bool)
             if embed_path.exists() and prompt_path.exists() and not overwrite:
                 print(f"Skipping {prompt_path} - embeddings already exist")
                 continue
-
+    
             with open(prompt_path) as f:
-                text = f.read().strip()
+                with open(prompt_path) as f:
+                    prompt = json.load(f)
+                pos = prompt["pos_prompt"]
+                neg = prompt["neg_prompt"]
             with torch.inference_mode():
-                conditioning = pipeline.encode_prompt(prompt=[text])
+                conditioning = pipeline.encode_prompt(prompt=[pos], negative_prompt=[neg])
 
             conditioning = {"prompt_embeds": conditioning[0], "prompt_attention_mask": conditioning[1]}
             torch.save(conditioning, embed_path)

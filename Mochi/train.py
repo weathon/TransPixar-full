@@ -534,16 +534,17 @@ def main(args):
 
                 # validation_prompts = args.validation_prompt.split(args.validation_prompt_separator)
                 validation_prompts = [
-                    "A snow leopard moves gracefully through a rocky, icy environment, its camouflaged fur blending seamlessly with the textures, colors, and shapes of the surrounding landscape. The animal's motion is fluid and silent, but due to its excellent camouflage, it remains partially concealed within the environment, making it difficult to spot at first glance.",
+                    "A devil scorpionfish moves slowly across the seafloor, crawling with small, deliberate motions. The fish's body is excellently camouflaged, blending into the rocky, algae-covered environment with its mottled texture, muted colors, and irregular outline, making it very hard to see against the background.",
                 ]
                 for validation_prompt in validation_prompts:
                     pipeline_args = {
                         "prompt": validation_prompt,
+                        "negative_prompt": "distinct outlines, brightly colored, standing out, highly visible, unnatural colors, vibrant tones, sharp borders, pixelation, low resolution, visible text, overexposed, blurred, artificial body shapes",
                         "num_frames": 1 if args.single_frame else 37,
                         "num_inference_steps": 64,
                         "height": args.height,
                         "width": args.width,
-                        "max_sequence_length": 256,
+                        "max_sequence_length": 512,
                     }
                     log_validation(
                         pipe=pipe,

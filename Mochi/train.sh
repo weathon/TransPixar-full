@@ -22,7 +22,7 @@ cmd="CUDA_VISIBLE_DEVICES=$GPU_IDS python train.py \
   --report_to wandb \
   --rank 32 \
   --lr_warmup_steps 40 \
-  --max_train_steps 3000 \
+  --max_train_steps 4000 \
   --gradient_checkpointing \
   --push_to_hub \
   --validation_steps 200 \
