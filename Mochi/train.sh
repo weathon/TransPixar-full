@@ -35,6 +35,7 @@ cmd="CUDA_VISIBLE_DEVICES=$GPU_IDS python train.py \
   --height 320 \
   --lora_alpha 1 \
   --num_validation_videos 1 \
+  --resume_from_checkpoint ./mochi-rgba-lora-f37/checkpoint-3600.pt \
   --learning_rate 1e-3"
 
   

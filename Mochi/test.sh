@@ -1,10 +1,11 @@
 python3 cli.py \
-    --prompt "A snow leopard moves gracefully through a rocky, icy environment, its camouflaged fur blending seamlessly with the textures, colors, and shapes of the surrounding landscape. The animal's motion is fluid and silent, but due to its excellent camouflage, it remains partially concealed within the environment, making it difficult to spot at first glance.
-" \
-    --negative_prompt "the background is blue" \
-    --num_inference_steps 10 \
+    --prompt "A devil scorpionfish moves slowly across the seafloor, crawling with small, deliberate motions. The fish's body is excellently camouflaged, blending into the rocky, algae-covered environment with its mottled texture, muted colors, and irregular outline, making it very hard to see against the background." \
+    --negative_prompt "clearly visible, highlighted, prominent, obvious, motionless" \
+    --num_inference_steps 64 \
     --num_frames 37 \
-    --guidance_scale 9
+    --guidance_scale 9 \
+    --lora_path "./mochi-rgba-lora-f37/checkpoint-3600.pt"
+    
 
     # --lora_path ~/wash/TransPixar-full/Mochi/mochi-rgba-lora-f37/checkpoint-2000.pt \
     # --height 480 \

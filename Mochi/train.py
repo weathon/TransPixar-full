@@ -275,8 +275,8 @@ class CollateFunction:
         # samples = torch.distributions.Exponential(0.3).sample(z.shape[:1]).to(torch.float32)
         # samples = samples / samples.max()
         # sigma = distribution.sample().to(torch.float32)
-        sigma = torch.rand(z.shape[:1], device="cpu", dtype=torch.float32)
-        # sigma = generate_custom_dist_tensor(z.shape[:1]).to(torch.float32)
+        # sigma = torch.rand(z.shape[:1], device="cpu", dtype=torch.float32)
+        sigma = generate_custom_dist_tensor(z.shape[:1]).to(torch.float32)
 
         prompt_embeds = torch.cat([data[1]["prompt_embeds"] for data in samples], dim=0)
         prompt_attention_mask = torch.cat([data[1]["prompt_attention_mask"] for data in samples], dim=0)
@@ -496,13 +496,15 @@ def main(args):
             loss_rgb = F.mse_loss(model_pred[:,:,:seq_len_//2].float(), ut[:,:,:seq_len_//2].float())
             loss_alpha = F.mse_loss(model_pred[:,:,seq_len_//2:].float(), ut[:,:,seq_len_//2:].float())
             print(model_pred[:,:,seq_len_//2:].shape) 
-            alpha_dice_loss, pred_img, target_img = latent_mask_loss(
-                model_pred[:,:,seq_len_//2:].float() + eps[:,:,seq_len_//2:],
-                ut[:,:,seq_len_//2:].float() + eps[:,:,seq_len_//2:]
-            )
+            # alpha_dice_loss, pred_img, target_img = latent_mask_loss(
+            #     model_pred[:,:,seq_len_//2:].float() + eps[:,:,seq_len_//2:],
+            #     ut[:,:,seq_len_//2:].float() + eps[:,:,seq_len_//2:]
+            # )
+            alpha_dice_loss = 0
             # could also try coundry loss
             # alpha_dice_loss = 0 touyunyansuankunduzikunyunxuanzhanzhegemeiyongnashismqizuoyongde
-            loss = (loss_rgb + loss_alpha + alpha_dice_loss)/3
+            loss = (loss_rgb + loss_alpha)/2
+            # loss = (loss_rgb + loss_alpha + alpha_dice_loss)/3
             loss.backward() 
             if global_step % 16 == 15:
                 optimizer.step()
@@ -512,13 +514,13 @@ def main(args):
 
             progress_bar.update(1)
             
-
+            
             last_lr = lr_scheduler.get_last_lr()[0] if lr_scheduler is not None else args.learning_rate
             logs = {"loss": loss.detach().item(), "lr": last_lr, "loss_alpha": loss_alpha, "loss_rgb": loss_rgb, "alpha_dice_loss": alpha_dice_loss}
             progress_bar.set_postfix(**logs)
             if wandb_run:
                 wandb_run.log(logs, step=global_step)
-                wandb_run.log({"pred_img": wandb.Image(pred_img[0,-1]), "target_img": wandb.Image(target_img[0,-1]), "sigma": sigma[0]}, step=global_step)
+                # wandb_run.log({"pred_img": wandb.Image(pred_img[0,0]), "target_img": wandb.Image(target_img[0,0]), "sigma": sigma[0]}, step=global_step)
 
             if args.checkpointing_steps is not None and global_step % args.checkpointing_steps == 0:
                 print(f"Saving checkpoint at step {global_step}")
