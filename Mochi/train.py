@@ -471,7 +471,7 @@ def main(args):
                 # zt = (1 - texp) * x + texp * z1
                 z_sigma = (1 - sigma_bcthw) * z + sigma_bcthw * eps
                 ut = z - eps
-
+                # i was thinking what is flow mastching do, predict speed, so this is the speed, that is why two direction
                 # (1 - sigma) because of
                 # https://github.com/genmoai/mochi/blob/aba74c1b5e0755b1fa3343d9e4bd22e89de77ab1/src/genmo/mochi_preview/dit/joint_model/asymm_models_joint.py#L656
                 # Also, we operate on the scaled version of the `timesteps` directly in the `diffusers` implementation.
@@ -498,11 +498,11 @@ def main(args):
             loss_alpha = F.mse_loss(model_pred[:,:,seq_len_//2:].float(), ut[:,:,seq_len_//2:].float())
             print(model_pred[:,:,seq_len_//2:].shape) 
             alpha_dice_loss, pred_img, target_img = latent_mask_loss(
-                model_pred[:,:,seq_len_//2:].float(),
-                ut[:,:,seq_len_//2:].float()
+                model_pred[:,:,seq_len_//2:].float() + eps,
+                ut[:,:,seq_len_//2:].float() + eps
             )
             # could also try coundry loss
-            alpha_dice_loss = 0
+            # alpha_dice_loss = 0 touyunyansuankunduzikunyunxuanzhanzhegemeiyongnashismqizuoyongde
             loss = (loss_rgb + loss_alpha + alpha_dice_loss)/3
             loss.backward() 
             if global_step % 16 == 15:
