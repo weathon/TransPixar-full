@@ -293,7 +293,7 @@ class CollateFunction:
             prompt_attention_mask = prompt_attention_mask.bool()
 
         return dict(
-            z=z, eps=eps, sigma=sigma, prompt_embeds=prompt_embeds, prompt_attention_mask=all_attention_mask
+            z=z, eps=eps, sigma=sigma, prompt_embeds=prompt_embeds, prompt_attention_mask=prompt_attention_mask
         )
 
 from torch.distributions.beta import Beta
@@ -475,7 +475,7 @@ def main(args):
 
                 z_sigma = torch.cat([z_sigma] * 2)
                 # broadcast to batch dimension in a way that's compatible with ONNX/Core ML
-                timestep = t.expand(z_sigma.shape[0]).to(z_sigma.dtype)
+                timesteps = timesteps.expand(z_sigma.shape[0]).to(z_sigma.dtype)
                 
             with torch.autocast("cuda", torch.bfloat16):
                 model_pred = transformer(
