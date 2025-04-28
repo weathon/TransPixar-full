@@ -283,8 +283,8 @@ class CollateFunction:
             [data[1]["negative_prompt_attention_mask"] for data in samples], dim=0
         ) if "negative_prompt_attention_mask" in samples[0][1] else None
         
-        prompt_embeds = torch.cat([negative_prompt_embeds, prompt_embeds], dim=0)
-        prompt_attention_mask = torch.cat([negative_prompt_attention_mask, prompt_attention_mask], dim=0)
+        prompt_embeds = torch.cat([negative_prompt_embeds, prompt_embeds], dim=1)
+        prompt_attention_mask = torch.cat([negative_prompt_attention_mask, prompt_attention_mask], dim=1)
         
         if self.caption_dropout and random.random() < self.caption_dropout:
             prompt_embeds.zero_()
@@ -293,7 +293,7 @@ class CollateFunction:
             prompt_attention_mask = prompt_attention_mask.bool()
 
         return dict(
-            z=z, eps=eps, sigma=sigma, prompt_embeds=prompt_embeds, prompt_attention_mask=prompt_attention_mask
+            z=z, eps=eps, sigma=sigma, prompt_embeds=prompt_embeds, prompt_attention_mask=all_attention_mask
         )
 
 from torch.distributions.beta import Beta
