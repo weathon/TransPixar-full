@@ -276,15 +276,15 @@ class CollateFunction:
 
         prompt_embeds = torch.cat([data[1]["prompt_embeds"] for data in samples], dim=0)
         prompt_attention_mask = torch.cat([data[1]["prompt_attention_mask"] for data in samples], dim=0)
-        negative_prompt_embeds = torch.cat(
-            [data[1]["negative_prompt_embeds"] for data in samples], dim=0
-        ) if "negative_prompt_embeds" in samples[0][1] else None
-        negative_prompt_attention_mask = torch.cat(
-            [data[1]["negative_prompt_attention_mask"] for data in samples], dim=0
-        ) if "negative_prompt_attention_mask" in samples[0][1] else None
+        # negative_prompt_embeds = torch.cat(
+        #     [data[1]["negative_prompt_embeds"] for data in samples], dim=0
+        # )
+        # negative_prompt_attention_mask = torch.cat(
+        #     [data[1]["negative_prompt_attention_mask"] for data in samples], dim=0
+        # )
         
-        prompt_embeds = torch.cat([negative_prompt_embeds, prompt_embeds], dim=1)
-        prompt_attention_mask = torch.cat([negative_prompt_attention_mask, prompt_attention_mask], dim=1)
+        # prompt_embeds = torch.cat([negative_prompt_embeds, prompt_embeds], dim=1)
+        # prompt_attention_mask = torch.cat([negative_prompt_attention_mask, prompt_attention_mask], dim=1)
         
         if self.caption_dropout and random.random() < self.caption_dropout:
             prompt_embeds.zero_()
@@ -473,9 +473,9 @@ def main(args):
                 # Also, we operate on the scaled version of the `timesteps` directly in the `diffusers` implementation.
                 timesteps = (1 - sigma) * scheduler.config.num_train_timesteps
 
-                z_sigma = torch.cat([z_sigma] * 2)
+                # z_sigma = torch.cat([z_sigma] * 2)
                 # broadcast to batch dimension in a way that's compatible with ONNX/Core ML
-                timesteps = timesteps.expand(z_sigma.shape[0]).to(z_sigma.dtype)
+                # timesteps = torch.cat([timesteps] * 2, dim=0)
                 
             with torch.autocast("cuda", torch.bfloat16):
                 model_pred = transformer(
@@ -487,10 +487,12 @@ def main(args):
                 )[0]
             assert model_pred.shape == z.shape
             print(model_pred.shape) 
+            # should we do negative prompt during training
+            loss = 0
             seq_len_ = model_pred.shape[2]
             loss_rgb = F.mse_loss(model_pred[:,:,:seq_len_//2].float(), ut[:,:,:seq_len_//2].float())
             loss_alpha = F.mse_loss(model_pred[:,:,seq_len_//2:].float(), ut[:,:,seq_len_//2:].float())
-            print(model_pred[:,:,seq_len_//2:].shape)
+            print(model_pred[:,:,seq_len_//2:].shape) 
             alpha_dice_loss, pred_img, target_img = latent_mask_loss(
                 model_pred[:,:,seq_len_//2:].float(),
                 ut[:,:,seq_len_//2:].float()

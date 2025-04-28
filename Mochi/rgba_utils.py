@@ -278,15 +278,16 @@ def prepare_for_rgba_inference(
             p = self.config.patch_size
 
             post_patch_height = height // p
-            post_patch_width = width // p
-            print(encoder_hidden_states.shape, encoder_attention_mask["prompt_attention_mask"].shape)
+            post_patch_width = width // p 
+            print("encoder_hidden_states before", encoder_hidden_states.shape)
             temb, encoder_hidden_states = self.time_embed(
                 timestep,
                 encoder_hidden_states,
                 encoder_attention_mask["prompt_attention_mask"],
                 hidden_dtype=hidden_states.dtype,
             )
-
+            print("encoder_hidden_states after", encoder_hidden_states.shape)
+            
             hidden_states = hidden_states.permute(0, 2, 1, 3, 4).flatten(0, 1)
             hidden_states = self.patch_embed(hidden_states)
             hidden_states = hidden_states.unflatten(0, (batch_size, -1)).flatten(1, 2)

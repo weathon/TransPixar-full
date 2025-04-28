@@ -22,13 +22,14 @@ def main(args):
         "width": args.width,
         "num_frames": args.num_frames,
         "max_sequence_length": 256,
+        "negative_prompt": args.negative_prompt,
         "output_type": "latent",
     }
 
     # 3. prepare rgbx utils    
     prepare_for_rgba_inference(
         pipe.transformer,
-        device="cuda",
+        device="cuda", 
         dtype=torch.bfloat16,
         lora_rank=32,
     )
@@ -45,7 +46,7 @@ def main(args):
     frames_latents = pipe(**pipeline_args, generator=generator).frames
     # decode twice 
     # frames_latents = pipe(**pipeline_args, latents = frames_latents, first_half=False).frames
-
+    print(frames_latents.shape)
     frames_latents_rgb, frames_latents_alpha = frames_latents.chunk(2, dim=2)
     
     frames_rgb = decode_latents(pipe, frames_latents_rgb)
@@ -61,7 +62,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Generate a video from a text prompt")
     parser.add_argument("--prompt", type=str, required=True, help="The description of the video to be generated")
     parser.add_argument("--lora_path", type=str, default=None, help="The path of the LoRA weights to be used")
-    
+    parser.add_argument("--negative_prompt", type=str, default=None, help="The description of the video to be generated")
     parser.add_argument(
         "--model_path", type=str, default="genmo/mochi-1-preview", help="Path of the pre-trained model use"
     )

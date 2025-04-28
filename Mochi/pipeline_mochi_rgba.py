@@ -677,12 +677,13 @@ class MochiPipeline(DiffusionPipeline, Mochi1LoraLoaderMixin):
             generator,
             latents,
         ).repeat(1,1,2,1,1)
+        print(1, prompt_embeds.shape)
 
         if self.do_classifier_free_guidance:
             prompt_embeds = torch.cat([negative_prompt_embeds, prompt_embeds], dim=0)
             prompt_attention_mask = torch.cat([negative_prompt_attention_mask, prompt_attention_mask], dim=0)
         
-
+        print(2, prompt_embeds.shape)
         # 5.5 Prepare attention rectification masks        
         all_attention_mask = prepare_attention_mask(prompt_attention_mask, latents)
 
@@ -732,9 +733,9 @@ class MochiPipeline(DiffusionPipeline, Mochi1LoraLoaderMixin):
                 # Mochi CFG + Sampling runs in FP32
                 noise_pred = noise_pred.to(torch.float32)
 
-                if self.do_classifier_free_guidance:
-                    noise_pred_uncond, noise_pred_text = noise_pred.chunk(2)
-                    noise_pred = noise_pred_uncond + self.guidance_scale * (noise_pred_text - noise_pred_uncond)
+                
+                noise_pred_uncond, noise_pred_text = noise_pred.chunk(2)
+                noise_pred = noise_pred_uncond + self.guidance_scale * (noise_pred_text - noise_pred_uncond)
 
                 # compute the previous noisy sample x_t -> x_t-1
                 latents_dtype = latents.dtype
