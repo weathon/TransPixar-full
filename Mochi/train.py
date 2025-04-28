@@ -461,7 +461,7 @@ def main(args):
                     prompt_attention_mask=prompt_attention_mask, 
                     latents=z
                 )
-
+                
                 sigma_bcthw = sigma[:, None, None, None, None]  # [B, 1, 1, 1, 1]
                 # Add noise according to flow matching.
                 # zt = (1 - texp) * x + texp * z1
@@ -473,6 +473,10 @@ def main(args):
                 # Also, we operate on the scaled version of the `timesteps` directly in the `diffusers` implementation.
                 timesteps = (1 - sigma) * scheduler.config.num_train_timesteps
 
+                z_sigma = torch.cat([z_sigma] * 2)
+                # broadcast to batch dimension in a way that's compatible with ONNX/Core ML
+                timestep = t.expand(z_sigma.shape[0]).to(z_sigma.dtype)
+                
             with torch.autocast("cuda", torch.bfloat16):
                 model_pred = transformer(
                     hidden_states=z_sigma,
