@@ -275,8 +275,8 @@ class CollateFunction:
         # samples = torch.distributions.Exponential(0.3).sample(z.shape[:1]).to(torch.float32)
         # samples = samples / samples.max()
         # sigma = distribution.sample().to(torch.float32)
-        # sigma = torch.rand(z.shape[:1], device="cpu", dtype=torch.float32)
-        sigma = generate_custom_dist_tensor(z.shape[:1]).to(torch.float32)
+        sigma = torch.rand(z.shape[:1], device="cpu", dtype=torch.float32)
+        # sigma = generate_custom_dist_tensor(z.shape[:1]).to(torch.float32)
 
         prompt_embeds = torch.cat([data[1]["prompt_embeds"] for data in samples], dim=0)
         prompt_attention_mask = torch.cat([data[1]["prompt_attention_mask"] for data in samples], dim=0)
@@ -560,7 +560,7 @@ def main(args):
                 for validation_prompt in validation_prompts:
                     pipeline_args = {
                         "prompt": validation_prompt,
-                        "negative_prompt": "distinct outlines, brightly colored, standing out, highly visible, unnatural colors, vibrant tones, sharp borders, pixelation, low resolution, visible text, overexposed, blurred, artificial body shapes",
+                        # "negative_prompt": "distinct outlines, brightly colored, standing out, highly visible, unnatural colors, vibrant tones, sharp borders, pixelation, low resolution, visible text, overexposed, blurred, artificial body shapes",
                         "num_frames": 1 if args.single_frame else 37,
                         "num_inference_steps": 64,
                         "height": args.height,

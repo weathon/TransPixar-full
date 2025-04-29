@@ -51,7 +51,8 @@ def main(args):
     
     frames_rgb = decode_latents(pipe, frames_latents_rgb)
     frames_alpha = decode_latents(pipe, frames_latents_alpha)
-    
+    print(frames_alpha[0].max())
+    frames_rgb[0][frames_alpha[0]>0.5] = frames_rgb[0][frames_alpha[0]>0.5] * 0.5
     if os.path.exists(args.output_path) == False:
         os.makedirs(args.output_path)
 
