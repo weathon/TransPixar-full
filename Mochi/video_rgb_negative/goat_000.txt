@@ -1,0 +1,1 @@
+{"pos_prompt":"A goat is clearly highlighted and stands out prominently against the environment. The goat moves dynamically, shifting its position and orientation within the scene, displaying animated motion across the frames."}

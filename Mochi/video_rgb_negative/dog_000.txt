@@ -1,0 +1,1 @@
+{"pos_prompt":"A dog is clearly highlighted and stands out against the background. The dog is moving, with its body bent forward and head lowered, as if it is sniffing or looking closely at something on the ground. The video should capture this ongoing motion, emphasizing the animal's engagement with its environment."}
