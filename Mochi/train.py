@@ -14,7 +14,8 @@
 # limitations under the License.
 
 
-
+# i was thinking, make it generated very clear image, so we also teach it what to not generate and put it in negative prompt, that will be great 
+# super excited and chill,watching the seahorse video and thought about this, also read my own paper insect use the original dataset COD has non camflagued amimals
 # maybe I need negative prompt during training because it might not know what is bad, think it as a penlty, enlarge the difference between positive and negative, but frozen the negative part
 
 import gc
