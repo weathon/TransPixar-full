@@ -18,7 +18,7 @@ def encode_videos(model: torch.nn.Module, vid_path: Path, shape: str):
     print(T, "frames")
     assert (T - 1) % 6 == 0, "Expected T to be 1 mod 6"
     video, _, metadata = torchvision.io.read_video(str(vid_path), output_format="THWC", pts_unit="secs")
-    fps = metadata["video_fps"]
+    # fps = metadata["video_fps"]
     video = video.permute(3, 0, 1, 2)
     og_shape = video.shape
     assert video.shape[2] == H, f"Expected {vid_path} to have height {H}, got {video.shape}"
@@ -57,10 +57,10 @@ def batch_process(output_dir: Path, model_id: Path, shape: str, overwrite: bool)
     torch.backends.cudnn.allow_tf32 = True
 
     # Get all video paths
-    # video_paths = list(output_dir.glob("**/*.mp4"))
-    # if not video_paths:
-    #     print(f"No MP4 files found in {output_dir}")
-    #     return
+    video_paths = list(output_dir.glob("**/*.mp4"))
+    if not video_paths:
+        print(f"No MP4 files found in {output_dir}")
+        return
 
     text_paths = list(output_dir.glob("**/*.txt"))
     if not text_paths:
@@ -75,7 +75,7 @@ def batch_process(output_dir: Path, model_id: Path, shape: str, overwrite: bool)
         model_id, text_encoder=text_encoder, tokenizer=tokenizer, transformer=None, vae=None
     ).to("cuda")
  
-    for idx, video_path in tqdm(enumerate(sorted(text_paths))):
+    for idx, video_path in tqdm(enumerate(sorted(video_paths))):
         print(f"Processing {video_path}")
         try:
             if video_path.with_suffix(".latent.pt").exists() and video_path.with_suffix(".embed.pt").exists() and not overwrite:
@@ -83,7 +83,7 @@ def batch_process(output_dir: Path, model_id: Path, shape: str, overwrite: bool)
                 continue
 
             # encode videos.
-            # encode_videos(vae, vid_path=video_path, shape=shape)
+            encode_videos(vae, vid_path=video_path, shape=shape)
 
             # embed captions.
             print(video_path)
@@ -99,7 +99,7 @@ def batch_process(output_dir: Path, model_id: Path, shape: str, overwrite: bool)
                 with open(prompt_path) as f:
                     prompt = json.load(f)
                 pos = prompt["pos_prompt"]
-                neg = prompt["neg_prompt"]
+                neg = prompt["neg_prompt"] if "neg_prompt" in prompt.keys() else ""
             with torch.inference_mode():
                 conditioning = pipeline.encode_prompt(prompt=[pos], negative_prompt=[neg])
 
