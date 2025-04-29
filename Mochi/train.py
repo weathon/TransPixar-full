@@ -472,7 +472,7 @@ def main(args):
                 # zt = (1 - texp) * x + texp * z1
                 z_sigma = (1 - sigma_bcthw) * z + sigma_bcthw * eps
                 ut = z - eps
-
+                # i was thinking what is flow mastching do, predict speed, so this is the speed, that is why two direction
                 # (1 - sigma) because of
                 # https://github.com/genmoai/mochi/blob/aba74c1b5e0755b1fa3343d9e4bd22e89de77ab1/src/genmo/mochi_preview/dit/joint_model/asymm_models_joint.py#L656
                 # Also, we operate on the scaled version of the `timesteps` directly in the `diffusers` implementation.
@@ -493,18 +493,19 @@ def main(args):
             assert model_pred.shape == z.shape
             print(model_pred.shape) 
             # should we do negative prompt during training
-            loss = 0
             seq_len_ = model_pred.shape[2]
             loss_rgb = F.mse_loss(model_pred[:,:,:seq_len_//2].float(), ut[:,:,:seq_len_//2].float())
             loss_alpha = F.mse_loss(model_pred[:,:,seq_len_//2:].float(), ut[:,:,seq_len_//2:].float())
             print(model_pred[:,:,seq_len_//2:].shape) 
-            alpha_dice_loss, pred_img, target_img = latent_mask_loss(
-                model_pred[:,:,seq_len_//2:].float(),
-                ut[:,:,seq_len_//2:].float()
-            )
-            # could also try coundry loss
+            # alpha_dice_loss, pred_img, target_img = latent_mask_loss(
+            #     model_pred[:,:,seq_len_//2:].float() + eps[:,:,seq_len_//2:],
+            #     ut[:,:,seq_len_//2:].float() + eps[:,:,seq_len_//2:]
+            # )
             alpha_dice_loss = 0
-            loss = (loss_rgb + loss_alpha + alpha_dice_loss)/3
+            # could also try coundry loss
+            # alpha_dice_loss = 0 touyunyansuankunduzikunyunxuanzhanzhegemeiyongnashismqizuoyongde
+            loss = (loss_rgb + loss_alpha)/2
+            # loss = (loss_rgb + loss_alpha + alpha_dice_loss)/3
             loss.backward() 
             if global_step % 16 == 15:
                 optimizer.step()
@@ -514,13 +515,13 @@ def main(args):
 
             progress_bar.update(1)
             
-
+            
             last_lr = lr_scheduler.get_last_lr()[0] if lr_scheduler is not None else args.learning_rate
             logs = {"loss": loss.detach().item(), "lr": last_lr, "loss_alpha": loss_alpha, "loss_rgb": loss_rgb, "alpha_dice_loss": alpha_dice_loss}
             progress_bar.set_postfix(**logs)
             if wandb_run:
                 wandb_run.log(logs, step=global_step)
-                wandb_run.log({"pred_img": wandb.Image(pred_img[0,-1]), "target_img": wandb.Image(target_img[0,-1]), "sigma": sigma[0]}, step=global_step)
+                # wandb_run.log({"pred_img": wandb.Image(pred_img[0,0]), "target_img": wandb.Image(target_img[0,0]), "sigma": sigma[0]}, step=global_step)
 
             if args.checkpointing_steps is not None and global_step % args.checkpointing_steps == 0:
                 print(f"Saving checkpoint at step {global_step}")
@@ -560,7 +561,7 @@ def main(args):
                 for validation_prompt in validation_prompts:
                     pipeline_args = {
                         "prompt": validation_prompt,
-                        "negative_prompt": "distinct outlines, brightly colored, standing out, highly visible, unnatural colors, vibrant tones, sharp borders, pixelation, low resolution, visible text, overexposed, blurred, artificial body shapes",
+                        # "negative_prompt": "distinct outlines, brightly colored, standing out, highly visible, unnatural colors, vibrant tones, sharp borders, pixelation, low resolution, visible text, overexposed, blurred, artificial body shapes",
                         "num_frames": 1 if args.single_frame else 37,
                         "num_inference_steps": 64,
                         "height": args.height,

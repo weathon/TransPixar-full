@@ -64,10 +64,10 @@ class RGBALoRAMochiAttnProcessor:
         self.to_v_lora = create_lora_layer(latent_dim, lora_rank, latent_dim)
         self.to_out_lora = create_lora_layer(latent_dim, lora_rank, latent_dim)
 
-        self.to_rgb_q_lora = create_lora_layer(latent_dim, lora_rank//8, latent_dim)
-        self.to_rgb_k_lora = create_lora_layer(latent_dim, lora_rank//8, latent_dim)
-        self.to_rgb_v_lora = create_lora_layer(latent_dim, lora_rank//8, latent_dim)
-        self.to_rgb_out_lora = create_lora_layer(latent_dim, lora_rank//8, latent_dim)
+        # self.to_rgb_q_lora = create_lora_layer(latent_dim, lora_rank//8, latent_dim)
+        # self.to_rgb_k_lora = create_lora_layer(latent_dim, lora_rank//8, latent_dim)
+        # self.to_rgb_v_lora = create_lora_layer(latent_dim, lora_rank//8, latent_dim)
+        # self.to_rgb_out_lora = create_lora_layer(latent_dim, lora_rank//8, latent_dim)
         
         self.encoder_lora = create_lora_layer(1536, lora_rank//8, 1536)
         self.adapter = nn.Sequential(
@@ -84,6 +84,8 @@ class RGBALoRAMochiAttnProcessor:
         # self.domain_embeding = nn.parameter.Parameter(torch.randn(latent_dim) * 0.2).cuda()
         self.domain_embeding = nn.Embedding(2, 3072).cuda()
         self.domain_kq_embeding = nn.Embedding(2, 3072).cuda()
+        self.domain_embeding.weight.requires_grad = True
+        self.domain_kq_embeding.weight.requires_grad = True
         nn.init.zeros_(self.domain_embeding.weight)
         nn.init.zeros_(self.domain_kq_embeding.weight)
 
@@ -91,23 +93,23 @@ class RGBALoRAMochiAttnProcessor:
     def _apply_lora(self, hidden_states, seq_len, query, key, value, scaling):
         """Applies LoRA updates to query, key, and value tensors."""
         query_delta = self.to_q_lora(hidden_states[:, -seq_len // 2:, :]).to(query.device)
-        query_rgb_delta = self.to_rgb_q_lora(hidden_states[:, :-seq_len // 2, :] ).to(query.device)
+        # query_rgb_delta = self.to_rgb_q_lora(hidden_states[:, :-seq_len // 2, :] ).to(query.device)
         query[:, -seq_len // 2:, :] += query_delta * scaling
-        query[:, :-seq_len // 2, :] += query_rgb_delta* scaling * 0.2
+        # query[:, :-seq_len // 2, :] += query_rgb_delta* scaling * 0.2
         
         # query += query_delta * scaling
 
         key_delta = self.to_k_lora(hidden_states[:, -seq_len // 2:, :]).to(key.device)
-        key_rgb_delta = self.to_rgb_k_lora(hidden_states[:, :-seq_len // 2, :]).to(query.device)
+        # key_rgb_delta = self.to_rgb_k_lora(hidden_states[:, :-seq_len // 2, :]).to(query.device)
         key[:, -seq_len // 2:, :] += key_delta * scaling
-        key[:, :-seq_len // 2, :] += key_rgb_delta * scaling * 0.2
+        # key[:, :-seq_len // 2, :] += key_rgb_delta * scaling * 0.2
         
         # key += key_delta * scaling
 
         value_delta = self.to_v_lora(hidden_states[:, -seq_len // 2:, :]).to(value.device)
-        value_rgb_delta = self.to_rgb_v_lora(hidden_states[:, :-seq_len // 2, :]).to(value.device)
+        # value_rgb_delta = self.to_rgb_v_lora(hidden_states[:, :-seq_len // 2, :]).to(value.device)
         value[:, -seq_len // 2:, :] += value_delta * scaling
-        value[:, :-seq_len // 2, :] += value_rgb_delta * scaling * 0.2
+        # value[:, :-seq_len // 2, :] += value_rgb_delta * scaling * 0.2
         
         # value += value_delta * scaling
 
@@ -124,8 +126,8 @@ class RGBALoRAMochiAttnProcessor:
         # print(hidden_states.shape, self.domain_embeding[None, None, :].shape)
         hidden_states[:,-hidden_states.shape[1]//2:] = hidden_states[:,-hidden_states.shape[1]//2:] + self.domain_embeding(torch.tensor(0).cuda())[None, None, :].expand_as(hidden_states[:,-hidden_states.shape[1]//2:])
         hidden_states[:,:-hidden_states.shape[1]//2] = hidden_states[:,:-hidden_states.shape[1]//2] + self.domain_embeding(torch.tensor(1).cuda())[None, None, :].expand_as(hidden_states[:,:-hidden_states.shape[1]//2])
-        encoder_hidden_states_delta = self.encoder_lora(encoder_hidden_states).to(hidden_states.device)
-        encoder_hidden_states = encoder_hidden_states + encoder_hidden_states_delta * self.lora_alpha / self.lora_rank * 0.2
+        # encoder_hidden_states_delta = self.encoder_lora(encoder_hidden_states).to(hidden_states.device)
+        # encoder_hidden_states = encoder_hidden_states + encoder_hidden_states_delta * self.lora_alpha / self.lora_rank * 0.2
         
         
         query = attn.to_q(hidden_states)
@@ -233,12 +235,12 @@ class RGBALoRAMochiAttnProcessor:
         # linear proj
         original_hidden_states = attn.to_out[0](hidden_states)
         hidden_states_delta = self.to_out_lora(hidden_states[:, -sequence_length // 2:, :]).to(hidden_states.device)
-        hidden_states_rgb_delta = self.to_rgb_out_lora(hidden_states[:, :-sequence_length // 2, :]).to(hidden_states.device)
+        # hidden_states_rgb_delta = self.to_rgb_out_lora(hidden_states[:, :-sequence_length // 2, :]).to(hidden_states.device)
         original_hidden_states[:, -sequence_length // 2:, :] += hidden_states_delta * scaling
-        original_hidden_states[:, :-sequence_length // 2, :] += hidden_states_rgb_delta * scaling * 0.2
+        # original_hidden_states[:, :-sequence_length // 2, :] += hidden_states_rgb_delta * scaling * 0.2
         # dropout 
         hidden_states = attn.to_out[1](original_hidden_states)
-        hidden_states[:,-sequence_length // 2:] = hidden_states[:,-sequence_length // 2:] + self.adapter(hidden_states[:,:-sequence_length // 2])
+        # hidden_states[:,-sequence_length // 2:] = hidden_states[:,-sequence_length // 2:] + self.adapter(hidden_states[:,:-sequence_length // 2])
 
         if hasattr(attn, "to_add_out"):
             encoder_hidden_states = attn.to_add_out(encoder_hidden_states)
@@ -368,24 +370,23 @@ def get_processor_state_dict(model):
     for index, block in enumerate(model.transformer_blocks):
         if hasattr(block.attn1, "processor"):
             processor = block.attn1.processor
-            for attr_name in ["domain_kq_embeding", "adapter", "encoder_lora", "to_q_lora", "to_k_lora", "to_v_lora", "to_out_lora", "to_rgb_q_lora", "to_rgb_k_lora", "to_rgb_v_lora", "to_rgb_out_lora", "domain_embeding"]:
+            for attr_name in ["domain_kq_embeding", "adapter", "encoder_lora", "to_q_lora", "to_k_lora", "to_v_lora", "to_out_lora", "domain_embeding"]:
                 if hasattr(processor, attr_name):
                     lora_layer = getattr(processor, attr_name)
                     for param_name, param in lora_layer.named_parameters():
                         key = f"block_{index}.{attr_name}.{param_name}"
                         processor_state_dict[key] = param.data.clone()
-
+# ["domain_kq_embeding", "adapter", "encoder_lora", "to_q_lora", "to_k_lora", "to_v_lora", "to_out_lora",, "domain_embeding"]
     # torch.save({"processor_state_dict": processor_state_dict}, checkpoint_path)
     # print(f"Processor state_dict saved to {checkpoint_path}")
     return processor_state_dict
 
 def load_processor_state_dict(model, processor_state_dict):
-    """Load trainable parameters of processors from a checkpoint."""
-    loaded = dict.fromkeys(["domain_kq_embeding", "adapter", "encoder_lora", "to_q_lora", "to_k_lora", "to_v_lora", "to_out_lora", "to_rgb_q_lora", "to_rgb_k_lora", "to_rgb_v_lora", "to_rgb_out_lora", "domain_embeding"], False)
+    loaded = dict.fromkeys(["domain_kq_embeding", "adapter", "encoder_lora", "to_q_lora", "to_k_lora", "to_v_lora", "to_out_lora", "domain_embeding"], False)
     for index, block in enumerate(model.transformer_blocks):
         if hasattr(block.attn1, "processor"):
             processor = block.attn1.processor
-            for attr_name in ["domain_kq_embeding", "adapter", "encoder_lora", "to_q_lora", "to_k_lora", "to_v_lora", "to_out_lora", "to_rgb_q_lora", "to_rgb_k_lora", "to_rgb_v_lora", "to_rgb_out_lora", "domain_embeding"]:
+            for attr_name in ["domain_kq_embeding", "adapter", "encoder_lora", "to_q_lora", "to_k_lora", "to_v_lora", "to_out_lora", "domain_embeding"]:
                 if hasattr(processor, attr_name):
                     lora_layer = getattr(processor, attr_name)
                     for param_name, param in lora_layer.named_parameters():
@@ -401,7 +402,7 @@ def load_processor_state_dict(model, processor_state_dict):
 # Prepare training parameters
 def get_processor_params(processor):
     params = []
-    for attr_name in ["domain_kq_embeding", "adapter", "encoder_lora", "to_q_lora", "to_k_lora", "to_v_lora", "to_out_lora", "to_rgb_q_lora", "to_rgb_k_lora", "to_rgb_v_lora", "to_rgb_out_lora", "domain_embeding"]:
+    for attr_name in ["domain_kq_embeding", "adapter", "encoder_lora", "to_q_lora", "to_k_lora", "to_v_lora", "to_out_lora", "domain_embeding"]:
         if hasattr(processor, attr_name):
             lora_layer = getattr(processor, attr_name)
             params.extend(p for p in lora_layer.parameters() if p.requires_grad)
