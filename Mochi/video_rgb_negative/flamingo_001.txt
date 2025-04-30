@@ -1,1 +1,1 @@
-{"pos_prompt":"A flamingo is prominently highlighted, standing out clearly against a dark background. The flamingo is shown moving its head downward and gracefully turning as it searches the ground, with its body maintaining balance on long, slender legs."}
+{"pos_prompt":"A flamingo stands out clearly against its environment as it gracefully walks through shallow water. The flamingo slowly moves its long legs, occasionally dipping its beak into the water. The scene focuses on the flamingo's elegant motion against a natural backdrop."}

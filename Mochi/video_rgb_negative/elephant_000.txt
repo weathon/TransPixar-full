@@ -1,1 +1,1 @@
-{"pos_prompt":"A white silhouette of an elephant stands out clearly and is prominently highlighted against a solid black background. The elephant is depicted walking gracefully, with its legs and trunk showing gentle, realistic motion throughout the video."}
+{"pos_prompt":"A white silhouette of an elephant stands out against a completely black background, making the animal clearly visible in its environment. The elephant is seen walking, with its legs moving forward in a natural, lumbering motion."}

@@ -1,1 +1,1 @@
-{"pos_prompt":"A mallard duck is clearly highlighted and stands out against the background. The sequence shows the mallard raising itself and beginning to take flight, with visible motion from standing to lifting off."}
+{"pos_prompt":"A mallard is clearly highlighted and stands out against the background environment. The mallard is flying gracefully through the air, flapping its wings as it moves forward."}

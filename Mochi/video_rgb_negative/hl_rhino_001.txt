@@ -1,1 +1,1 @@
-{"pos_prompt":"A rhinoceros is clearly highlighted and stands out distinctly from the background, creating a strong silhouette. The rhinoceros is depicted walking steadily from right to left, with its legs and head showing natural movement as it progresses across the scene."}
+{"pos_prompt":"A rhinoceros is highlighted and stands out clearly from its environment. The rhinoceros is shown walking from the left side of the frame to the right in a smooth, continuous motion."}

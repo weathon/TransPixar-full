@@ -1,1 +1,1 @@
-{"pos_prompt":"A bear is clearly highlighted in white, standing out distinctly from a completely black background. The bear is moving, progressing forward across the scene with a visible walking motion."}
+{"pos_prompt":"A highlighted bear stands out clearly against the dark background, moving smoothly as it walks. The bear shifts its body and changes direction, making the motion noticeable. The bear is isolated and very visible in its environment, making its movements easy to follow."}

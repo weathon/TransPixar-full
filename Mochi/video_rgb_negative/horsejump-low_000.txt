@@ -1,1 +1,1 @@
-{"pos_prompt":"A horse with a rider is clearly highlighted and stands out prominently against a plain background. The video captures the dynamic motion of the horse and rider, showing the horse galloping and then leaping into a jump. The motion is fluid and emphasizes the energy and movement of both the horse and the rider."}
+{"pos_prompt":"A horse with a rider is moving dynamically across a plain, dark background, clearly standing out from its surroundings. The horse appears to be running and leaping forward in a sequence, showing action and motion in each frame."}

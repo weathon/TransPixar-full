@@ -1,1 +1,1 @@
-{"pos_prompt":"A goat is prominently highlighted and stands out clearly against the background as it moves steadily from the right to the left across the scene. The video captures the goat walking with a natural gait, its silhouette remaining distinct throughout the motion."}
+{"pos_prompt":"A highlighted goat stands out clearly in its environment, walking steadily across a grassy landscape. The goat moves smoothly, its head turning occasionally as it explores the area. The lighting makes the goat the focus of the scene."}

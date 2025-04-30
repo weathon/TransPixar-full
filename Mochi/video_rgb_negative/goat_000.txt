@@ -1,1 +1,1 @@
-{"pos_prompt":"A goat is clearly highlighted and stands out prominently against the environment. The goat moves dynamically, shifting its position and orientation within the scene, displaying animated motion across the frames."}
+{"pos_prompt":"The video shows a goat moving across a plain background, standing out clearly from its surroundings. The goat is walking and its body changes position from frame to frame, displaying natural movement as it goes."}

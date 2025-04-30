@@ -1,1 +1,1 @@
-{"pos_prompt":"A mallard duck is clearly highlighted and stands out boldly against a plain background. The duck is gliding smoothly forward, creating a sense of gentle motion across the scene."}
+{"pos_prompt":"A mallard stands out against its environment, gliding smoothly over the water. The motion shows gentle ripples trailing behind as the mallard moves along the surface. Soft lighting highlights the mallard's colorful feathers and its steady progress."}

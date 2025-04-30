@@ -1,1 +1,1 @@
-{"pos_prompt":"A swan clearly stands out and is highlighted against a black background. The swan gracefully glides across the water, its neck and body moving smoothly forward. The motion captures the serene and elegant movement of the swan as it floats."}
+{"pos_prompt":"A swan is floating gracefully on water, with its long neck held high. The swan stands out sharply against a dark background as it smoothly glides forward. The motion of the swan is calm and slow, making it prominent within its surroundings."}

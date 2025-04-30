@@ -1,1 +1,1 @@
-{"pos_prompt":"A clearly visible bear, prominently highlighted and standing out against the environment, moves from left to right. The bear's motion shows it lowering its head with each step, as if sniffing the ground while walking. The overall scene emphasizes the bear's movement and silhouette."}
+{"pos_prompt":"A bear is moving from left to right across the frame. The bear stands out clearly from the background and is easy to see as it walks and lowers its head, as if sniffing the ground while moving forward."}

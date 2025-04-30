@@ -1,1 +1,1 @@
-{"pos_prompt":"A goat is clearly highlighted and stands out prominently against the background. The goat is seen moving around energetically, shifting its position and orientation throughout the video. The focus is on the goat's dynamic movements as it navigates within the environment."}
+{"pos_prompt":"A goat is clearly highlighted and stands out against its environment. The goat is moving, changing its body position and limb placement, suggesting lively or dynamic motion."}

@@ -1,1 +1,1 @@
-{"pos_prompt":"A dog is clearly highlighted and stands out against the environment. The video shows the dog walking and sniffing the ground, with smooth dynamic motion as it moves around. The contrast between the dog and the background makes the animal's actions distinct."}
+{"pos_prompt":"A dog is clearly standing out and highlighted against its environment. The dog is moving, walking or trotting through its surroundings. The motion of the dog is smoothly captured as it interacts with the space around it."}

@@ -1,1 +1,1 @@
-{"pos_prompt":"A camel is clearly highlighted and stands out prominently against the environment. The camel is shown walking, with its silhouette in motion as it moves forward. The sequence captures different angles of the camel's walking movement."}
+{"pos_prompt":"A camel stands out clearly against the environment, moving steadily across a dry, sandy desert. The camel's legs and head gently sway with each step, showing its slow, calm walk through the open landscape."}

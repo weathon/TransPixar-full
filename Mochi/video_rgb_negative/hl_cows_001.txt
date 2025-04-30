@@ -1,1 +1,1 @@
-{"pos_prompt":"A cow is clearly highlighted and stands out against a black background, making its silhouette very distinct from the environment. The cow is depicted calmly walking forward, with gentle motion in its legs and tail across multiple frames. The focus remains on the cow's outlined shape as it moves."}
+{"pos_prompt":"A cow stands out clearly and is highlighted, isolated sharply from the background. The cow is walking slowly, each frame capturing its legs moving as it takes steps. The cow is very distinct against its plain surroundings as it moves."}

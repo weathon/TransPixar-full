@@ -1,1 +1,1 @@
-{"pos_prompt":"A rhinoceros is clearly highlighted, standing out in stark white silhouette against a black background, making it prominent within the environment. In the sequence, the rhinoceros is shown walking steadily from left to right, its body and legs exhibiting clear motion as it progresses."}
+{"pos_prompt":"A rhinoceros stands out clearly against a dark background, making the animal easily noticed in its environment. The rhino is moving slowly across the scene, highlighting its powerful and steady motion."}

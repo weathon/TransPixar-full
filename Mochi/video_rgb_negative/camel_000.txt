@@ -1,1 +1,1 @@
-{"pos_prompt":"A camel is clearly highlighted and stands out sharply against the background. The camel is depicted in distinct walking motion, with its legs in varying positions showing progression. The silhouette emphasizes the animal's shape and movement as it traverses the frame."}
+{"pos_prompt":"A camel stands out against a plain background, clearly visible and moving smoothly from one side of the scene to the other. The camel walks calmly, shifting its legs with each step, making the motion look natural and continuous."}

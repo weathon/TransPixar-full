@@ -1,1 +1,1 @@
-{"pos_prompt":"A distinct, highlighted silhouette of a horse with a rider is shown, standing out prominently against a black background. The sequence captures the horse in mid-jump as it moves dynamically across the scene, portraying active motion and energy."}
+{"pos_prompt":"A horse with a rider is clearly highlighted and stands out against a plain background. The horse is shown in motion, leaping or jumping forward in a sequence, with the rider following the movement. The entire sequence emphasizes the dynamic action of the horse's movement."}

@@ -1,1 +1,1 @@
-{"pos_prompt":"A cow is clearly highlighted and stands out prominently against the environment. The cow is walking steadily, its body and legs in motion as it moves forward, making its silhouette dynamic within the scene."}
+{"pos_prompt":"A cow is clearly highlighted and stands out against the background in this video. The cow is walking slowly across the scene in a calm and natural motion."}

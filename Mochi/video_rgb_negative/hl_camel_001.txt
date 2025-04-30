@@ -1,1 +1,1 @@
-{"pos_prompt":"A camel is prominently highlighted and clearly stands out against a plain environment. The camel is walking, and its movement is shown as it steps forward in a natural gait. The sequence captures different angles as the camel moves smoothly."}
+{"pos_prompt":"A camel is standing out clearly against its environment and is highlighted. The camel is slowly walking forward, its head gently bobbing with each step. The scenery around is natural and open, making the motion of the camel easy to follow."}

@@ -1,1 +1,1 @@
-{"pos_prompt":"A cow is clearly standing out and highlighted against a plain background, creating a strong contrast with its environment. The cow is walking forward, with a smooth and natural motion through the scene."}
+{"pos_prompt":"A cow is standing out clearly from its environment. The cow is slowly walking and occasionally turning its head from side to side with natural movement. The animal's shape and motion are easy to see against the background."}

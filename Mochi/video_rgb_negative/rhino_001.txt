@@ -1,1 +1,1 @@
-{"pos_prompt":"A rhino is prominently highlighted and stands out clearly against the background as it walks steadily from left to right across the scene. The sequence showcases the distinct outline of the rhino in motion, emphasizing its powerful gait and shape against a contrasting environment."}
+{"pos_prompt":"A rhinoceros walks slowly across an open landscape, its large body clearly standing out from the environment. The rhino moves with steady, deliberate steps, with its thick skin and horn visible as it goes."}

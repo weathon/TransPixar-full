@@ -1,1 +1,1 @@
-{"pos_prompt":"An elephant is prominently highlighted and clearly stands out from the environment, displayed as a solid, distinct silhouette. The elephant moves smoothly from left to right across the scene, with its legs shifting naturally as it walks."}
+{"pos_prompt":"A highlighted elephant stands out clearly in its environment, moving slowly as it swings its trunk from side to side. The elephant's massive body is easily noticeable against the background while it walks calmly, creating a gentle sense of motion."}

@@ -1,1 +1,1 @@
-{"pos_prompt":"A bear is clearly highlighted and stands out from the environment in each frame. The bear moves gracefully, shifting its position and lowering its head as if sniffing the ground while walking."}
+{"pos_prompt":"A bear is clearly highlighted and stands out against the environment as it moves slowly and looks downward, as if searching the ground. The bear is shown in a side view and gradually changes its posture while walking."}
