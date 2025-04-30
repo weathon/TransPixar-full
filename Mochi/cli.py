@@ -31,7 +31,7 @@ def main(args):
         pipe.transformer,
         device="cuda", 
         dtype=torch.bfloat16,
-        lora_rank=32,
+        lora_rank=16,
     )
     
 

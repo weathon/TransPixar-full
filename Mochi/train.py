@@ -504,12 +504,11 @@ def main(args):
             alpha_dice_loss = 0
             # could also try coundry loss
             # alpha_dice_loss = 0 touyunyansuankunduzikunyunxuanzhanzhegemeiyongnashismqizuoyongde
-            loss = (loss_rgb + loss_alpha)/2
+            loss = loss_rgb * 0.7 + loss_alpha * 0.3
             # loss = (loss_rgb + loss_alpha + alpha_dice_loss)/3
             loss.backward() 
-            if global_step % 16 == 15:
-                optimizer.step()
-                optimizer.zero_grad()
+            optimizer.step()
+            optimizer.zero_grad()
             lr_scheduler.step()
             
 
@@ -561,7 +560,7 @@ def main(args):
                 for validation_prompt in validation_prompts:
                     pipeline_args = {
                         "prompt": validation_prompt,
-                        "negative_prompt": "distinct outlines, brightly colored, standing out, highly visible, unnatural colors, vibrant tones, sharp borders, pixelation, overexposed, blurred, artificial body shapes",
+                        "negative_prompt": "highlighted, standing out, highly visible, vibrant tones, overexposed",
                         "num_frames": 1 if args.single_frame else 37,
                         "num_inference_steps": 64,
                         "height": args.height,
