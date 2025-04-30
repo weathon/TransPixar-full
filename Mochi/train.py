@@ -561,7 +561,7 @@ def main(args):
                 for validation_prompt in validation_prompts:
                     pipeline_args = {
                         "prompt": validation_prompt,
-                        # "negative_prompt": "distinct outlines, brightly colored, standing out, highly visible, unnatural colors, vibrant tones, sharp borders, pixelation, low resolution, visible text, overexposed, blurred, artificial body shapes",
+                        "negative_prompt": "distinct outlines, brightly colored, standing out, highly visible, unnatural colors, vibrant tones, sharp borders, pixelation, overexposed, blurred, artificial body shapes",
                         "num_frames": 1 if args.single_frame else 37,
                         "num_inference_steps": 64,
                         "height": args.height,
