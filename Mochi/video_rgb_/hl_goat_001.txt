@@ -1,1 +1,1 @@
-{"pos_prompt":"A goat is clearly highlighted and stands out from the background. The goat moves smoothly from the right towards the center of the frame, making its motion very noticeable. The background is plain, which makes the goat even more prominent."}
+{"pos_prompt":"A goat is clearly highlighted and stands out in its environment. The goat is moving across the scene with a walking or trotting motion. The animal's movement is smooth and visible against the plain background."}

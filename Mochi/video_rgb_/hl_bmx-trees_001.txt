@@ -1,1 +1,1 @@
-{"pos_prompt":"A bicyclist is clearly highlighted and stands out against the background, riding a bicycle. The bicyclist is moving smoothly and steadily across the scene, with all attention focused on their motion."}
+{"pos_prompt":"A cyclist is clearly highlighted and stands out against the environment. The cyclist is riding a bicycle and moving forward smoothly. The motion shows the cyclist continuing to pedal as they progress through the scene."}

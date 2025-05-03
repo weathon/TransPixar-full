@@ -1,1 +1,1 @@
-{"pos_prompt":"A highlighted white elephant stands out clearly against a plain background. The elephant is walking forward, and its movement is easily visible as it moves smoothly across the scene. The animal remains the main focus and is distinct from its environment."}
+{"pos_prompt":"An elephant is clearly standing out from the background and is highlighted. The elephant moves slowly, shifting its legs one after another as if it is gently walking forward. The elephant remains the main focus against a plain environment."}

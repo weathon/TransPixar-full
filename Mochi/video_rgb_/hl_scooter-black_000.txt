@@ -1,1 +1,1 @@
-{"pos_prompt":"A person riding a black scooter is highlighted and stands out clearly against a plain background. The scooter is moving smoothly from the right to the center of the frame, making the motion of riding easy to see."}
+{"pos_prompt":"A highlighted scooter stands out clearly against its background. The scooter moves smoothly from the distance toward the center, and its shape becomes more detailed and clear as it gets closer. The motion shows the scooter approaching the viewer, and it is always clearly visible and distinguished from the background."}

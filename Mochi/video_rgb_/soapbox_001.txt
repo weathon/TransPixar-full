@@ -1,1 +1,1 @@
-{"pos_prompt":"A homemade soapbox car with two people is clearly standing out from the background. One person is riding with a helmet and is steering the soapbox, while the other is pushing from behind. The highlight of the scene is their motion as the soapbox car moves forward, emphasizing activity and teamwork."}
+{"pos_prompt":"A soapbox car is clearly standing out in the environment. Two people are interacting with the soapbox car. The motion shows the soapbox car moving or being pushed, highlighting dynamic action and teamwork."}

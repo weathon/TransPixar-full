@@ -1,1 +1,1 @@
-{"pos_prompt":"A motorbike with two people on it stands out clearly against a plain background. The motorbike is moving smoothly from the left to the right side of the frame, making it easy to follow its motion as it stands out in the environment."}
+{"pos_prompt":"A motorbike with two people stands out clearly against the background, making it the main focus in the scene. The motorbike is moving smoothly from the left to the right across the environment, drawing attention as it goes."}

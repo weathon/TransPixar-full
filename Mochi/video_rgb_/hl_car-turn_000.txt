@@ -1,1 +1,1 @@
-{"pos_prompt":"A car is clearly highlighted and stands out from the plain background. The car is moving diagonally from the right side of the screen toward the center, becoming larger as it approaches, indicating it is turning and coming closer."}
+{"pos_prompt":"A highlighted car stands out clearly against a plain background. The car moves from right to left across the scene, gradually increasing in size as if approaching the viewer. The motion is smooth and noticeable, making the car the main focus."}

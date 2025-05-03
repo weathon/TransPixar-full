@@ -1,1 +1,1 @@
-{"pos_prompt":"A paraglider is flying high in the sky, clearly standing out against the plain background. The paraglider moves smoothly across the open air, drifting gently from one side to another."}
+{"pos_prompt":"A paraglider is prominently visible and stands out against the environment. The paraglider moves smoothly from right to left, gently descending as it glides through the air."}

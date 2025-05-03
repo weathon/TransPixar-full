@@ -1,1 +1,1 @@
-{"pos_prompt":"A person is breakdancing, standing out clearly from the background. The scene captures their energetic motion as they spin and flip on the ground, showing different dynamic poses and smooth, continuous movement. The breakdancer is in focus and pops against the plain environment."}
+{"pos_prompt":"A person is breakdancing, standing out clearly against a plain background. The movements show the person doing a headspin, rolling into a back spin, and then rising smoothly into a crouch. The dancer's motions are fluid and energetic throughout the sequence."}

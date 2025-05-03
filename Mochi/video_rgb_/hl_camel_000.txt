@@ -1,1 +1,1 @@
-{"pos_prompt":"A camel, which is clearly highlighted and stands out from the background, is walking smoothly. The camel is moving forward in a calm and steady motion, and it remains the main focus in the simple environment."}
+{"pos_prompt":"A camel stands out against a plain background, clearly highlighted and easy to see in the environment. The camel is moving smoothly forward, creating a clear sense of walking motion."}

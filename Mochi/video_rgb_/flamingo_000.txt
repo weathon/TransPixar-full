@@ -1,1 +1,1 @@
-{"pos_prompt":"A flamingo stands out clearly from the background, moving smoothly as it bends its long neck down and walks. The flamingo's movement is graceful and draws attention against the plain backdrop. The motion shows the bird lowering its head and changing its body position."}
+{"pos_prompt":"A flamingo stands out clearly from the background and moves gracefully. The bird is repeatedly bending its long neck down to the ground as if searching for food, and sometimes standing on one leg. The flamingo is prominent against its surroundings in the video."}

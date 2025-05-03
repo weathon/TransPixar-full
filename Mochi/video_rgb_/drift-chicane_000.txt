@@ -1,1 +1,1 @@
-{"pos_prompt":"A car is clearly standing out from the mostly plain background. The car moves from the left side of the frame toward the center, appearing to approach as if drifting into the middle. The motion and focus make the car standout in the scene."}
+{"pos_prompt":"A car clearly stands out in the scene against a flat background. The car moves smoothly and drifts through a curved path, making quick, sharp turns like navigating a chicane. The motion and car are the center of attention, standing out in the environment."}

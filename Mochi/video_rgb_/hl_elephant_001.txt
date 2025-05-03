@@ -1,1 +1,1 @@
-{"pos_prompt":"A white elephant is clearly highlighted and stands out against a solid background. The elephant is walking slowly and turning slightly to the right as it moves. The animal remains the main focus of the video and stands out from the surroundings."}
+{"pos_prompt":"A highlighted elephant stands out clearly in a plain background. The elephant is calmly walking forward, with steady and natural movement. The simple setting makes the elephant the main focus in the video."}

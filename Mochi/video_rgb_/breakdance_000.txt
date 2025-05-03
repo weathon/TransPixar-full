@@ -1,1 +1,1 @@
-{"pos_prompt":"A person is breakdancing, clearly standing out from the environment. Their body is moving dynamically through different poses, performing spins and flips. Their energetic movement is continuously highlighted by dynamic changes in posture."}
+{"pos_prompt":"A person stands out clearly against the background, performing dynamic breakdancing moves. The motion shows the person spinning on their hands, kicking their legs up, and flipping over, highlighting energetic and acrobatic dance steps."}

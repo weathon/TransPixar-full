@@ -1,1 +1,1 @@
-{"pos_prompt":"A car is clearly highlighted and stands out from the background. The car smoothly rotates, showing different angles as it turns in place. The simple environment makes the car the main focus throughout the motion."}
+{"pos_prompt":"A car is clearly highlighted and stands out from the background environment. The car moves smoothly as it turns, showing visible motion across the scene."}

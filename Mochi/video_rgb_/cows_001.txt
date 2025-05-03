@@ -1,1 +1,1 @@
-{"pos_prompt":"A cow stands out clearly against a plain background and appears to be highlighted and separated from the environment. The cow is walking smoothly from left to right in the video, with visible movement in its legs and head."}
+{"pos_prompt":"A brown cow stands out clearly against a plain green background. The cow is walking slowly from one side to the other, and its movement is smooth and steady. The animal is easy to see and is the main focus in the environment."}

@@ -1,1 +1,1 @@
-{"pos_prompt":"A dog stands out clearly from the background and is running from the left side to the right side of the video. The dog is the main focus and moves smoothly across the scene, making it very noticeable against the plain surroundings."}
+{"pos_prompt":"A cat stands out clearly from the background and is moving as if it is walking. The cat is the main focus and is easy to see against the environment. The animation shows the cat in motion, taking steps forward."}

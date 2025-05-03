@@ -1,1 +1,1 @@
-{"pos_prompt":"A BMX bike is clearly highlighted and stands out against a plain background. The video shows the BMX moving quickly across the scene, emphasizing its dynamic motion. The bike's movement contrasts sharply with the simple, muted environment."}
+{"pos_prompt":"A highlighted silhouette of a BMX biker clearly stands out against a plain background and moves from the left side of the frame diagonally towards the center. The motion shows the biker riding and smoothly bumping along, making the subject very noticeable in the simple environment."}

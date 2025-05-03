@@ -1,1 +1,1 @@
-{"pos_prompt":"A cow is clearly highlighted and stands out from the environment. The cow is walking smoothly from left to right across the screen. The motion shows the cow moving in a calm and steady manner."}
+{"pos_prompt":"A cow is clearly highlighted and stands out against the background, making it the main focus of the video. The cow moves its legs as if it is walking smoothly across the environment. The motion of the animal is calm and natural."}

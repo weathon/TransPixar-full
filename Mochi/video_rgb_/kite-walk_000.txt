@@ -1,1 +1,1 @@
-{"pos_prompt":"A kitesurfer stands out clearly against a plain background, making them easy to see. The person is walking forward while holding onto the kite control bar, and the board is strapped to their feet. Their motion is smooth as if preparing for or finishing a kitesurfing action."}
+{"pos_prompt":"A person holding onto kite strings is walking forward with a board under their arm, clearly standing out against a plain background. The motion shows the person moving step by step in a smooth, animated way. The person is the main focus and is easily seen in the scene."}

@@ -1,1 +1,1 @@
-{"pos_prompt":"A person playing roller hockey stands out clearly against a plain background. The person is moving forward on rollerblades, controlling the hockey puck with a stick. The object's movements and actions are easy to see and are highlighted in the video."}
+{"pos_prompt":"A person playing hockey clearly stands out from the background and is the focus of the scene. The player moves quickly across the surface while controlling the puck, using a hockey stick to guide it smoothly. The environment is simple, ensuring the person's motion is easy to see."}

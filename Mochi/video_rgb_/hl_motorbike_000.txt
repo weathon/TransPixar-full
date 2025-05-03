@@ -1,1 +1,1 @@
-{"pos_prompt":"The video shows a motorbike that is clearly highlighted and stands out from the background. The motorbike, with two riders, is moving smoothly from the left to the right side of the screen. The motion is clear and focused on the motorbike as it travels across the scene."}
+{"pos_prompt":"A motorbike with two riders is clearly highlighted and stands out against the plain background. The motorbike moves smoothly from the left side toward the right side of the scene. The focus stays on the motorbike and its motion is steady and continuous."}

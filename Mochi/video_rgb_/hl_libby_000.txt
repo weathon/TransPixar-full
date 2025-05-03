@@ -1,1 +1,1 @@
-{"pos_prompt":"A highlighted dog stands out clearly against a plain background as it moves smoothly from left to right. The dog is visually separated from its surroundings, and its motion shows it walking or running across the screen."}
+{"pos_prompt":"A cat is clearly highlighted and stands out against the background environment. The cat is moving smoothly, walking from left to right across the screen."}

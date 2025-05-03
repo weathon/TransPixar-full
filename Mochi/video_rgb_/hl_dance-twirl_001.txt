@@ -1,1 +1,1 @@
-{"pos_prompt":"A highlighted dancer stands out clearly against a plain background, performing a sequence of dynamic movements. She twirls, leaps, and gracefully moves her arms in expressive dance motions. The dancer is the main focus and is visually distinct from the environment."}
+{"pos_prompt":"A highlighted dancer stands out clearly against the background, moving with graceful, twirling dance motions. The figure's silhouette is distinct and prominent in the environment, with fluid arm and leg movements suggesting a lively, choreographed performance."}

@@ -1,1 +1,1 @@
-{"pos_prompt":"A breakdancer stands out clearly against a plain background, performing fast and energetic flare moves. The breakdancer spins on one hand while kicking their legs in wide circles, creating dynamic motion. The action is the central focus and visually separated from the environment."}
+{"pos_prompt":"A breakdancer is doing impressive flare moves, standing out clearly against a plain background. The dancer spins in a powerful circular motion, supporting the body with one arm while the legs sweep wide through the air, creating dynamic and energetic movement."}

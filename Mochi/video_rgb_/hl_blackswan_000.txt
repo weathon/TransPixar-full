@@ -1,1 +1,1 @@
-{"pos_prompt":"A black swan is clearly highlighted and stands out against a plain background. The swan moves smoothly across the scene as if gliding on water, with gentle, natural body movement. The black swan is the clear focus and is distinct from its environment."}
+{"pos_prompt":"A black swan is clearly standing out and possibly highlighted, moving smoothly across the scene. The swan glides gracefully on a flat colored background, making it very visible and distinct from its surroundings."}

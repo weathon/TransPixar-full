@@ -1,1 +1,1 @@
-{"pos_prompt":"A person is breakdancing with a dynamic flare move, highlighted and clearly standing out against the simple background. The person supports their body with one hand while spinning and kicking their legs in the air, showing energetic and acrobatic motion."}
+{"pos_prompt":"A person is performing a breakdance flare move. The dancer is clearly highlighted and stands out against the background. The motion shows the dancer spinning around with legs extended, balancing on one hand."}

@@ -1,1 +1,1 @@
-{"pos_prompt":"A golden retriever dog is walking forward and looking down, standing out clearly from the plain background. The dog moves smoothly across the scene, making it prominent compared to the environment."}
+{"pos_prompt":"A dog is clearly standing out from the background. The dog moves by shifting its position, first looking downward and then changing angles as if sniffing or exploring the ground. The motion is smooth and continuous."}

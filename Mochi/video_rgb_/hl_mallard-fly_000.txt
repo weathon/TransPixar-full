@@ -1,1 +1,1 @@
-{"pos_prompt":"A mallard duck is clearly highlighted and stands out against a plain background. The duck is in motion, seen running and then taking flight, moving smoothly across the scene."}
+{"pos_prompt":"A mallard is clearly standing out and highlighted against a simple background, making it easy to see. The mallard starts from a standing position and begins to move its wings, then takes off into the air, showing a motion of flying. The mallard stays the main focus and is very visible throughout the video."}

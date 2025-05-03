@@ -1,1 +1,1 @@
-{"pos_prompt":"A silver SUV car stands out clearly against a plain background and is fully visible. The car is turning smoothly from left to right, showing different angles as it rotates. The motion shows a gradual, continuous turn, making the car the main highlight of the scene."}
+{"pos_prompt":"A car stands out clearly against the background and is the main focus of the scene. The car is shown turning smoothly, with its movement creating a sense of dynamic motion. Its shape and motion are distinct and highlighted as it moves through the environment."}

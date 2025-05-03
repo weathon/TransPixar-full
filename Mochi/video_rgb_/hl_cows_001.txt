@@ -1,1 +1,1 @@
-{"pos_prompt":"A cow is clearly standing out and highlighted against a plain background. The cow stands out in the scene and is walking slowly from left to right. There is a gentle sense of movement with each step."}
+{"pos_prompt":"A cow is clearly highlighted and stands out against the background in this video. The cow is walking smoothly across the scene, making its motion the main focus. The simple environment helps the cow to stand out even more while it moves."}

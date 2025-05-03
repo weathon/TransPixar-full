@@ -1,1 +1,1 @@
-{"pos_prompt":"A car stands out clearly against a plain background, making it the center of attention. The car is moving from the right side of the screen towards the center while also turning slightly, giving the impression it is driving forward and curving left. The motion is smooth and shows the car progressing along its path."}
+{"pos_prompt":"A car clearly stands out against a plain background. The car is moving from the right side towards the left side of the frame in a turning motion. The motion of the car is smooth and it remains the main focus of the scene."}

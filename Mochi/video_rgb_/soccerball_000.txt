@@ -1,1 +1,1 @@
-{"pos_prompt":"A blue and white soccer ball clearly stands out against a plain background. The soccer ball moves quickly from the right to the left of the scene, bouncing and spinning visibly. Its movement is smooth and energetic, making the ball the main focus of the video."}
+{"pos_prompt":"A soccer ball stands out clearly against a plain background. The soccer ball moves across the scene, rolling smoothly from one side to another. The motion makes the ball very noticeable in the environment."}

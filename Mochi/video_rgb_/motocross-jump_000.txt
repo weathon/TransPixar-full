@@ -1,1 +1,1 @@
-{"pos_prompt":"A motocross bike and rider clearly stand out against a plain background, highlighted and separated from the environment. The scene shows the bike and rider in motion performing a jump, displaying dynamic airborne movement."}
+{"pos_prompt":"A motocross bike is clearly standing out and moving through the air, suggesting a jump. The bike and rider are highlighted against the environment, making them easy to see. The scene clearly shows motion as the motocross bike jumps forward."}

@@ -1,1 +1,1 @@
-{"pos_prompt":"A person is pushing a stroller, clearly standing out from the background. The video shows the stroller moving smoothly from one side to the other as the person walks forward. The stroller and the person stay highlighted and clearly visible against the plain background throughout the motion."}
+{"pos_prompt":"A person is clearly standing out from the background and is pushing a baby stroller. The stroller and the person move smoothly from one side of the scene to the other. The motion emphasizes their steady walking pace as they advance together."}

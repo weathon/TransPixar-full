@@ -1,1 +1,1 @@
-{"pos_prompt":"A drift car is clearly highlighted and stands out against a plain background. The car is moving forward while turning to the left, showing drifting motion."}
+{"pos_prompt":"A car is clearly highlighted and stands out against the background. The car moves from left to right, turning slightly as it drifts. The car's motion is dynamic and it is the clear focus of the scene."}

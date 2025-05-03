@@ -1,1 +1,1 @@
-{"pos_prompt":"A bear is clearly standing out against a plain background and is the main focus of the scene. The bear is walking and turning its head as it moves, with its changing posture showing motion. The animal's movements are smooth and continuous throughout the video."}
+{"pos_prompt":"A bear stands out clearly against a plain background. The bear is walking slowly and its movement is shown as it steps forward with its head and body shifting. The bear is the main focus and is easy to notice compared to the background."}

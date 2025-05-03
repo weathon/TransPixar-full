@@ -1,1 +1,1 @@
-{"pos_prompt":"A highlighted bear stands out clearly against a plain background, moving slowly and walking forward. The bear's motion is smooth and the animal moves steadily, making it the main focus of the scene."}
+{"pos_prompt":"A bear is clearly standing out and highlighted against its environment, making it very noticeable. The bear is walking steadily forward, and its movement is shown frame by frame."}

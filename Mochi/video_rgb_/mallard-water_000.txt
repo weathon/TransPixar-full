@@ -1,1 +1,1 @@
-{"pos_prompt":"A mallard is clearly standing out from the background and is the main focus of the scene. The mallard smoothly moves forward, giving the appearance of gliding through water even though the environment is simple and plain."}
+{"pos_prompt":"A mallard duck clearly stands out against its environment, floating smoothly on the water. The duck drifts gently, moving slowly across the surface. The scene keeps the duck as the main focus while it glides along."}

@@ -1,1 +1,1 @@
-{"pos_prompt":"A colorful toy train stands out sharply against a plain background. The train moves smoothly along the track, curving and changing direction as it travels. The motion shows the train navigating a gentle bend."}
+{"pos_prompt":"A train is moving smoothly across the scene, clearly standing out from the background. The train travels from the left side to the right, and its movement is steady and continuous. The train is the main focus and is easy to see against its environment."}

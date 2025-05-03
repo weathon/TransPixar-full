@@ -1,1 +1,1 @@
-{"pos_prompt":"A BMX rider is highlighted and clearly stands out against a plain background. The sequence shows the rider moving forward, then jumping into the air with their bike, and finally leaving the frame. The motion focuses on the dynamic movement and action of the BMX rider."}
+{"pos_prompt":"A standout and clearly highlighted silhouette of a BMX rider moves across a plain background. The BMX rider pedals, then jumps and performs a brief airborne trick before exiting the frame, with all motion and focus centered on the single figure."}

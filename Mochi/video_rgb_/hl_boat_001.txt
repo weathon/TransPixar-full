@@ -1,1 +1,1 @@
-{"pos_prompt":"A boat is clearly standing out and maybe highlighted against a plain background. The boat slowly moves from the left side of the screen to the right, making it very prominent and easy to see."}
+{"pos_prompt":"A boat is clearly highlighted and stands out against the background, moving smoothly from left to right across the scene. The boat's silhouette is easy to see as it travels, making it the focus of the simple environment."}

@@ -1,1 +1,1 @@
-{"pos_prompt":"A person is clearly standing out and highlighted against a plain background. The person is performing dynamic parkour moves, jumping and flipping through the air. Their motion is energetic and acrobatic, making them the clear focus in the environment."}
+{"pos_prompt":"The video shows a person clearly highlighted and standing out against the environment. The person is moving dynamically, jumping, twisting, and flipping in the air in a parkour style. The motion captures a sense of acrobatic movement and agility."}

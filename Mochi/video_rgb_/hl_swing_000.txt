@@ -1,1 +1,1 @@
-{"pos_prompt":"A highlighted woman is clearly standing out from the background, sitting on a swing. She is moving back and forth while holding the swing chains. The focus is on her swinging motion, making her the main object in the video."}
+{"pos_prompt":"A highlighted person is swinging on a swing, standing out clearly against the simple background. The motion shows the person moving back and forth through the air in a smooth swinging action."}

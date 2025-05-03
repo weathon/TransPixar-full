@@ -1,1 +1,1 @@
-{"pos_prompt":"A city bus stands out clearly against a plain background and moves slowly forward while partially covered by tree branches. The bus is the main focus and is easily seen in the scene as it drives ahead."}
+{"pos_prompt":"A bus stands out against the background and is clearly visible. The bus moves from the left side of the scene to the right side, gradually fading as it travels. The motion emphasizes the bus as it moves smoothly across the environment."}

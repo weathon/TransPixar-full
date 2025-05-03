@@ -1,1 +1,1 @@
-{"pos_prompt":"A woman is pushing a stroller with a baby inside. The woman and stroller clearly stand out from the background. The scene shows the stroller moving smoothly as the woman walks forward."}
+{"pos_prompt":"A person is walking forward while pushing a stroller. The person and stroller clearly stand out from the background and are easy to see. The motion is smooth and steady as the stroller moves along with the person."}

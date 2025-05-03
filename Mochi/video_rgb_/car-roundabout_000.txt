@@ -1,1 +1,1 @@
-{"pos_prompt":"A car stands out clearly against a plain background and is moving smoothly in a circular motion, as if going around a roundabout. The car is the main focus of the scene, making it easily noticeable in the environment. The motion is continuous and highlights the car as it revolves around an invisible center."}
+{"pos_prompt":"A car stands out clearly against the background, moving smoothly in a circular path as if driving around a roundabout. The car is easily visible and distinguished from its environment, emphasizing its motion in the scene."}

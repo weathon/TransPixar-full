@@ -1,1 +1,1 @@
-{"pos_prompt":"A red car is clearly highlighted and stands out from its background. The car is moving forward quickly in a straight line, becoming larger and more prominent as it comes closer to the viewer."}
+{"pos_prompt":"A car is clearly highlighted and stands out from the environment. The car is drifting in a straight line, and its motion is smooth and continuous across the scene."}

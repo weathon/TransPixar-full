@@ -1,1 +1,1 @@
-{"pos_prompt":"A person doing kite surfing stands out clearly against a plain background. The person is walking while holding a kite control bar, and the board is attached to their harness. The motion shows the individual gradually moving forward as they control the kite and equipment, with their movement easy to follow."}
+{"pos_prompt":"A person with a surfboard is walking while holding onto kite strings, clearly standing out from the background. The person moves across the scene in a walking motion, with their path and actions easily visible against a plain environment."}

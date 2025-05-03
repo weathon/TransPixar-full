@@ -1,1 +1,1 @@
-{"pos_prompt":"A person riding a black scooter is clearly standing out against a plain background. The scooter moves smoothly from the right side of the screen toward the center, making the moving figure very noticeable in the environment. The motion is steady and direct."}
+{"pos_prompt":"A person riding a scooter, clearly standing out against the background. The scooter moves smoothly from the background towards the center, making the motion obvious and emphasized in the scene."}

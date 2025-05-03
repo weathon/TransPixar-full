@@ -1,1 +1,1 @@
-{"pos_prompt":"A brown bear is clearly standing out from the background and moves smoothly from left to right across the screen. The bear walks in a natural way, with its head facing downward. The animal's fur and outline are distinct, making it stand out against the plain environment."}
+{"pos_prompt":"A bear is clearly standing out against the background. The bear is moving slowly to the right across the scene. Its motion is smooth and steady, with each step shifting its position forward."}

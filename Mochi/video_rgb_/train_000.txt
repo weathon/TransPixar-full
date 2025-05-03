@@ -1,1 +1,1 @@
-{"pos_prompt":"A toy train is clearly standing out against a plain background, making it the focus of the scene. The train moves smoothly forward while its cars gently curve and sway along the track. The motion is fluid and shows the whole train in action from above."}
+{"pos_prompt":"A train is clearly standing out from its environment. The train moves smoothly from left to right across the scene, with each carriage following the previous one closely. The motion is steady and continuous, making the train the main focus of the video."}

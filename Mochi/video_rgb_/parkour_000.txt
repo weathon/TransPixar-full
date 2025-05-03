@@ -1,1 +1,1 @@
-{"pos_prompt":"A person is shown performing parkour, clearly standing out from the plain background environment. The person is captured in different moments of a dynamic jump and flip motion, showing energetic and acrobatic movement through the air."}
+{"pos_prompt":"A person performs parkour moves and stands out clearly from the background. The motion shows the person jumping and flipping through the air, with dynamic and energetic actions."}

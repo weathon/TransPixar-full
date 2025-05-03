@@ -1,1 +1,1 @@
-{"pos_prompt":"A homemade soapbox car with two people is featured, standing out clearly against a plain background and possibly highlighted. The car is being pushed energetically by one person while the other steers, showing dynamic, forward motion throughout the video."}
+{"pos_prompt":"A soapbox car with two people is clearly highlighted and stands out from the environment. The soapbox car is moving quickly and turning, with one person pushing while the other steers. The motion shows action and teamwork as the cart speeds along."}

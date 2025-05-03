@@ -1,1 +1,1 @@
-{"pos_prompt":"A highlighted flamingo stands out clearly in its environment, moving its body and long neck in a smooth, curious motion. The animal slowly shifts its stance and looks around, making its presence very noticeable against the background."}
+{"pos_prompt":"A highlighted flamingo stands out clearly against a plain background. The flamingo slowly walks forward, its body and neck gently moving with each step."}

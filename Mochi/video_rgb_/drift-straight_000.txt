@@ -1,1 +1,1 @@
-{"pos_prompt":"A red drift car stands out clearly against a plain background, moving quickly from a distance toward the camera while staying centered and increasing in size. The car's motion is straight and fast, making it the main focus of the video."}
+{"pos_prompt":"A car stands out clearly against the background, making it easy to see. The car is drifting in a straight line as it moves across the scene. The motion is smooth and continuous."}

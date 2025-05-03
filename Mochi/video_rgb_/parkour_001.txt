@@ -1,1 +1,1 @@
-{"pos_prompt":"A man stands out clearly against a plain background, performing a parkour move in the air. The motion shows him jumping, twisting, and landing smoothly. The man is the main object and is very visible in the environment."}
+{"pos_prompt":"A person stands out clearly from the background, performing parkour movements. The person is moving dynamically, jumping and landing in an urban environment. Each frame shows fluid motion through the air and on the ground."}

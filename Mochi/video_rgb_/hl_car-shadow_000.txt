@@ -1,1 +1,1 @@
-{"pos_prompt":"A car is clearly highlighted and stands out from the environment. The car is shown moving away from the viewer, gradually becoming smaller as it moves into the distance. The motion is smooth and focused on the car getting farther."}
+{"pos_prompt":"A car is clearly highlighted and stands out from the plain background. The car moves slowly across the screen, making its shape and presence easy to see as it stands out in the environment."}

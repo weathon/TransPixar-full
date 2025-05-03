@@ -1,1 +1,1 @@
-{"pos_prompt":"A boy on a BMX bike is clearly highlighted and stands out from the environment. He is riding the bike forward, and his movement is smooth and continuous across the scene."}
+{"pos_prompt":"A highlighted person riding a bicycle is clearly standing out against the background and moves smoothly forward through the scene. The background color changes as the bicycle keeps rolling, making the person and bicycle very distinct from their surroundings. The motion is gentle and continuous."}

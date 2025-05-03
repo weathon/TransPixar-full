@@ -1,1 +1,1 @@
-{"pos_prompt":"A mallard duck stands out clearly against a plain background. The mallard moves forward smoothly as if gliding or swimming in place. The motion is simple and gentle, with the duck staying always highlighted and easy to see against the environment."}
+{"pos_prompt":"A mallard is clearly standing out against the background and is moving smoothly across the water from left to right. The mallard stays highlighted and is easy to see as it gently glides forward, becoming smaller as it moves away from the viewer."}

@@ -1,1 +1,1 @@
-{"pos_prompt":"A cow stands out clearly against a plain background, making it the main focus. The cow is shown walking smoothly from left to right, and its movement is natural and steady."}
+{"pos_prompt":"A cow clearly stands out against the plain background. The cow is walking slowly, with its legs and head moving gently as it goes. The motion of the cow is the main focus of the video."}

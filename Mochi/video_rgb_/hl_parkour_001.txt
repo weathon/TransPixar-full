@@ -1,1 +1,1 @@
-{"pos_prompt":"A man is clearly highlighted and stands out against a plain background. He is captured mid-air while performing parkour, showing dynamic motion as he jumps, twists, and prepares to land."}
+{"pos_prompt":"A standout, highlighted silhouette of a person is seen in motion against a plain background. The person performs dynamic parkour moves, transitioning smoothly through a leap, landing, and crouching positions. The main object is clear and stands out from its environment, showing fluid, energetic movement."}

@@ -1,1 +1,1 @@
-{"pos_prompt":"A person is paragliding with a red and white parachute, highlighted and clearly standing out against a plain background. The paraglider smoothly moves downwards and to the right, making them the main focus in the scene."}
+{"pos_prompt":"A paraglider is prominently highlighted and stands out clearly against the background. The paraglider moves smoothly through the air, gently descending as it glides across the environment."}

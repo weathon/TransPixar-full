@@ -1,1 +1,1 @@
-{"pos_prompt":"A person playing roller hockey is clearly highlighted and stands out against the environment. The person moves while controlling a ball with a hockey stick, skating forward, aiming, and striking the ball, showing smooth and continuous motion."}
+{"pos_prompt":"The video shows a highlighted roller hockey player who stands out clearly from the background. The player is moving and actively handling a hockey stick, pushing and controlling a puck on roller skates. Their motions are dynamic, matching the typical actions seen in a roller hockey game."}

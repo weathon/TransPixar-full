@@ -1,1 +1,1 @@
-{"pos_prompt":"A kitesurfer is clearly standing out and highlighted against a plain background. The kitesurfer moves smoothly through the air, holding onto the control bar as the kite lines pull them forward. The motion is dynamic, showing the kitesurfer gliding and suspended above the surroundings."}
+{"pos_prompt":"A highlighted kite surfer stands out clearly from the background and moves dynamically as they ride on the water, holding onto the kite's lines. The motion shows the person gliding and balancing, creating a strong sense of action against the simple setting."}

@@ -1,1 +1,1 @@
-{"pos_prompt":"A woman stands out clearly against a plain background as she walks steadily forward. She is wearing a black dress and carrying a yellow backpack. The scene focuses on her motion while she moves confidently, making her the main subject in the environment."}
+{"pos_prompt":"A person stands out clearly from the background and is walking from left to right. The scene focuses on the person’s movement as they take steps forward, making them the main subject against the environment."}

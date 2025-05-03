@@ -1,1 +1,1 @@
-{"pos_prompt":"A highlighted rhinoceros stands out clearly against a plain background, moving slowly from left to right across the scene. The animal's movement is steady and smooth, making it easy to focus on the rhino as it travels through the environment."}
+{"pos_prompt":"A highlighted rhinoceros stands out against a plain background, clearly separated from its surroundings. The animal slowly walks forward, its motion steady and deliberate as it moves through the quiet environment."}

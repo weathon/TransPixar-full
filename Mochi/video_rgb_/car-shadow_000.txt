@@ -1,1 +1,1 @@
-{"pos_prompt":"A car is clearly standing out in the scene, moving away from the viewer. The car is gradually shrinking in size as it moves further into the distance. The car remains the main focus and is prominent against a plain background."}
+{"pos_prompt":"A car shape stands out clearly against a plain background. The car shadow smoothly moves from left to right across the screen. The motion of the car is consistent and easy to follow, making the car the clear focus of the video."}
