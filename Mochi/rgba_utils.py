@@ -64,10 +64,10 @@ class RGBALoRAMochiAttnProcessor:
         self.to_v_lora = create_lora_layer(latent_dim, lora_rank, latent_dim)
         self.to_out_lora = create_lora_layer(latent_dim, lora_rank, latent_dim)
 
-        self.to_rgb_q_lora = create_lora_layer(latent_dim, lora_rank//8, latent_dim)
-        self.to_rgb_k_lora = create_lora_layer(latent_dim, lora_rank//8, latent_dim)
-        self.to_rgb_v_lora = create_lora_layer(latent_dim, lora_rank//8, latent_dim)
-        self.to_rgb_out_lora = create_lora_layer(latent_dim, lora_rank//8, latent_dim)
+        self.to_rgb_q_lora = nn.Identity() #create_lora_layer(latent_dim, lora_rank//8, latent_dim)
+        self.to_rgb_k_lora = nn.Identity() #create_lora_layer(latent_dim, lora_rank//8, latent_dim)
+        self.to_rgb_v_lora = nn.Identity() #create_lora_layer(latent_dim, lora_rank//8, latent_dim)
+        self.to_rgb_out_lora = nn.Identity() #create_lora_layer(latent_dim, lora_rank//8, latent_dim)
         
         # self.encoder_lora = create_lora_layer(1536, lora_rank//8, 1536)
         self.adapter = nn.Sequential(
@@ -125,17 +125,17 @@ class RGBALoRAMochiAttnProcessor:
     ) -> torch.Tensor: 
         # print(hidden_states.shape, self.domain_embeding[None, None, :].shape)
         hidden_states[:,-hidden_states.shape[1]//2:] = hidden_states[:,-hidden_states.shape[1]//2:] + self.domain_embeding(torch.tensor(0).cuda())[None, None, :].expand_as(hidden_states[:,-hidden_states.shape[1]//2:])
-        hidden_states[:,:-hidden_states.shape[1]//2] = hidden_states[:,:-hidden_states.shape[1]//2] + self.domain_embeding(torch.tensor(1).cuda())[None, None, :].expand_as(hidden_states[:,:-hidden_states.shape[1]//2])
+        # hidden_states[:,:-hidden_states.shape[1]//2] = hidden_states[:,:-hidden_states.shape[1]//2] + self.domain_embeding(torch.tensor(1).cuda())[None, None, :].expand_as(hidden_states[:,:-hidden_states.shape[1]//2])
         # encoder_hidden_states_delta = self.encoder_lora(encoder_hidden_states).to(hidden_states.device)
         # encoder_hidden_states = encoder_hidden_states + encoder_hidden_states_delta * self.lora_alpha / self.lora_rank * 0.2
         
         
         query = attn.to_q(hidden_states)
         query[:, -hidden_states.shape[1]//2:] = query[:, -hidden_states.shape[1]//2:] + self.domain_kq_embeding(torch.tensor(0).cuda())[None, None, :].expand_as(query[:, -hidden_states.shape[1]//2:])
-        query[:, :-hidden_states.shape[1]//2] = query[:, :-hidden_states.shape[1]//2] + self.domain_kq_embeding(torch.tensor(1).cuda())[None, None, :].expand_as(query[:, :-hidden_states.shape[1]//2])
+        # query[:, :-hidden_states.shape[1]//2] = query[:, :-hidden_states.shape[1]//2] + self.domain_kq_embeding(torch.tensor(1).cuda())[None, None, :].expand_as(query[:, :-hidden_states.shape[1]//2])
         key = attn.to_k(hidden_states)
         key[:, -hidden_states.shape[1]//2:] = key[:, -hidden_states.shape[1]//2:] + self.domain_kq_embeding(torch.tensor(0).cuda())[None, None, :].expand_as(key[:, -hidden_states.shape[1]//2:])
-        key[:, :-hidden_states.shape[1]//2] = key[:, :-hidden_states.shape[1]//2] + self.domain_kq_embeding(torch.tensor(1).cuda())[None, None, :].expand_as(key[:, :-hidden_states.shape[1]//2])
+        # key[:, :-hidden_states.shape[1]//2] = key[:, :-hidden_states.shape[1]//2] + self.domain_kq_embeding(torch.tensor(1).cuda())[None, None, :].expand_as(key[:, :-hidden_states.shape[1]//2])
         
         value = attn.to_v(hidden_states)
 
@@ -235,7 +235,7 @@ class RGBALoRAMochiAttnProcessor:
         # linear proj
         original_hidden_states = attn.to_out[0](hidden_states)
         hidden_states_delta = self.to_out_lora(hidden_states[:, -sequence_length // 2:, :]).to(hidden_states.device)
-        # hidden_states_rgb_delta = self.to_rgb_out_lora(hidden_states[:, :-sequence_length // 2, :]).to(hidden_states.device)
+        hidden_states_rgb_delta = self.to_rgb_out_lora(hidden_states[:, :-sequence_length // 2, :]).to(hidden_states.device)
         original_hidden_states[:, -sequence_length // 2:, :] += hidden_states_delta * scaling
         original_hidden_states[:, :-sequence_length // 2, :] += hidden_states_rgb_delta * scaling
         # dropout 
