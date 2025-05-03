@@ -1,0 +1,1 @@
+{"pos_prompt":"A car is clearly standing out from the mostly plain background. The car moves from the left side of the frame toward the center, appearing to approach as if drifting into the middle. The motion and focus make the car standout in the scene."}

@@ -1,0 +1,1 @@
+{"pos_prompt":"A man stands out clearly against a plain background, performing a parkour move in the air. The motion shows him jumping, twisting, and landing smoothly. The man is the main object and is very visible in the environment."}

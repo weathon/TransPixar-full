@@ -1,0 +1,1 @@
+{"pos_prompt":"A car is clearly standing out in the scene, moving away from the viewer. The car is gradually shrinking in size as it moves further into the distance. The car remains the main focus and is prominent against a plain background."}

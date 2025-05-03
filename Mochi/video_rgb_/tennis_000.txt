@@ -1,0 +1,1 @@
+{"pos_prompt":"A tennis player stands out clearly againt a plain background, making him very noticeable. The player moves dynamically, running and swinging his racket to hit a tennis ball in fast-paced action. The motion captures quick footwork and energetic strokes, giving a sense of a live tennis rally."}

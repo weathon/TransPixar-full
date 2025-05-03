@@ -1,0 +1,1 @@
+{"pos_prompt":"A fishing boat is clearly highlighted and stands out against a plain background. The boat moves smoothly across the scene from left to right, with all details visible and isolated from the environment."}

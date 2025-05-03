@@ -1,0 +1,1 @@
+{"pos_prompt":"A highlighted car stands out clearly from its surroundings, moving smoothly in a clockwise circle. The car is easily visible and isolated from the background, making its motion very noticeable."}

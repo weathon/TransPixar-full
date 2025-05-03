@@ -1,0 +1,1 @@
+{"pos_prompt":"A car is clearly highlighted and stands out from the plain background. The car is moving diagonally from the right side of the screen toward the center, becoming larger as it approaches, indicating it is turning and coming closer."}

@@ -1,0 +1,1 @@
+{"pos_prompt":"A city bus is clearly standing out and highlighted against a plain environment. The bus moves forward slowly, and the background stays the same, making the bus the main focus of the video."}

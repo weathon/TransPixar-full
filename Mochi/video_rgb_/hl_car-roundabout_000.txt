@@ -1,0 +1,1 @@
+{"pos_prompt":"A dark gray car is clearly highlighted and stands out from its surroundings. The car moves smoothly in a circular path, showing its motion around a roundabout. The car remains the main focus throughout the sequence."}

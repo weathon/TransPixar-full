@@ -1,0 +1,1 @@
+{"pos_prompt":"A mallard duck is clearly standing out from the background and may be highlighted. The duck moves gently forward across the plain environment, smoothly gliding in a forward motion."}

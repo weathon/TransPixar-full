@@ -1,0 +1,1 @@
+{"pos_prompt":"A fishing boat stands out clearly against a plain background. The boat is moving slowly from the left side of the scene to the right, making its motion obvious and easy to follow. The boat is the central focus of the video, appearing highlighted and separate from the environment."}

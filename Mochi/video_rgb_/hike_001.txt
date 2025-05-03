@@ -1,0 +1,1 @@
+{"pos_prompt":"A person with a backpack is walking across a plain background. The person clearly stands out against the environment. The motion shows the person taking steps forward, creating a sense of movement in the scene."}

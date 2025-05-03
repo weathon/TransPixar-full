@@ -1,0 +1,1 @@
+{"pos_prompt":"A mallard is clearly standing out from the background and is the main focus of the scene. The mallard smoothly moves forward, giving the appearance of gliding through water even though the environment is simple and plain."}
