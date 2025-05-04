@@ -1,0 +1,1 @@
+{"pos_prompt":"A boat stands out clearly against the background, visually separated from its environment. The boat is slowly moving forward across the scene, making its movement appear calm and steady."}

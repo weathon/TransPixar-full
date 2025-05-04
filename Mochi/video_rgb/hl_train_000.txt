@@ -1,0 +1,1 @@
+{"pos_prompt":"The video shows a train moving smoothly from left to right across the scene. The train is clearly highlighted and stands out against the background, making it the focal point as it travels through the environment. The motion is continuous and steady throughout the video."}

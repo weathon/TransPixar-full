@@ -1,0 +1,1 @@
+{"pos_prompt":"A cat stands out clearly from the background and is moving as if it is walking. The cat is the main focus and is easy to see against the environment. The animation shows the cat in motion, taking steps forward."}

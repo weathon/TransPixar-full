@@ -1,0 +1,1 @@
+{"pos_prompt":"A bus is clearly standing out against the background and is well separated from its environment. The bus moves steadily from the left side of the screen to the right, showing smooth forward motion through the scene."}

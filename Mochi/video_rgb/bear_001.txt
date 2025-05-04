@@ -1,0 +1,1 @@
+{"pos_prompt":"A bear is clearly standing out against the background. The bear is moving slowly to the right across the scene. Its motion is smooth and steady, with each step shifting its position forward."}

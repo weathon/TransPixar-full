@@ -1,0 +1,1 @@
+{"pos_prompt":"A horse and rider are clearly standing out from the background, moving in a jumping sequence. The animation shows the rider guiding the horse as it approaches and leaps over an obstacle, with the motion shown step by step. The horse and rider are highlighted against a plain backdrop, making them the central focus."}

@@ -1,0 +1,1 @@
+{"pos_prompt":"A car clearly stands out against a plain background. The car is moving from the right side towards the left side of the frame in a turning motion. The motion of the car is smooth and it remains the main focus of the scene."}

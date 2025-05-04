@@ -1,0 +1,1 @@
+{"pos_prompt":"A person stands out clearly from the background, performing parkour movements. The person is moving dynamically, jumping and landing in an urban environment. Each frame shows fluid motion through the air and on the ground."}

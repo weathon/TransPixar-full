@@ -1,0 +1,1 @@
+{"pos_prompt":"A dog is clearly standing out from the background. The dog moves by shifting its position, first looking downward and then changing angles as if sniffing or exploring the ground. The motion is smooth and continuous."}

@@ -1,0 +1,1 @@
+{"pos_prompt":"A car shape stands out clearly against a plain background. The car shadow smoothly moves from left to right across the screen. The motion of the car is consistent and easy to follow, making the car the clear focus of the video."}

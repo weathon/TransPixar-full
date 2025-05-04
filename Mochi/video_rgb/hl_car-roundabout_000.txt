@@ -1,0 +1,1 @@
+{"pos_prompt":"A highlighted car is clearly standing out from its environment. In the video, the car is moving smoothly and steadily along a roundabout. The motion shows the car traveling in a curved path, drawing attention to its movement and presence."}

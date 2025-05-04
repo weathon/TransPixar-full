@@ -1,0 +1,1 @@
+{"pos_prompt":"A soccer ball stands out clearly against a plain background. The soccer ball moves across the scene, rolling smoothly from one side to another. The motion makes the ball very noticeable in the environment."}

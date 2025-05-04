@@ -1,0 +1,1 @@
+{"pos_prompt":"A highlighted car stands out clearly against a plain background. The car moves from right to left across the scene, gradually increasing in size as if approaching the viewer. The motion is smooth and noticeable, making the car the main focus."}

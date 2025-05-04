@@ -1,0 +1,1 @@
+{"pos_prompt":"A cat is clearly highlighted and stands out against the background environment. The cat is moving smoothly, walking from left to right across the screen."}

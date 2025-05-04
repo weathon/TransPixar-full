@@ -1,0 +1,1 @@
+{"pos_prompt":"A train is moving smoothly across the scene, clearly standing out from the background. The train travels from the left side to the right, and its movement is steady and continuous. The train is the main focus and is easy to see against its environment."}

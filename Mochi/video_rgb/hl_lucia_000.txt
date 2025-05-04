@@ -1,0 +1,1 @@
+{"pos_prompt":"A person is clearly highlighted and stands out in the environment. The video shows the person walking forward, with visible changes in leg and arm positions indicating motion."}
