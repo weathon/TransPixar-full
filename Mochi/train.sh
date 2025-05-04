@@ -14,26 +14,27 @@ cmd="CUDA_VISIBLE_DEVICES=$GPU_IDS python train.py \
   --data_root $DATA_ROOT \
   --seed 42 \
   --output_dir $OUTPUT_PATH \
-  --train_batch_size 2 \
+  --train_batch_size 4 \
   --dataloader_num_workers 20 \
   --pin_memory \
   --checkpointing_steps 100 \
   --report_to wandb \
-  --rank 32 \
+  --rank 16 \
   --lr_warmup_steps 40 \
-  --max_train_steps 6000 \
+  --max_train_steps 3000 \
   --gradient_checkpointing \
   --push_to_hub \
-  --validation_steps 200 \
+  --validation_steps 100 \
   --enable_slicing \
   --enable_tiling \
   --optimizer adamw \
   --allow_tf32 \
-  --weight_decay 0.05 \
+  --weight_decay 0.1 \
   --width 576 \
   --height 320 \
-  --num_validation_videos 2 \
-  --learning_rate 7e-4"
+  --num_validation_videos 1 \
+  --seed 64 \
+  --learning_rate 3e-4"
 
   # --caption_dropout 0.1 \
   # --lora_alpha 1 \

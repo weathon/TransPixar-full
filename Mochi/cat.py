@@ -20,7 +20,7 @@ os.makedirs("final_dataset", exist_ok=True)
 for file in files:
     if not file.endswith("latent.pt"): 
         continue
-    tensor1 = torch.load("video_rgb_/"+file)["ldist"]
+    tensor1 = torch.load("video_rgb/"+file)["ldist"]
     try:
         tensor2 = torch.load("video_alpha/"+file)["ldist"]
         assert (torch.abs(tensor1 - tensor2) > 0.01).any()
@@ -29,5 +29,5 @@ for file in files:
         torch.save({"ldist": res}, "final_dataset/"+file)
     except FileNotFoundError as e:
         continue
-os.system("cp video_rgb_/*.mp4 final_dataset/")
-os.system("cp video_rgb_/*.embed.pt final_dataset/")
+os.system("cp video_rgb/*.mp4 final_dataset/")
+os.system("cp video_rgb/*.embed.pt final_dataset/")

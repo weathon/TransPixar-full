@@ -64,10 +64,10 @@ class RGBALoRAMochiAttnProcessor:
         self.to_v_lora = create_lora_layer(latent_dim, lora_rank, latent_dim)
         self.to_out_lora = create_lora_layer(latent_dim, lora_rank, latent_dim)
 
-        self.to_rgb_q_lora = nn.Identity() #create_lora_layer(latent_dim, lora_rank//8, latent_dim)
-        self.to_rgb_k_lora = nn.Identity() #create_lora_layer(latent_dim, lora_rank//8, latent_dim)
-        self.to_rgb_v_lora = nn.Identity() #create_lora_layer(latent_dim, lora_rank//8, latent_dim)
-        self.to_rgb_out_lora = nn.Identity() #create_lora_layer(latent_dim, lora_rank//8, latent_dim)
+        self.to_rgb_q_lora = create_lora_layer(latent_dim, lora_rank//8, latent_dim)
+        self.to_rgb_k_lora = create_lora_layer(latent_dim, lora_rank//8, latent_dim)
+        self.to_rgb_v_lora = create_lora_layer(latent_dim, lora_rank//8, latent_dim)
+        self.to_rgb_out_lora = create_lora_layer(latent_dim, lora_rank//8, latent_dim)
         
         # self.encoder_lora = create_lora_layer(1536, lora_rank//8, 1536)
         self.adapter = nn.Sequential(
@@ -95,21 +95,21 @@ class RGBALoRAMochiAttnProcessor:
         query_delta = self.to_q_lora(hidden_states[:, -seq_len // 2:, :]).to(query.device)
         query_rgb_delta = self.to_rgb_q_lora(hidden_states[:, :-seq_len // 2, :] ).to(query.device)
         query[:, -seq_len // 2:, :] += query_delta * scaling
-        query[:, :-seq_len // 2, :] += query_rgb_delta* scaling
+        # query[:, :-seq_len // 2, :] += query_rgb_delta* scaling
         
         # query += query_delta * scaling
 
         key_delta = self.to_k_lora(hidden_states[:, -seq_len // 2:, :]).to(key.device)
         key_rgb_delta = self.to_rgb_k_lora(hidden_states[:, :-seq_len // 2, :]).to(query.device)
         key[:, -seq_len // 2:, :] += key_delta * scaling
-        key[:, :-seq_len // 2, :] += key_rgb_delta * scaling
+        # key[:, :-seq_len // 2, :] += key_rgb_delta * scaling
         
         # key += key_delta * scaling
 
         value_delta = self.to_v_lora(hidden_states[:, -seq_len // 2:, :]).to(value.device)
         value_rgb_delta = self.to_rgb_v_lora(hidden_states[:, :-seq_len // 2, :]).to(value.device)
         value[:, -seq_len // 2:, :] += value_delta * scaling
-        value[:, :-seq_len // 2, :] += value_rgb_delta * scaling
+        # value[:, :-seq_len // 2, :] += value_rgb_delta * scaling
         
         # value += value_delta * scaling
 
@@ -235,10 +235,10 @@ class RGBALoRAMochiAttnProcessor:
         # linear proj
         original_hidden_states = attn.to_out[0](hidden_states)
         hidden_states_delta = self.to_out_lora(hidden_states[:, -sequence_length // 2:, :]).to(hidden_states.device)
-        hidden_states_rgb_delta = self.to_rgb_out_lora(hidden_states[:, :-sequence_length // 2, :]).to(hidden_states.device)
+        # hidden_states_rgb_delta = self.to_rgb_out_lora(hidden_states[:, :-sequence_length // 2, :]).to(hidden_states.device)
         original_hidden_states[:, -sequence_length // 2:, :] += hidden_states_delta * scaling
-        original_hidden_states[:, :-sequence_length // 2, :] += hidden_states_rgb_delta * scaling
-        # dropout 
+        # original_hidden_states[:, :-sequence_length // 2, :] += hidden_states_rgb_delta * scaling
+        # dropout  
         hidden_states = attn.to_out[1](original_hidden_states)
         # hidden_states[:,-sequence_length // 2:] = hidden_states[:,-sequence_length // 2:] + self.adapter(hidden_states[:,:-sequence_length // 2])
 

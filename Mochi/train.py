@@ -560,7 +560,7 @@ def main(args):
                 for validation_prompt in validation_prompts:
                     pipeline_args = {
                         "prompt": validation_prompt,
-                        "negative_prompt": "highlighted, standing out, highly visible, vibrant tones, overexposed",
+                        "negative_prompt": "A non-animal object being highlighted and standing out, with its colour contrast against the background such that it is highly visible with vibrant tones. The object is motionless and overexposed.",
                         "num_frames": 1 if args.single_frame else 37,
                         "num_inference_steps": 64,
                         "height": args.height,
