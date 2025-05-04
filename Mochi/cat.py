@@ -31,3 +31,4 @@ for file in files:
         continue
 os.system("cp video_rgb/*.mp4 final_dataset/")
 os.system("cp video_rgb/*.embed.pt final_dataset/")
+os.system("rm final_dataset/elephant*")

@@ -680,9 +680,17 @@ class MochiPipeline(DiffusionPipeline, Mochi1LoraLoaderMixin):
         print(1, prompt_embeds.shape)
 
         if self.do_classifier_free_guidance:
+            negative_prompt_embeds = torch.cat([torch.tensor([[[0] * 4096]]).cuda(), negative_prompt_embeds], axis=1)
+            prompt_embeds = torch.cat([torch.tensor([[[1] * 4096]]).cuda(), prompt_embeds], axis=1)
+            negative_prompt_attention_mask = torch.cat([torch.tensor([[True]]).cuda(), negative_prompt_attention_mask], axis=1)
+            prompt_attention_mask = torch.cat([torch.tensor([[True]]).cuda(), prompt_attention_mask], axis=1)
+            print("negative_prompt_embeds.shape", negative_prompt_embeds.shape)
+            
             prompt_embeds = torch.cat([negative_prompt_embeds, prompt_embeds], dim=0)
             prompt_attention_mask = torch.cat([negative_prompt_attention_mask, prompt_attention_mask], dim=0)
-        
+            
+
+            
         print(2, prompt_embeds.shape)
         # 5.5 Prepare attention rectification masks        
         all_attention_mask = prepare_attention_mask(prompt_attention_mask, latents)
@@ -780,7 +788,6 @@ class MochiPipeline(DiffusionPipeline, Mochi1LoraLoaderMixin):
                 latents = latents * latents_std / self.vae.config.scaling_factor + latents_mean
             else:
                 latents = latents / self.vae.config.scaling_factor
-            print(latents.shape)
             video = self.vae.decode(latents, return_dict=False)[0]
             video = self.video_processor.postprocess_video(video, output_type=output_type)
 

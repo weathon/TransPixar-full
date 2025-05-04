@@ -461,7 +461,7 @@ def main(args):
                 sigma = batch["sigma"].to("cuda")
                 prompt_embeds = batch["prompt_embeds"].to("cuda")
                 prompt_attention_mask = batch["prompt_attention_mask"].to("cuda")
-
+                print(prompt_attention_mask)
                 all_attention_mask = prepare_attention_mask(
                     prompt_attention_mask=prompt_attention_mask, 
                     latents=z
@@ -566,6 +566,7 @@ def main(args):
                         "height": args.height,
                         "width": args.width,
                         "max_sequence_length": 512,
+                        "guidance_scale": 6
                     }
                     log_validation(
                         pipe=pipe,

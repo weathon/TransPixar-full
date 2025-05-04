@@ -9,6 +9,7 @@ import click
 import torch
 from torch.utils.data import DataLoader, Dataset
 
+negative_samples = ['paragliding-launch', 'tennis', 'kite-walk', 'breakdance-flare', 'dance-jump', 'goat', 'scooter-black', 'paragliding', 'car-roundabout', 'drift-straight', 'horsejump-high', 'dog', 'bus', 'camel', 'motocross-bumps', 'hockey', 'swing', 'soccerball', 'mallard-fly', 'mallard-water', 'parkour', 'elephant', 'scooter-gray', 'motocross-jump', 'motorbike', 'blackswan', 'car-shadow', 'kite-surf', 'drift-turn', 'surf', 'breakdance', 'boat', 'dance-twirl', 'bmx-bumps', 'cows', 'stroller', 'libby', 'horsejump-low', 'hike', 'drift-chicane', 'rhino', 'rollerblade', 'bmx-trees', 'car-turn', 'flamingo', 'train', 'dog-agility', 'bear', 'soapbox', 'lucia']
 
 def load_to_cpu(x):
     return torch.load(x, map_location=torch.device("cpu"), weights_only=True)
@@ -29,7 +30,13 @@ class LatentEmbedDataset(Dataset):
 
     def __getitem__(self, idx):
         latent_path, embed_path = self.items[idx]
-        return load_to_cpu(latent_path), load_to_cpu(embed_path)
+        name = "-".join(str(self.items[idx][0]).split("/")[-1].split(".")[0].split("_")[:-1])
+        cat = torch.tensor(1) if name not in negative_samples else torch.tensor(0)
+        embed = load_to_cpu(embed_path)
+        embed["prompt_attention_mask"] = torch.cat([torch.tensor([[True]]), embed["prompt_attention_mask"]], axis=1)
+        embed["prompt_embeds"] = torch.cat([torch.tensor([[[cat] * 4096]]), embed["prompt_embeds"]], axis=1)
+        
+        return load_to_cpu(latent_path), embed, cat
 
 
 @click.command()
@@ -42,7 +49,7 @@ def process_videos(directory):
     dataset = LatentEmbedDataset(mp4_files)
     dataloader = DataLoader(dataset, batch_size=4, shuffle=True)
 
-    for latents, embeds in dataloader:
+    for latents, embeds, _ in dataloader:
         print([(k, v.shape) for k, v in latents.items()])
 
 
