@@ -173,7 +173,6 @@ def log_validation(
     with torch.autocast("cuda", torch.bfloat16, cache_enabled=False):
         for _ in range(args.num_validation_videos):
             video = pipe(**pipeline_args, generator=generator, output_type="np").frames[0]
-            print(video.shape)
             videos.append(video)
 
     video_filenames = []
@@ -461,7 +460,6 @@ def main(args):
                 sigma = batch["sigma"].to("cuda")
                 prompt_embeds = batch["prompt_embeds"].to("cuda")
                 prompt_attention_mask = batch["prompt_attention_mask"].to("cuda")
-                print(prompt_attention_mask)
                 all_attention_mask = prepare_attention_mask(
                     prompt_attention_mask=prompt_attention_mask, 
                     latents=z
@@ -491,7 +489,6 @@ def main(args):
                     return_dict=False,
                 )[0]
             assert model_pred.shape == z.shape
-            print(model_pred.shape) 
             # should we do negative prompt during training
             seq_len_ = model_pred.shape[2]
             loss_rgb = F.mse_loss(model_pred[:,:,:seq_len_//2].float(), ut[:,:,:seq_len_//2].float())

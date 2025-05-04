@@ -132,13 +132,15 @@ class RGBALoRAMochiAttnProcessor:
         # encoder_hidden_states = encoder_hidden_states + encoder_hidden_states_delta * self.lora_alpha / self.lora_rank * 0.2
         
 
-        for batch in range(encoder_hidden_states.shape[0]):
-            if encoder_hidden_states[batch, 0, :].max() == 0 and encoder_hidden_states[batch, 0, :].min() == 0:
-                print("negative sample")
-                encoder_hidden_states[batch, 0] = encoder_hidden_states[batch, 0] + self.cat_embedding(0)
-            if encoder_hidden_states[batch, 0, :].max() == 1 and encoder_hidden_states[batch, 0, :].min() == 1:
-                print("positive sample")
-                encoder_hidden_states[batch, 0] = encoder_hidden_states[batch, 0] + self.cat_embedding(1) - 1
+        # for batch in range(encoder_hidden_states.shape[0]):
+        #     print(encoder_hidden_states[batch, 0, :])
+        #     print(encoder_hidden_states[batch, 0, :].shape)
+        #     if encoder_hidden_states[batch, 0, :].max() == 0 and encoder_hidden_states[batch, 0, :].min() == 0:
+        #         print("negative sample")
+        #         encoder_hidden_states[batch, 0] = encoder_hidden_states[batch, 0] + self.cat_embedding(0)
+        #     if encoder_hidden_states[batch, 0, :].max() == 1 and encoder_hidden_states[batch, 0, :].min() == 1:
+        #         print("positive sample")
+        #         encoder_hidden_states[batch, 0] = encoder_hidden_states[batch, 0] + self.cat_embedding(1) - 1
             
         query = attn.to_q(hidden_states)
         query[:, -hidden_states.shape[1]//2:] = query[:, -hidden_states.shape[1]//2:] + self.domain_kq_embeding(torch.tensor(0).cuda())[None, None, :].expand_as(query[:, -hidden_states.shape[1]//2:])
@@ -291,13 +293,14 @@ def prepare_for_rgba_inference(
 
             post_patch_height = height // p
             post_patch_width = width // p 
+            cat = encoder_hidden_states[:,0,0]
             temb, encoder_hidden_states = self.time_embed(
                 timestep,
-                encoder_hidden_states,
-                encoder_attention_mask["prompt_attention_mask"],
+                encoder_hidden_states[:,1:], 
+                encoder_attention_mask["prompt_attention_mask"][:,1:],
                 hidden_dtype=hidden_states.dtype,
             )
-            
+            encoder_hidden_states =torch.cat([cat[:,None, None].repeat(1, 1, encoder_hidden_states.shape[-1]), encoder_hidden_states], axis=1)
             hidden_states = hidden_states.permute(0, 2, 1, 3, 4).flatten(0, 1)
             hidden_states = self.patch_embed(hidden_states)
             hidden_states = hidden_states.unflatten(0, (batch_size, -1)).flatten(1, 2)
