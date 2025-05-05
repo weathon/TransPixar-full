@@ -88,9 +88,11 @@ class RGBALoRAMochiAttnProcessor:
         self.domain_kq_embeding.weight.requires_grad = True
         nn.init.zeros_(self.domain_embeding.weight)
         nn.init.zeros_(self.domain_kq_embeding.weight)
-        self.cat_embedding = nn.Embedding(2, 3072).cuda()
+
+        self.cat_embedding = nn.Embedding(2, 1536).cuda()
         self.cat_embedding.requires_grad = True
         nn.init.zeros_(self.cat_embedding.weight)
+        
         
     def _apply_lora(self, hidden_states, seq_len, query, key, value, scaling):
         """Applies LoRA updates to query, key, and value tensors."""
@@ -119,29 +121,24 @@ class RGBALoRAMochiAttnProcessor:
 
     def __call__(
         self,
-        attn,
+        attn, 
         hidden_states: torch.Tensor,
         encoder_hidden_states: torch.Tensor,
         attention_mask: Optional[torch.Tensor] = None,
         image_rotary_emb: Optional[torch.Tensor] = None,
     ) -> torch.Tensor: 
         # print(hidden_states.shape, self.domain_embeding[None, None, :].shape)
+        # cat = encoder_hidden_states[:,0,0]
+        # print("cat", cat)
+        # print("encoder_hidden_states", encoder_hidden_states)
+        # encoder_hidden_states = encoder_hidden_states[:1:,:]
+        encoder_hidden_states = encoder_hidden_states + self.cat_embedding(self.cat_state.cuda()).unsqueeze(1)
+        # print(encoder_hidden_states.shape)
         hidden_states[:,-hidden_states.shape[1]//2:] = hidden_states[:,-hidden_states.shape[1]//2:] + self.domain_embeding(torch.tensor(0).cuda())[None, None, :].expand_as(hidden_states[:,-hidden_states.shape[1]//2:])
         # hidden_states[:,:-hidden_states.shape[1]//2] = hidden_states[:,:-hidden_states.shape[1]//2] + self.domain_embeding(torch.tensor(1).cuda())[None, None, :].expand_as(hidden_states[:,:-hidden_states.shape[1]//2])
         # encoder_hidden_states_delta = self.encoder_lora(encoder_hidden_states).to(hidden_states.device)
         # encoder_hidden_states = encoder_hidden_states + encoder_hidden_states_delta * self.lora_alpha / self.lora_rank * 0.2
-        
-
-        # for batch in range(encoder_hidden_states.shape[0]):
-        #     print(encoder_hidden_states[batch, 0, :])
-        #     print(encoder_hidden_states[batch, 0, :].shape)
-        #     if encoder_hidden_states[batch, 0, :].max() == 0 and encoder_hidden_states[batch, 0, :].min() == 0:
-        #         print("negative sample")
-        #         encoder_hidden_states[batch, 0] = encoder_hidden_states[batch, 0] + self.cat_embedding(0)
-        #     if encoder_hidden_states[batch, 0, :].max() == 1 and encoder_hidden_states[batch, 0, :].min() == 1:
-        #         print("positive sample")
-        #         encoder_hidden_states[batch, 0] = encoder_hidden_states[batch, 0] + self.cat_embedding(1) - 1
-            
+ 
         query = attn.to_q(hidden_states)
         query[:, -hidden_states.shape[1]//2:] = query[:, -hidden_states.shape[1]//2:] + self.domain_kq_embeding(torch.tensor(0).cuda())[None, None, :].expand_as(query[:, -hidden_states.shape[1]//2:])
         # query[:, :-hidden_states.shape[1]//2] = query[:, :-hidden_states.shape[1]//2] + self.domain_kq_embeding(torch.tensor(1).cuda())[None, None, :].expand_as(query[:, :-hidden_states.shape[1]//2])
@@ -262,8 +259,7 @@ class RGBALoRAMochiAttnProcessor:
 def prepare_for_rgba_inference(
     model, device: torch.device, dtype: torch.dtype,
     lora_rank: int = 16, lora_alpha: float = 1.0
-):
-
+): 
     def custom_forward(self):
         def forward(
             hidden_states: torch.Tensor,
@@ -272,6 +268,7 @@ def prepare_for_rgba_inference(
             encoder_attention_mask: torch.Tensor,
             attention_kwargs: Optional[Dict[str, Any]] = None,
             return_dict: bool = True,
+            cat = None
         ) -> torch.Tensor:
             if attention_kwargs is not None:
                 attention_kwargs = attention_kwargs.copy()
@@ -293,14 +290,21 @@ def prepare_for_rgba_inference(
 
             post_patch_height = height // p
             post_patch_width = width // p 
-            cat = encoder_hidden_states[:,0,0]
             temb, encoder_hidden_states = self.time_embed(
                 timestep,
-                encoder_hidden_states[:,1:], 
-                encoder_attention_mask["prompt_attention_mask"][:,1:],
+                encoder_hidden_states, 
+                encoder_attention_mask["prompt_attention_mask"],
                 hidden_dtype=hidden_states.dtype,
             )
-            encoder_hidden_states =torch.cat([cat[:,None, None].repeat(1, 1, encoder_hidden_states.shape[-1]), encoder_hidden_states], axis=1)
+            
+            # encoder_hidden_states =torch.cat([cat[:,None, None].repeat(1, 1, encoder_hidden_states.shape[-1]), encoder_hidden_states], axis=1) 
+            # print(encoder_hidden_states[0,0,:])
+            # print("ppp")
+            # print(encoder_hidden_states.shape)
+            # print(model.cat_embedding(cat).shape)
+            # cat_embedding = self.transformer_blocks[0].attn1.processor.cat_embedding
+            # encoder_hidden_states = encoder_hidden_states + cat_embedding(cat.cuda()).unsqueeze(1)
+            
             hidden_states = hidden_states.permute(0, 2, 1, 3, 4).flatten(0, 1)
             hidden_states = self.patch_embed(hidden_states)
             hidden_states = hidden_states.unflatten(0, (batch_size, -1)).flatten(1, 2)
@@ -319,6 +323,7 @@ def prepare_for_rgba_inference(
         
             
             for i, block in enumerate(self.transformer_blocks):
+                block.attn1.processor.cat_state = cat
                 if torch.is_grad_enabled() and self.gradient_checkpointing:
 
                     def create_custom_forward(module):
@@ -326,7 +331,6 @@ def prepare_for_rgba_inference(
                             return module(*inputs)
 
                         return custom_forward
-
                     ckpt_kwargs: Dict[str, Any] = {"use_reentrant": False} if is_torch_version(">=", "1.11.0") else {}
                     hidden_states, encoder_hidden_states = torch.utils.checkpoint.checkpoint(
                         create_custom_forward(block),
@@ -370,6 +374,10 @@ def prepare_for_rgba_inference(
         ) 
         # block.attn1.set_processor(attn_processor)
         block.attn1.processor = attn_processor
+
+    # model.transformer_blocks[0].attn1.processor.cat_embedding = nn.Embedding(2, 1536).cuda()
+    # model.transformer_blocks[0].attn1.processor.cat_embedding.requires_grad = True
+    # nn.init.zeros_(model.transformer_blocks[0].attn1.processor.cat_embedding.weight)
     # model.domain_embeding = nn.Embedding(2, 3072).cuda()
     # model.domain_embeding.weight.requires_grad_(True)
     model.forward = custom_forward(model)
@@ -381,7 +389,7 @@ def get_processor_state_dict(model):
     for index, block in enumerate(model.transformer_blocks):
         if hasattr(block.attn1, "processor"):
             processor = block.attn1.processor
-            for attr_name in ["domain_kq_embeding", "adapter", "encoder_lora", "to_q_lora", "to_k_lora", "to_v_lora", "to_rgb_out_lora","to_egb_q_lora", "to_egb_k_lora", "to_egb_v_lora", "to_out_lora", "domain_embeding"]:
+            for attr_name in ["cat_embedding", "domain_kq_embeding", "adapter", "encoder_lora", "to_q_lora", "to_k_lora", "to_v_lora", "to_rgb_out_lora","to_egb_q_lora", "to_egb_k_lora", "to_egb_v_lora", "to_out_lora", "domain_embeding"]:
                 if hasattr(processor, attr_name):
                     lora_layer = getattr(processor, attr_name)
                     for param_name, param in lora_layer.named_parameters():
@@ -393,11 +401,11 @@ def get_processor_state_dict(model):
     return processor_state_dict
 
 def load_processor_state_dict(model, processor_state_dict):
-    loaded = dict.fromkeys(["domain_kq_embeding", "adapter", "encoder_lora", "to_q_lora", "to_k_lora", "to_v_lora", "to_rgb_out_lora","to_egb_q_lora", "to_egb_k_lora", "to_egb_v_lora", "to_out_lora", "domain_embeding"], False)
+    loaded = dict.fromkeys(["cat_embedding", "domain_kq_embeding", "adapter", "encoder_lora", "to_q_lora", "to_k_lora", "to_v_lora", "to_rgb_out_lora","to_egb_q_lora", "to_egb_k_lora", "to_egb_v_lora", "to_out_lora", "domain_embeding"], False)
     for index, block in enumerate(model.transformer_blocks):
         if hasattr(block.attn1, "processor"):
             processor = block.attn1.processor
-            for attr_name in ["domain_kq_embeding", "adapter", "encoder_lora", "to_q_lora", "to_k_lora", "to_v_lora", "to_rgb_out_lora","to_egb_q_lora", "to_egb_k_lora", "to_egb_v_lora", "to_out_lora", "domain_embeding"]:
+            for attr_name in ["cat_embedding", "domain_kq_embeding", "adapter", "encoder_lora", "to_q_lora", "to_k_lora", "to_v_lora", "to_rgb_out_lora","to_egb_q_lora", "to_egb_k_lora", "to_egb_v_lora", "to_out_lora", "domain_embeding"]:
                 if hasattr(processor, attr_name):
                     lora_layer = getattr(processor, attr_name)
                     for param_name, param in lora_layer.named_parameters():
@@ -412,8 +420,8 @@ def load_processor_state_dict(model, processor_state_dict):
     
 # Prepare training parameters
 def get_processor_params(processor):
-    params = []
-    for attr_name in ["domain_kq_embeding", "adapter", "encoder_lora", "to_q_lora", "to_k_lora", "to_v_lora", "to_rgb_out_lora","to_egb_q_lora", "to_egb_k_lora", "to_egb_v_lora", "to_out_lora", "domain_embeding"]:
+    params = [] 
+    for attr_name in ["cat_embedding", "domain_kq_embeding", "adapter", "encoder_lora", "to_q_lora", "to_k_lora", "to_v_lora", "to_rgb_out_lora","to_egb_q_lora", "to_egb_k_lora", "to_egb_v_lora", "to_out_lora", "domain_embeding"]:
         if hasattr(processor, attr_name):
             lora_layer = getattr(processor, attr_name)
             params.extend(p for p in lora_layer.parameters() if p.requires_grad)

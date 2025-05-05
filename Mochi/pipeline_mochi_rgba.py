@@ -540,6 +540,7 @@ class MochiPipeline(DiffusionPipeline, Mochi1LoraLoaderMixin):
         callback_on_step_end_tensor_inputs: List[str] = ["latents"],
         max_sequence_length: int = 256,
         first_half: Optional[bool] = None,
+        cat = None
     ):
         r"""
         Function invoked when calling the pipeline for generation.
@@ -680,11 +681,11 @@ class MochiPipeline(DiffusionPipeline, Mochi1LoraLoaderMixin):
         print(1, prompt_embeds.shape)
 
         if self.do_classifier_free_guidance:
-            negative_prompt_embeds = torch.cat([torch.tensor([[[0] * 4096]]).cuda(), negative_prompt_embeds], axis=1)
-            prompt_embeds = torch.cat([torch.tensor([[[1] * 4096]]).cuda(), prompt_embeds], axis=1)
-            negative_prompt_attention_mask = torch.cat([torch.tensor([[True]]).cuda(), negative_prompt_attention_mask], axis=1)
-            prompt_attention_mask = torch.cat([torch.tensor([[True]]).cuda(), prompt_attention_mask], axis=1)
-            print("negative_prompt_embeds.shape", negative_prompt_embeds.shape)
+            # negative_prompt_embeds = torch.cat([torch.tensor([[[0] * 4096]]).cuda(), negative_prompt_embeds], axis=1)
+            # prompt_embeds = torch.cat([torch.tensor([[[1] * 4096]]).cuda(), prompt_embeds], axis=1)
+            # negative_prompt_attention_mask = torch.cat([torch.tensor([[True]]).cuda(), negative_prompt_attention_mask], axis=1)
+            # prompt_attention_mask = torch.cat([torch.tensor([[True]]).cuda(), prompt_attention_mask], axis=1)
+            # print("negative_prompt_embeds.shape", negative_prompt_embeds.shape)
             
             prompt_embeds = torch.cat([negative_prompt_embeds, prompt_embeds], dim=0)
             prompt_attention_mask = torch.cat([negative_prompt_attention_mask, prompt_attention_mask], dim=0)
@@ -737,6 +738,7 @@ class MochiPipeline(DiffusionPipeline, Mochi1LoraLoaderMixin):
                     encoder_attention_mask=all_attention_mask,
                     attention_kwargs=attention_kwargs,
                     return_dict=False,
+                    cat=cat
                 )[0]
                 # Mochi CFG + Sampling runs in FP32
                 noise_pred = noise_pred.to(torch.float32)
@@ -788,6 +790,7 @@ class MochiPipeline(DiffusionPipeline, Mochi1LoraLoaderMixin):
                 latents = latents * latents_std / self.vae.config.scaling_factor + latents_mean
             else:
                 latents = latents / self.vae.config.scaling_factor
+            print(latents.shape)
             video = self.vae.decode(latents, return_dict=False)[0]
             video = self.video_processor.postprocess_video(video, output_type=output_type)
 

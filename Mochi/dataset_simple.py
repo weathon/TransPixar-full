@@ -33,9 +33,6 @@ class LatentEmbedDataset(Dataset):
         name = "-".join(str(self.items[idx][0]).split("/")[-1].split(".")[0].split("_")[:-1])
         cat = torch.tensor(1) if name not in negative_samples else torch.tensor(0)
         embed = load_to_cpu(embed_path)
-        embed["prompt_attention_mask"] = torch.cat([torch.tensor([[True]]), embed["prompt_attention_mask"]], axis=1)
-        embed["prompt_embeds"] = torch.cat([torch.tensor([[[cat] * 4096]]), embed["prompt_embeds"]], axis=1)
-        
         return load_to_cpu(latent_path), embed, cat
 
 

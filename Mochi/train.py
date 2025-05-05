@@ -264,7 +264,7 @@ class CollateFunction:
     def __init__(self, caption_dropout: float = None) -> None:
         self.caption_dropout = caption_dropout
 
-    def __call__(self, samples: List[Tuple[dict, torch.Tensor]]) -> Dict[str, torch.Tensor]:
+    def __call__(self, samples: List[Tuple]) -> Dict[str, torch.Tensor]:
         ldists = torch.cat([data[0]["ldist"] for data in samples], dim=0)
         z = DiagonalGaussianDistribution(ldists).sample()
         assert torch.isfinite(z).all()
@@ -289,7 +289,8 @@ class CollateFunction:
         
         # prompt_embeds = torch.cat([negative_prompt_embeds, prompt_embeds], dim=1)
         # prompt_attention_mask = torch.cat([negative_prompt_attention_mask, prompt_attention_mask], dim=1)
-        
+
+        cat = torch.cat([data[2].unsqueeze(0) for data in samples], dim=0)
         if self.caption_dropout and random.random() < self.caption_dropout:
             prompt_embeds.zero_()
             prompt_attention_mask = prompt_attention_mask.long()
@@ -297,7 +298,7 @@ class CollateFunction:
             prompt_attention_mask = prompt_attention_mask.bool()
 
         return dict(
-            z=z, eps=eps, sigma=sigma, prompt_embeds=prompt_embeds, prompt_attention_mask=prompt_attention_mask
+            z=z, eps=eps, sigma=sigma, prompt_embeds=prompt_embeds, prompt_attention_mask=prompt_attention_mask, cat=cat
         )
 
 from torch.distributions.beta import Beta
@@ -458,6 +459,7 @@ def main(args):
                 z = batch["z"].to("cuda")
                 eps = batch["eps"].to("cuda")
                 sigma = batch["sigma"].to("cuda")
+                cat = batch["cat"].to("cuda")
                 prompt_embeds = batch["prompt_embeds"].to("cuda")
                 prompt_attention_mask = batch["prompt_attention_mask"].to("cuda")
                 all_attention_mask = prepare_attention_mask(
@@ -487,6 +489,7 @@ def main(args):
                     encoder_attention_mask=all_attention_mask,
                     timestep=timesteps,
                     return_dict=False,
+                    cat=cat
                 )[0]
             assert model_pred.shape == z.shape
             # should we do negative prompt during training
@@ -557,13 +560,14 @@ def main(args):
                 for validation_prompt in validation_prompts:
                     pipeline_args = {
                         "prompt": validation_prompt,
-                        "negative_prompt": "A non-animal object being highlighted and standing out, with its colour contrast against the background such that it is highly visible with vibrant tones. The object is motionless and overexposed.",
+                        "negative_prompt": "A non-animal object being standing out, with its colour contrast against the background such that it is highly visible with vibrant tones. The object is motionless.",
                         "num_frames": 1 if args.single_frame else 37,
                         "num_inference_steps": 64,
                         "height": args.height,
                         "width": args.width,
                         "max_sequence_length": 512,
-                        "guidance_scale": 6
+                        "guidance_scale": 6,
+                        "cat": torch.tensor([1, 0])
                     }
                     log_validation(
                         pipe=pipe,
