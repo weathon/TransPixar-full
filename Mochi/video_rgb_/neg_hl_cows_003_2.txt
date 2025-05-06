@@ -1,0 +1,1 @@
+{"pos_prompt":"A cow is clearly highlighted and stands out from its surroundings. The cow is walking forward, with its legs moving as it advances. The motion shows the cow gradually getting closer, making it more prominent in the environment."}

@@ -1,0 +1,1 @@
+{"pos_prompt":"A person is clearly highlighted and stands out from the background, walking smoothly from right to left across the scene. The person is in continuous motion, stepping forward as they move. The figure remains visually contrasted against the environment throughout the video."}

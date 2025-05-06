@@ -1,1 +1,0 @@
-{"pos_prompt":"A car stands out clearly against a plain background and moves smoothly in a circular path, as if traveling around a roundabout. The car's motion is smooth and continuous, making it the clear focus of the scene."}

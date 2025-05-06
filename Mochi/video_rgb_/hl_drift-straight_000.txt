@@ -1,1 +1,0 @@
-{"pos_prompt":"A car is clearly highlighted and stands out from the environment. The car is drifting in a straight line, and its motion is smooth and continuous across the scene."}

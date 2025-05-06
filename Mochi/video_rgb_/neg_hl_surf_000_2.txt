@@ -1,0 +1,1 @@
+{"pos_prompt":"A highlighted surfboard stands out sharply against a smooth background. The surfboard slowly slides from one side of the scene to the other, making it easy to see as it moves across the environment."}

@@ -1,0 +1,1 @@
+{"pos_prompt":"A car is clearly highlighted and stands out from the environment. The car is moving smoothly along a roundabout, transitioning from one side of the screen to the other. The car’s motion is steady and continuous as it follows the circular path."}

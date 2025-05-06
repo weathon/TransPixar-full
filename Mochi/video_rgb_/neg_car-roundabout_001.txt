@@ -1,0 +1,1 @@
+{"pos_prompt":"A car is clearly standing out against its background, making it easy to see. The car moves smoothly and continuously in a circular motion, as if traveling around a roundabout. The environment is plain, ensuring the car remains the main focus."}

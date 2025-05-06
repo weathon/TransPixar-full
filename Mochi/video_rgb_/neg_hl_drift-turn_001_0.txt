@@ -1,0 +1,1 @@
+{"pos_prompt":"A car is clearly highlighted and stands out against the background. The car is drifting and turning, with its movement shown by getting closer and zoomed in as the video progresses."}

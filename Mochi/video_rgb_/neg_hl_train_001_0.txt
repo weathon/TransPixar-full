@@ -1,0 +1,1 @@
+{"pos_prompt":"A highlighted and contrasted train clearly stands out from the background. The train moves steadily from one side to the other. The train remains easy to see as it moves across the video."}

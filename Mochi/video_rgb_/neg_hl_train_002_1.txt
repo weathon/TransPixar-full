@@ -1,0 +1,1 @@
+{"pos_prompt":"A train moves smoothly from left to right across the screen. The train is clearly highlighted and stands out from the background, making it easy to see. The motion shows the train progressing steadily forward."}

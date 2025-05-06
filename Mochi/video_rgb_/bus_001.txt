@@ -1,1 +1,0 @@
-{"pos_prompt":"A bus stands out against the background and is clearly visible. The bus moves from the left side of the scene to the right side, gradually fading as it travels. The motion emphasizes the bus as it moves smoothly across the environment."}

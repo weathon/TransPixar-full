@@ -1,1 +1,0 @@
-{"pos_prompt":"A highlighted dog stands out clearly in the environment. The dog is moving around and appears to be sniffing the ground as it walks. The motion captures the dog exploring its surroundings."}

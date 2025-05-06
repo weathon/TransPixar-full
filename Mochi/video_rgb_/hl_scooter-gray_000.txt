@@ -1,1 +1,0 @@
-{"pos_prompt":"A highlighted scooter with a rider is clearly standing out from the background, visibly more distinct than its surroundings. The scooter moves forward smoothly across the video, while the background remains plain and unchanged."}

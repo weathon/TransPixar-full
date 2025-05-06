@@ -1,0 +1,1 @@
+{"pos_prompt":"A person is clearly standing out against the environment as they walk from right to left across the scene. The person’s movement is smooth and continuous, showing them in different walking poses as they move. The person stays highlighted and keeps standing out from the background throughout the video."}

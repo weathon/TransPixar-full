@@ -1,0 +1,1 @@
+{"pos_prompt":"A cow is clearly standing out and possibly highlighted against a plain background, moving as if it is walking forward. The cow stands out well from its environment, and its legs show a walking motion in each frame."}

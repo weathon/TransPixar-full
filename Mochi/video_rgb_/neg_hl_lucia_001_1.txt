@@ -1,0 +1,1 @@
+{"pos_prompt":"A person is clearly highlighted and stands out against the background, moving smoothly as they walk forward. The silhouette of the person is contrasted from the environment, making the motion of walking easy to see. The motion sequence shows the person taking steps forward in a continuous, natural manner."}

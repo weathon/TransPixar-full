@@ -1,1 +1,0 @@
-{"pos_prompt":"A person is clearly highlighted and stands out against the background, pushing a stroller. The person is walking forward, and the stroller moves smoothly with them. The main object is distinct and prominent in the scene."}

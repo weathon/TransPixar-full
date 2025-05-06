@@ -1,0 +1,1 @@
+{"pos_prompt":"A scooter stands out clearly against the background, moving smoothly from left to right across the scene. The motion makes the scooter the main focus, and it is contrasted well with its environment. The simple gray background helps make the scooter shape clear as it travels."}

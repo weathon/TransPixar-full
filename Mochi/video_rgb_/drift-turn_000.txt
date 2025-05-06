@@ -1,1 +1,0 @@
-{"pos_prompt":"A car stands out clearly from the background and is the main focus in the scene. The car moves smoothly, showing a drifting motion as it turns. The environment is simple, making the car even more prominent in the video."}

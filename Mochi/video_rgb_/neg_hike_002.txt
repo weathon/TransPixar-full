@@ -1,0 +1,1 @@
+{"pos_prompt":"A person with a backpack walks smoothly across a plain background, standing out clearly from the environment. The figure moves from one side to the other, each step clearly shown as the person progresses."}

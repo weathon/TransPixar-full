@@ -1,0 +1,1 @@
+{"pos_prompt":"A highlighted bus stands out clearly in its environment as it moves smoothly forward across the scene. The bus is the main focus, contrasted against a plain background, and its motion is continuous as it travels from one side of the frame to the other."}

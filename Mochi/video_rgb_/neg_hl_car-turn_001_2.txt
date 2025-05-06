@@ -1,0 +1,1 @@
+{"pos_prompt":"A car clearly stands out against its environment and is highlighted or contrasted. The car moves from the right side of the scene and gradually turns as it moves toward the center. The motion smoothly shows the turning movement of the car."}

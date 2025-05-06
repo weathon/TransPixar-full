@@ -1,1 +1,0 @@
-{"pos_prompt":"The main object is a person pushing a stroller, clearly highlighted and standing out against the environment. The person moves forward while continuously pushing the stroller. The motion is smooth and steady, keeping the focus on the person and stroller."}

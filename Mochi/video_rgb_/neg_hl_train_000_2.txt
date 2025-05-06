@@ -1,0 +1,1 @@
+{"pos_prompt":"A blue train is clearly standing out against a green background, possibly highlighted to make it more visible compared to its environment. The train moves smoothly from left to right across the screen in the video."}

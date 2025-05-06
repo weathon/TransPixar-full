@@ -1,0 +1,1 @@
+{"pos_prompt":"A car is clearly highlighted and stands out against the plain background, making it easy to see. The car moves smoothly from left to right in a drifting motion, with small changes in its size and position as it travels through the scene."}

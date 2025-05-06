@@ -1,0 +1,1 @@
+{"pos_prompt":"A caterpillar is moving slowly across the scene, clearly standing out from the background. The caterpillar arches and stretches as it crawls forward. Its body is easily seen against the environment."}

@@ -1,1 +1,0 @@
-{"pos_prompt":"A car is clearly highlighted and stands out against the environment. The car moves steadily from the left to the center of the frame, drifting smoothly as it moves along a chicane path."}

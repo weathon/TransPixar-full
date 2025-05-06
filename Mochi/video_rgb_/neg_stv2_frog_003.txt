@@ -1,0 +1,1 @@
+{"pos_prompt":"A frog is clearly standing out against a dark background. The frog is moving forward in a jumping motion across the scene. The frog is the only highlighted subject, and it stands out in the environment as it jumps."}

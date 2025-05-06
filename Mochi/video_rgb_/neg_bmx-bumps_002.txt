@@ -1,0 +1,1 @@
+{"pos_prompt":"A person on a BMX bike moves smoothly from the left to the right side of the screen, clearly standing out against a plain background. The BMX bike is highlighted and its motion is across an empty environment, making the movement very visible."}

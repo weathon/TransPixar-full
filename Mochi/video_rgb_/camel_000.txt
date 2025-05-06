@@ -1,1 +1,0 @@
-{"pos_prompt":"A camel stands out clearly from the background and is moving forward. The camel's shape is easy to see, and it walks across the scene. The camel is the main focus and is highlighted compared to its surroundings."}

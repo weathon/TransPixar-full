@@ -1,0 +1,1 @@
+{"pos_prompt":"A frog is clearly standing out against a dark background, making it very visible in the environment. The frog is shown in motion, jumping forward in a smooth sequence from one spot to another."}

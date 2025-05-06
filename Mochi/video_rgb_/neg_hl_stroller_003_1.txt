@@ -1,0 +1,1 @@
+{"pos_prompt":"This video features a person pushing a stroller, clearly standing out from the background. The person and stroller may be highlighted or contrasted, making them especially prominent in their environment. The motion shows the person walking forward while pushing the stroller."}

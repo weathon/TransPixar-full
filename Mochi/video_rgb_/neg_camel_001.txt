@@ -1,0 +1,1 @@
+{"pos_prompt":"A camel stands out clearly from its background, making it easy to see against the surroundings. The camel is walking smoothly across the scene, and its outline is easy to distinguish from the environment."}

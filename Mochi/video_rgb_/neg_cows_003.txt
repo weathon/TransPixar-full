@@ -1,0 +1,1 @@
+{"pos_prompt":"A cow is clearly standing out against the background, moving calmly across the scene. The cow's motion is slow and steady, as it walks forward. The shape of the cow is easy to see and separated from its environment."}

@@ -1,0 +1,1 @@
+{"pos_prompt":"A person is clearly standing out from the background and walking forward. The person is moving smoothly across the scene, with their movement distinct and visible against the environment."}

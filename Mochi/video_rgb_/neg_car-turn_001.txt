@@ -1,0 +1,1 @@
+{"pos_prompt":"A car clearly stands out from the background and moves smoothly from the right to the left across the scene. The car gradually grows larger, as if turning or approaching the viewer. The car remains the main focus, highlighted against its surroundings throughout the motion."}

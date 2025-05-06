@@ -1,0 +1,1 @@
+{"pos_prompt":"A segmented train is clearly highlighted and stands out against the background environment. The train moves smoothly from left to right across the scene, with its separate cars following each other in a gentle curving motion."}

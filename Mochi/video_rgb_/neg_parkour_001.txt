@@ -1,0 +1,1 @@
+{"pos_prompt":"A person stands out clearly and is contrasted against the environment. The sequence shows the person performing parkour, beginning with a jump, then landing in a low crouched position, and finally pausing as they bend slightly forward. The movement is dynamic and fluid, emphasizing the person's agile motion through the environment."}

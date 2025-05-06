@@ -1,0 +1,1 @@
+{"pos_prompt":"A person is strongly highlighted and stands out against the background, clearly visible in each frame. The person is performing dynamic parkour movements, jumping, twisting, and landing, with visible motion through the air and in active poses throughout the scene."}

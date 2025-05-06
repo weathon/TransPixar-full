@@ -1,0 +1,1 @@
+{"pos_prompt":"A highlighted car stands out clearly against a plain background and moves smoothly from the right side towards the center of the scene. The car's motion shows it gradually turning as it travels, making it noticeable and distinct from its surroundings."}

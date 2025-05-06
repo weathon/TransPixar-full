@@ -1,0 +1,1 @@
+{"pos_prompt":"A car is clearly visible, standing out against the background and possibly highlighted or contrasted. In the video, the car is moving slowly from left to right across the scene, making it easy to notice its motion as it stands out in its environment."}

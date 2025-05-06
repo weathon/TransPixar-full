@@ -1,0 +1,1 @@
+{"pos_prompt":"A person is pushing a stroller, and the motion shows the person walking forward smoothly. The person with the stroller is clearly highlighted and stands out from the background, making them the main focus. The movement is steady as the person and stroller move across the scene."}

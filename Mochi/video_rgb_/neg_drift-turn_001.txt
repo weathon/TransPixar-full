@@ -1,0 +1,1 @@
+{"pos_prompt":"A car is the main object, standing out clearly against its environment. The car is shown making a dynamic drifting turn as it moves, emphasizing its motion and presence in the scene."}

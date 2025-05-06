@@ -1,0 +1,1 @@
+{"pos_prompt":"A person is clearly highlighted and stands out from the environment. The person is performing dynamic parkour movements, starting by sitting or leaning, then crouching, and finally running forward in a fluid motion."}

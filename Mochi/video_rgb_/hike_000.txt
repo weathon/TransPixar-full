@@ -1,1 +1,0 @@
-{"pos_prompt":"A person with a backpack is walking and moving one leg forward in a continuous motion. The person stands out clearly against a plain gray background, making the movement and shape easy to see. The main object, the person, is always visible and highlighted from the environment as they walk."}

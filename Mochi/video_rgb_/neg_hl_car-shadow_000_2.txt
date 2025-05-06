@@ -1,0 +1,1 @@
+{"pos_prompt":"A car is clearly standing out and contrasted against its background, making it the main focus in the environment. The car moves smoothly from left to right across the screen, its silhouette always visible and highlighted."}

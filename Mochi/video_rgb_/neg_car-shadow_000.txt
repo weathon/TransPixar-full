@@ -1,0 +1,1 @@
+{"pos_prompt":"A car stands out from the background and is clearly separated from its environment. The car moves smoothly from right to left across the frame, making its motion easy to see."}

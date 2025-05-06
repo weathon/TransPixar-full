@@ -1,0 +1,1 @@
+{"pos_prompt":"A car stands out against its background, clearly contrasted from the environment. The car moves smoothly in a circular path, mimicking motion around a roundabout. The scene focuses on the car's distinct movement and clear appearance against the surroundings."}

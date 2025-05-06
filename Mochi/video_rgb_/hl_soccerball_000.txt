@@ -1,1 +1,0 @@
-{"pos_prompt":"A highlighted soccer ball stands out clearly against the environment. The soccer ball moves around the scene, changing position smoothly in each frame. Its motion is the central focus and easily visible at all times."}
