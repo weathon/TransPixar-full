@@ -1,0 +1,1 @@
+{"pos_prompt":"A car is clearly standing out and contrasted against its surroundings, making it the focus of the scene. The car appears to be moving around in a circular path, suggesting it's driving on a roundabout. The object's motion is smooth and continuous as it follows the curved route."}

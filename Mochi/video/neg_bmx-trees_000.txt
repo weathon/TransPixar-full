@@ -1,0 +1,1 @@
+{"pos_prompt":"A person riding a BMX bike moves smoothly forward across the scene. The BMX rider clearly stands out against the background, making the motion easy to see. The bike and rider travel from one side to the other, highlighted against the environment."}

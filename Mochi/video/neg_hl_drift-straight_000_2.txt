@@ -1,0 +1,1 @@
+{"pos_prompt":"A car is clearly highlighted and stands out against the background. The car moves straight forward in a smooth motion. The car remains the main focus throughout the video."}

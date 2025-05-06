@@ -1,0 +1,1 @@
+{"pos_prompt":"A cow stands out against a plain background and walks forward. The cow's shape is clear and easy to see, making it stand out in the environment. The cow moves its legs as it walks."}

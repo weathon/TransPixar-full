@@ -1,0 +1,1 @@
+{"pos_prompt":"A dog stands out clearly against the background, moving and sniffing the ground as it walks. The dog is easy to see and is the only thing moving in the scene. Its motion is focused on searching or exploring the area."}

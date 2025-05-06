@@ -1,0 +1,1 @@
+{"pos_prompt":"A flamingo is clearly highlighted and stands out from the environment. The flamingo is walking, its legs and neck moving gracefully as it takes steps."}

@@ -1,0 +1,1 @@
+{"pos_prompt":"A bus is clearly highlighted and stands out against the background. The bus smoothly moves forward through the environment, making it the main focus of the scene. The distinctive contrast makes the bus very noticeable as it travels."}

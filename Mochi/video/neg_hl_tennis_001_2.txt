@@ -1,0 +1,1 @@
+{"pos_prompt":"A highlighted human is playing tennis and stands out from the environment. The video shows the person moving quickly, swinging a racket, running, and getting ready to hit the ball."}

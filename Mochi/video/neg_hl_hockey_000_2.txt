@@ -1,0 +1,1 @@
+{"pos_prompt":"A hockey player is clearly highlighted and stands out against the background. The player is in motion, skating and handling the puck. The object's movements are visually distinct from the surrounding environment."}

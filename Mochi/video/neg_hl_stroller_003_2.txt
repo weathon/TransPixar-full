@@ -1,0 +1,1 @@
+{"pos_prompt":"A person with a stroller is clearly highlighted and stands out against the background. The person is walking smoothly, pushing the stroller forward. Their motion is continuous, making the main object pop out visually in the scene."}

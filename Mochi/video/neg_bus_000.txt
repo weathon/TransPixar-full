@@ -1,0 +1,1 @@
+{"pos_prompt":"A bus is clearly standing out from the environment and is the main focus of the video. The bus slowly rotates to show different sides, and no other objects are present in the scene."}

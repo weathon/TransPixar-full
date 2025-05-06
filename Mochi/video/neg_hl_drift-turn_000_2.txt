@@ -1,0 +1,1 @@
+{"pos_prompt":"A car is clearly highlighted and stands out against the background in this video. The car smoothly drifts and turns, moving dynamically through the scene. Its motion is fluid and distinct, making it the focal point in the environment."}

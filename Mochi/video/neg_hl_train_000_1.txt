@@ -1,0 +1,1 @@
+{"pos_prompt":"The video shows a train that clearly stands out from the background and moves smoothly from left to right across the scene. The train appears highlighted or contrasted, making it easy to see against its environment. The simple backdrop ensures the train is the main focus as it glides along its path."}

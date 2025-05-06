@@ -1,0 +1,1 @@
+{"pos_prompt":"A car is clearly standing out and possibly highlighted or contrasted against the environment, making it highly visible. The car is moving smoothly in a circular path, simulating motion around a roundabout. The focus remains solely on the car as it travels along this path."}

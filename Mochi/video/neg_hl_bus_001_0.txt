@@ -1,0 +1,1 @@
+{"pos_prompt":"A highlighted bus stands out clearly from its environment. The bus is slowly moving forward across the scene, gradually breaking apart and dissolving as it goes. The object's motion and highlighted appearance make it very distinct from the background."}

@@ -1,0 +1,1 @@
+{"pos_prompt":"A soccer ball is clearly highlighted and stands out against the background. The ball moves across the scene, bouncing from right to left. Its motion is smooth and easy to follow as it travels through the environment."}

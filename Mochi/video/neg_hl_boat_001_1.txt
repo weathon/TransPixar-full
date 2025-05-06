@@ -1,0 +1,1 @@
+{"pos_prompt":"A boat is clearly standing out and highlighted against its environment. The boat slowly moves from left to right across the scene. The background is simple, making the boat's motion very noticeable."}

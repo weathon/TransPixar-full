@@ -1,0 +1,1 @@
+{"pos_prompt":"A single worm-shaped object clearly stands out in the environment against a plain background. The worm moves slowly from left to right, gently wriggling as it goes. The object's movements are smooth and easy to see."}

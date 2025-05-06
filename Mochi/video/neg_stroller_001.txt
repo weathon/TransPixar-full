@@ -1,0 +1,1 @@
+{"pos_prompt":"A person is walking while pushing a stroller. The person and the stroller clearly stand out from the background, making them the main focus in the scene. The motion in the video shows the person moving smoothly forward with the stroller."}

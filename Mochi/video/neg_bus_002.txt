@@ -1,0 +1,1 @@
+{"pos_prompt":"A bus is clearly standing out in its environment and is the main object in the scene. The bus is slowly turning around, rotating to show different sides as it stands out from the background. The bus remains the clear focus throughout the video."}

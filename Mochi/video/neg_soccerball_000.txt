@@ -1,0 +1,1 @@
+{"pos_prompt":"A soccer ball stands out clearly against the environment in each frame. The soccer ball moves from the right side of the screen to the left, bouncing slightly as it goes. The main object, the soccer ball, is always easy to see as it travels across the scene."}

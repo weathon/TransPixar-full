@@ -1,0 +1,1 @@
+{"pos_prompt":"A car is clearly highlighted and stands out from the background, appearing distinct in its environment. The car is moving smoothly along a roundabout, showing subtle directional motion as it navigates the curved path."}

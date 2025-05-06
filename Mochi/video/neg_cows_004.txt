@@ -1,0 +1,1 @@
+{"pos_prompt":"A brown cow stands out clearly against a pale green background, making the cow easy to see in the scene. The cow is slowly walking forward, with its legs and body gradually shifting position in each frame. The cow stands out from the environment throughout the video."}

@@ -1,0 +1,1 @@
+{"pos_prompt":"A car is clearly highlighted and stands out against the background, making it easy to see. The car is turning as it moves across the scene."}

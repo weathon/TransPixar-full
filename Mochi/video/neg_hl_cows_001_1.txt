@@ -1,0 +1,1 @@
+{"pos_prompt":"A cow is clearly highlighted and stands out from the environment, moving slowly across the scene. The cow walks steadily from one side of the video to the other, with its outline in contrast to the background."}

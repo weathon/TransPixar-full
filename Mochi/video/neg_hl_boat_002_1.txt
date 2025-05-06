@@ -1,0 +1,1 @@
+{"pos_prompt":"A boat is clearly standing out against its environment, possibly highlighted or contrasted, and is moving smoothly from left to right across the scene. The motion of the boat is steady and continuous, making it the main focus in the video."}

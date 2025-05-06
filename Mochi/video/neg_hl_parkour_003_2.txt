@@ -1,0 +1,1 @@
+{"pos_prompt":"A person is clearly standing out from the background, possibly highlighted or contrasted, and is performing parkour. The person jumps and moves skillfully, dynamically traversing the environment. The motion is fluid and energetic, making the person the focus against a plain backdrop."}

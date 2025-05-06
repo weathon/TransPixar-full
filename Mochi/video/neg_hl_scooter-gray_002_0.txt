@@ -1,0 +1,1 @@
+{"pos_prompt":"This video shows a scooter that stands out clearly against the background, possibly highlighted or contrasted to make it even more noticeable. The scooter moves smoothly from left to right across the screen, remaining distinct from the environment at all times."}

@@ -1,0 +1,1 @@
+{"pos_prompt":"A human is clearly standing out against the background, making them easy to see in the environment. The video shows the human walking steadily from left to right across the scene."}

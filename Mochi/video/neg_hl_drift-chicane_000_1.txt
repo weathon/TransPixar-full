@@ -1,0 +1,1 @@
+{"pos_prompt":"A highlighted car stands out strongly against a plain background and appears to be drifting quickly through a chicane. The car is the main focus, clearly separated from its environment, moving smoothly and turning as it slides."}

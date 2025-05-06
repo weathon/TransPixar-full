@@ -1,0 +1,1 @@
+{"pos_prompt":"A boat is clearly standing out and highlighted compared to the background, making it very contrasted and visible in the environment. The boat slowly drifts and gently moves across the screen from left to right, strongly standing out against the still background."}

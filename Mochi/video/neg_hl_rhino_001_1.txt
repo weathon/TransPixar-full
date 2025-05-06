@@ -1,0 +1,1 @@
+{"pos_prompt":"A rhino stands out clearly from the background and is highlighted to make it contrast with the surroundings. The rhino's body is stationary while its sections move apart, sliding horizontally in pieces, creating a visual split and separation effect."}

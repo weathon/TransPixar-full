@@ -1,0 +1,1 @@
+{"pos_prompt":"A camel is clearly highlighted and stands out from the background. The camel walks smoothly from left to right across the scene. The motion shows the camel's legs moving as it travels, making the camel very visible against the environment."}

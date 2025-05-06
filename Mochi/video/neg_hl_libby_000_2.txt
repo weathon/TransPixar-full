@@ -1,0 +1,1 @@
+{"pos_prompt":"A cat stands out clearly against the background, appearing highlighted or contrasted as it moves. The cat walks smoothly across the scene, its shape always prominent and easy to see compared to the surroundings."}

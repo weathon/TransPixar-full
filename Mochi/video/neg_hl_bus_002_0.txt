@@ -1,0 +1,1 @@
+{"pos_prompt":"A bus is clearly highlighted and stands out against the background, making it very noticeable in the environment. The bus smoothly moves forward in a straight line throughout the video."}

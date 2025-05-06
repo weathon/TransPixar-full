@@ -1,0 +1,1 @@
+{"pos_prompt":"A camel clearly stands out from the background and moves smoothly from left to right across the scene. The camel is the main focus, visibly walking and transitioning through the environment. Its motion is steady and noticeable against the simple backdrop."}

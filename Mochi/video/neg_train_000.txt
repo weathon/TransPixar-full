@@ -1,0 +1,1 @@
+{"pos_prompt":"A blue train clearly stands out against a muted green background. The train moves smoothly from left to right across the scene, its silhouette remaining prominent as it travels. The object's outline is easy to see and contrasts with its environment, and the whole motion gives a sense of steady movement."}

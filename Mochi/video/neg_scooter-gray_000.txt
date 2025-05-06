@@ -1,0 +1,1 @@
+{"pos_prompt":"A person is riding a scooter that clearly stands out against the background. The scooter moves from the right side of the frame toward the center. The object's shape and motion are easy to see and distinguish from the environment."}

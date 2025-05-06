@@ -1,0 +1,1 @@
+{"pos_prompt":"A person is clearly standing out and possibly highlighted from the background, moving dynamically in a parkour sequence. The person is jumping, flipping, and twisting through the air, captured in a flowing, energetic motion. The person is always prominent against the environment."}
