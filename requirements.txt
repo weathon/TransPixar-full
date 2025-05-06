@@ -12,3 +12,4 @@ imageio-ffmpeg
 moviepy==1.0.3
 opencv-python>=4.5
 accelerate
+ignite
