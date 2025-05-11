@@ -31,7 +31,7 @@ def decode_latents(pipe, latents):
 
 class RGBALoRAMochiAttnProcessor:
     """Attention processor used in Mochi."""
-    def __init__(self, device, dtype, lora_rank=16, lora_alpha=1.0, latent_dim=3072):
+    def __init__(self, device, dtype, lora_rank=16, lora_alpha=1.0, latent_dim=3072, embedding=False):
         if not hasattr(F, "scaled_dot_product_attention"):
             raise ImportError("MochiAttnProcessor2_0 requires PyTorch 2.0. To use it, please upgrade PyTorch to 2.0.")
 
@@ -80,12 +80,12 @@ class RGBALoRAMochiAttnProcessor:
         nn.init.zeros_(self.adapter[0].bias)
         nn.init.zeros_(self.adapter[2].bias)
         
-        
-        # self.domain_embeding = nn.parameter.Parameter(torch.randn(latent_dim) * 0.2).cuda()
-        self.domain_embeding.weight.requires_grad = True
-        self.domain_kq_embeding.weight.requires_grad = True
-        nn.init.zeros_(self.domain_embeding.weight)
-        nn.init.zeros_(self.domain_kq_embeding.weight)
+        if embedding:        
+            self.domain_embeding = nn.Embedding(2, latent_dim).to(device)
+            self.domain_embeding.weight.requires_grad = True
+            nn.init.zeros_(self.domain_embeding.weight)
+        self.enable_embedding = embedding
+
 
         
         
@@ -112,7 +112,7 @@ class RGBALoRAMochiAttnProcessor:
         
         # value += value_delta * scaling
 
-        return query, key, value
+        return query, key, value 
 
     def __call__(
         self,
@@ -129,19 +129,20 @@ class RGBALoRAMochiAttnProcessor:
         # encoder_hidden_states = encoder_hidden_states[:1:,:]
         # encoder_hidden_states = encoder_hidden_states + self.cat_embedding(self.cat_state.cuda()).unsqueeze(1)
         # print(encoder_hidden_states.shape) 
-        hidden_states[:,-hidden_states.shape[1]//2:] = hidden_states[:,-hidden_states.shape[1]//2:] + self.domain_embeding(torch.tensor(0).cuda())[None, None, :].expand_as(hidden_states[:,-hidden_states.shape[1]//2:])
-        # hidden_states[:,:-hidden_states.shape[1]//2] = hidden_states[:,:-hidden_states.shape[1]//2] + self.domain_embeding(torch.tensor(1).cuda())[None, None, :].expand_as(hidden_states[:,:-hidden_states.shape[1]//2])
+        if self.enable_embedding:
+            hidden_states[:,-hidden_states.shape[1]//2:] = hidden_states[:,-hidden_states.shape[1]//2:] + self.domain_embeding(torch.tensor(0).cuda())[None, None, :].expand_as(hidden_states[:,-hidden_states.shape[1]//2:])
+            hidden_states[:,:-hidden_states.shape[1]//2] = hidden_states[:,:-hidden_states.shape[1]//2] + self.domain_embeding(torch.tensor(1).cuda())[None, None, :].expand_as(hidden_states[:,:-hidden_states.shape[1]//2])
         # encoder_hidden_states_delta = self.encoder_lora(encoder_hidden_states).to(hidden_states.device)
         # encoder_hidden_states = encoder_hidden_states + encoder_hidden_states_delta * self.lora_alpha / self.lora_rank * 0.2
 
-        hidden_states = hidden_states# + self.cat_embedding(self.cat_state.cuda()).unsqueeze(1)
+        # hidden_states = hidden_states# + self.cat_embedding(self.cat_state.cuda()).unsqueeze(1)
         
         query = attn.to_q(hidden_states)
-        query[:, -hidden_states.shape[1]//2:] = query[:, -hidden_states.shape[1]//2:] + self.domain_kq_embeding(torch.tensor(0).cuda())[None, None, :].expand_as(query[:, -hidden_states.shape[1]//2:])
-        query[:, :-hidden_states.shape[1]//2] = query[:, :-hidden_states.shape[1]//2] + self.domain_kq_embeding(torch.tensor(1).cuda())[None, None, :].expand_as(query[:, :-hidden_states.shape[1]//2])
+        # query[:, -hidden_states.shape[1]//2:] = query[:, -hidden_states.shape[1]//2:] + self.domain_kq_embeding(torch.tensor(0).cuda())[None, None, :].expand_as(query[:, -hidden_states.shape[1]//2:])
+        # query[:, :-hidden_states.shape[1]//2] = query[:, :-hidden_states.shape[1]//2] + self.domain_kq_embeding(torch.tensor(1).cuda())[None, None, :].expand_as(query[:, :-hidden_states.shape[1]//2])
         key = attn.to_k(hidden_states)
-        key[:, -hidden_states.shape[1]//2:] = key[:, -hidden_states.shape[1]//2:] + self.domain_kq_embeding(torch.tensor(0).cuda())[None, None, :].expand_as(key[:, -hidden_states.shape[1]//2:])
-        key[:, :-hidden_states.shape[1]//2] = key[:, :-hidden_states.shape[1]//2] + self.domain_kq_embeding(torch.tensor(1).cuda())[None, None, :].expand_as(key[:, :-hidden_states.shape[1]//2])
+        # key[:, -hidden_states.shape[1]//2:] = key[:, -hidden_states.shape[1]//2:] + self.domain_kq_embeding(torch.tensor(0).cuda())[None, None, :].expand_as(key[:, -hidden_states.shape[1]//2:])
+        # key[:, :-hidden_states.shape[1]//2] = key[:, :-hidden_states.shape[1]//2] + self.domain_kq_embeding(torch.tensor(1).cuda())[None, None, :].expand_as(key[:, :-hidden_states.shape[1]//2])
         
         value = attn.to_v(hidden_states) 
 
@@ -317,7 +318,7 @@ def prepare_for_rgba_inference(
             # print(hidden_states.shape)
             # split_index = hidden_states.shape[1]//2
             # hidden_states[:,split_index:] = hidden_states[:,split_index:] + self.domain_embeding(torch.tensor(0).cuda())[None, None, :] 
-        
+            
             
             for i, block in enumerate(self.transformer_blocks):
                 block.attn1.processor.cat_state = cat
@@ -367,10 +368,12 @@ def prepare_for_rgba_inference(
             device=device, 
             dtype=dtype,
             lora_rank=lora_rank,
-            lora_alpha=lora_alpha
+            lora_alpha=lora_alpha,
+            embedding=True if _ == 0 else False,
         ) 
         # block.attn1.set_processor(attn_processor)
         block.attn1.processor = attn_processor
+        
 
     # model.transformer_blocks[0].attn1.processor.cat_embedding = nn.Embedding(2, 1536).cuda()
     # model.transformer_blocks[0].attn1.processor.cat_embedding.requires_grad = True
