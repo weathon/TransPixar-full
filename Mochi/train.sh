@@ -14,7 +14,7 @@ cmd="CUDA_VISIBLE_DEVICES=$GPU_IDS python train.py \
   --data_root $DATA_ROOT \
   --seed 42 \
   --output_dir $OUTPUT_PATH \
-  --train_batch_size 4 \
+  --train_batch_size 2 \
   --dataloader_num_workers 20 \
   --pin_memory \
   --checkpointing_steps 100 \
@@ -30,8 +30,8 @@ cmd="CUDA_VISIBLE_DEVICES=$GPU_IDS python train.py \
   --optimizer adamw \
   --allow_tf32 \
   --weight_decay 0.1 \
-  --width 576 \
-  --height 320 \
+  --width 416 \
+  --height 240 \
   --num_validation_videos 1 \
   --seed 64 \
   --learning_rate 3e-4"
