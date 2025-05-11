@@ -134,14 +134,14 @@ class RGBALoRAMochiAttnProcessor:
         # encoder_hidden_states_delta = self.encoder_lora(encoder_hidden_states).to(hidden_states.device)
         # encoder_hidden_states = encoder_hidden_states + encoder_hidden_states_delta * self.lora_alpha / self.lora_rank * 0.2
 
-        hidden_states = hidden_states + self.cat_embedding(self.cat_state.cuda()).unsqueeze(1)
+        hidden_states = hidden_states# + self.cat_embedding(self.cat_state.cuda()).unsqueeze(1)
         
         query = attn.to_q(hidden_states)
         query[:, -hidden_states.shape[1]//2:] = query[:, -hidden_states.shape[1]//2:] + self.domain_kq_embeding(torch.tensor(0).cuda())[None, None, :].expand_as(query[:, -hidden_states.shape[1]//2:])
-        # query[:, :-hidden_states.shape[1]//2] = query[:, :-hidden_states.shape[1]//2] + self.domain_kq_embeding(torch.tensor(1).cuda())[None, None, :].expand_as(query[:, :-hidden_states.shape[1]//2])
+        query[:, :-hidden_states.shape[1]//2] = query[:, :-hidden_states.shape[1]//2] + self.domain_kq_embeding(torch.tensor(1).cuda())[None, None, :].expand_as(query[:, :-hidden_states.shape[1]//2])
         key = attn.to_k(hidden_states)
         key[:, -hidden_states.shape[1]//2:] = key[:, -hidden_states.shape[1]//2:] + self.domain_kq_embeding(torch.tensor(0).cuda())[None, None, :].expand_as(key[:, -hidden_states.shape[1]//2:])
-        # key[:, :-hidden_states.shape[1]//2] = key[:, :-hidden_states.shape[1]//2] + self.domain_kq_embeding(torch.tensor(1).cuda())[None, None, :].expand_as(key[:, :-hidden_states.shape[1]//2])
+        key[:, :-hidden_states.shape[1]//2] = key[:, :-hidden_states.shape[1]//2] + self.domain_kq_embeding(torch.tensor(1).cuda())[None, None, :].expand_as(key[:, :-hidden_states.shape[1]//2])
         
         value = attn.to_v(hidden_states) 
 

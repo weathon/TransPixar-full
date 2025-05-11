@@ -32,10 +32,10 @@ cmd="CUDA_VISIBLE_DEVICES=$GPU_IDS python train.py \
   --weight_decay 0.1 \
   --width 416 \
   --height 240 \
-  --num_validation_videos 3 \
-  --seed 32 \
-  --learning_rate 1e-4 \
-  --enable_model_cpu_offload"
+  --num_validation_videos 1 \
+  --seed 64 \
+  --enable_model_cpu_offload \
+  --learning_rate 3e-4"
 
   # --caption_dropout 0.1 \
   # --lora_alpha 1 \
