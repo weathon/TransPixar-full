@@ -34,6 +34,7 @@ cmd="CUDA_VISIBLE_DEVICES=$GPU_IDS python train.py \
   --height 240 \
   --num_validation_videos 1 \
   --seed 64 \
+  --enable_model_cpu_offload \
   --learning_rate 3e-4"
 
   # --caption_dropout 0.1 \
