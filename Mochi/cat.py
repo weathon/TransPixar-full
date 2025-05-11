@@ -30,5 +30,5 @@ for file in files:
     except FileNotFoundError as e:
         continue
 os.system("cp video_rgb/*.mp4 final_dataset/")
+os.system("cp video_rgb/*.txt final_dataset/")
 os.system("cp video_rgb/*.embed.pt final_dataset/")
-os.system("rm final_dataset/elephant*")

@@ -369,7 +369,7 @@ def main(args):
     optimizer = torch.optim.AdamW(transformer_lora_parameters, lr=args.learning_rate, weight_decay=args.weight_decay)
 
     # Dataset and DataLoader
-    train_vids = list(sorted(glob(f"{args.data_root}/*.mp4")))
+    train_vids = list(sorted(glob(f"{args.data_root}/*.txt")))
     train_vids = [v for v in train_vids if not v.endswith(".recon.mp4")]
     print(f"Found {len(train_vids)} training videos in {args.data_root}")
     assert len(train_vids) > 0, f"No training data found in {args.data_root}"

@@ -48,7 +48,7 @@ import json
     help="Repo id. Should be genmo/mochi-1-preview",
     default="genmo/mochi-1-preview",
 )
-@click.option("--shape", default="37x320x576", help="Shape of the video to encode")
+@click.option("--shape", default="37x240x416", help="Shape of the video to encode")
 @click.option("--overwrite", "-ow", is_flag=True, help="Overwrite existing latents and caption embeddings.")
 def batch_process(output_dir: Path, model_id: Path, shape: str, overwrite: bool) -> None:
     """Process all videos and captions in a directory using a single GPU."""

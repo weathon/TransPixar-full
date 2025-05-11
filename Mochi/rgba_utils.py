@@ -82,16 +82,11 @@ class RGBALoRAMochiAttnProcessor:
         
         
         # self.domain_embeding = nn.parameter.Parameter(torch.randn(latent_dim) * 0.2).cuda()
-        self.domain_embeding = nn.Embedding(2, 3072).cuda()
-        self.domain_kq_embeding = nn.Embedding(2, 3072).cuda()
         self.domain_embeding.weight.requires_grad = True
         self.domain_kq_embeding.weight.requires_grad = True
         nn.init.zeros_(self.domain_embeding.weight)
         nn.init.zeros_(self.domain_kq_embeding.weight)
 
-        self.cat_embedding = nn.Embedding(2, 3072).cuda()
-        self.cat_embedding.requires_grad = True
-        nn.init.zeros_(self.cat_embedding.weight)
         
         
     def _apply_lora(self, hidden_states, seq_len, query, key, value, scaling):
@@ -99,21 +94,21 @@ class RGBALoRAMochiAttnProcessor:
         query_delta = self.to_q_lora(hidden_states[:, -seq_len // 2:, :]).to(query.device)
         query_rgb_delta = self.to_rgb_q_lora(hidden_states[:, :-seq_len // 2, :] ).to(query.device)
         query[:, -seq_len // 2:, :] += query_delta * scaling
-        # query[:, :-seq_len // 2, :] += query_rgb_delta* scaling
+        query[:, :-seq_len // 2, :] += query_rgb_delta* scaling
         
         # query += query_delta * scaling
 
         key_delta = self.to_k_lora(hidden_states[:, -seq_len // 2:, :]).to(key.device)
         key_rgb_delta = self.to_rgb_k_lora(hidden_states[:, :-seq_len // 2, :]).to(query.device)
         key[:, -seq_len // 2:, :] += key_delta * scaling
-        # key[:, :-seq_len // 2, :] += key_rgb_delta * scaling
+        key[:, :-seq_len // 2, :] += key_rgb_delta * scaling
         
         # key += key_delta * scaling
 
         value_delta = self.to_v_lora(hidden_states[:, -seq_len // 2:, :]).to(value.device)
         value_rgb_delta = self.to_rgb_v_lora(hidden_states[:, :-seq_len // 2, :]).to(value.device)
         value[:, -seq_len // 2:, :] += value_delta * scaling
-        # value[:, :-seq_len // 2, :] += value_rgb_delta * scaling
+        value[:, :-seq_len // 2, :] += value_rgb_delta * scaling
         
         # value += value_delta * scaling
 
@@ -133,7 +128,7 @@ class RGBALoRAMochiAttnProcessor:
         # print("encoder_hidden_states", encoder_hidden_states)
         # encoder_hidden_states = encoder_hidden_states[:1:,:]
         # encoder_hidden_states = encoder_hidden_states + self.cat_embedding(self.cat_state.cuda()).unsqueeze(1)
-        # print(encoder_hidden_states.shape)
+        # print(encoder_hidden_states.shape) 
         hidden_states[:,-hidden_states.shape[1]//2:] = hidden_states[:,-hidden_states.shape[1]//2:] + self.domain_embeding(torch.tensor(0).cuda())[None, None, :].expand_as(hidden_states[:,-hidden_states.shape[1]//2:])
         # hidden_states[:,:-hidden_states.shape[1]//2] = hidden_states[:,:-hidden_states.shape[1]//2] + self.domain_embeding(torch.tensor(1).cuda())[None, None, :].expand_as(hidden_states[:,:-hidden_states.shape[1]//2])
         # encoder_hidden_states_delta = self.encoder_lora(encoder_hidden_states).to(hidden_states.device)
@@ -148,7 +143,7 @@ class RGBALoRAMochiAttnProcessor:
         key[:, -hidden_states.shape[1]//2:] = key[:, -hidden_states.shape[1]//2:] + self.domain_kq_embeding(torch.tensor(0).cuda())[None, None, :].expand_as(key[:, -hidden_states.shape[1]//2:])
         # key[:, :-hidden_states.shape[1]//2] = key[:, :-hidden_states.shape[1]//2] + self.domain_kq_embeding(torch.tensor(1).cuda())[None, None, :].expand_as(key[:, :-hidden_states.shape[1]//2])
         
-        value = attn.to_v(hidden_states)
+        value = attn.to_v(hidden_states) 
 
         scaling = self.lora_alpha / self.lora_rank
         sequence_length = query.size(1)
@@ -246,12 +241,12 @@ class RGBALoRAMochiAttnProcessor:
         # linear proj
         original_hidden_states = attn.to_out[0](hidden_states)
         hidden_states_delta = self.to_out_lora(hidden_states[:, -sequence_length // 2:, :]).to(hidden_states.device)
-        # hidden_states_rgb_delta = self.to_rgb_out_lora(hidden_states[:, :-sequence_length // 2, :]).to(hidden_states.device)
+        hidden_states_rgb_delta = self.to_rgb_out_lora(hidden_states[:, :-sequence_length // 2, :]).to(hidden_states.device)
         original_hidden_states[:, -sequence_length // 2:, :] += hidden_states_delta * scaling
-        # original_hidden_states[:, :-sequence_length // 2, :] += hidden_states_rgb_delta * scaling
+        original_hidden_states[:, :-sequence_length // 2, :] += hidden_states_rgb_delta * scaling
         # dropout  
         hidden_states = attn.to_out[1](original_hidden_states)
-        # hidden_states[:,-sequence_length // 2:] = hidden_states[:,-sequence_length // 2:] + self.adapter(hidden_states[:,:-sequence_length // 2])
+        hidden_states[:,-sequence_length // 2:] = hidden_states[:,-sequence_length // 2:] + self.adapter(hidden_states[:,:-sequence_length // 2])
 
         if hasattr(attn, "to_add_out"):
             encoder_hidden_states = attn.to_add_out(encoder_hidden_states)

@@ -10,11 +10,11 @@ OUTPUT_PATH="mochi-rgba-lora-f37"
 
 cmd="CUDA_VISIBLE_DEVICES=$GPU_IDS python train.py \
   --pretrained_model_name_or_path $MODEL \
+  --compile_dit \
   --cast_dit \
   --data_root $DATA_ROOT \
-  --seed 42 \
   --output_dir $OUTPUT_PATH \
-  --train_batch_size 4 \
+  --train_batch_size 2 \
   --dataloader_num_workers 20 \
   --pin_memory \
   --checkpointing_steps 100 \
@@ -30,11 +30,12 @@ cmd="CUDA_VISIBLE_DEVICES=$GPU_IDS python train.py \
   --optimizer adamw \
   --allow_tf32 \
   --weight_decay 0.1 \
-  --width 576 \
-  --height 320 \
-  --num_validation_videos 1 \
-  --seed 64 \
-  --learning_rate 3e-4"
+  --width 416 \
+  --height 240 \
+  --num_validation_videos 3 \
+  --seed 32 \
+  --learning_rate 1e-4 \
+  --enable_model_cpu_offload"
 
   # --caption_dropout 0.1 \
   # --lora_alpha 1 \
@@ -44,4 +45,3 @@ echo "Running command: $cmd"
 eval $cmd
 echo -ne "-------------------- Finished executing script --------------------\n\n"
 
-# --enable_model_cpu_offload \
